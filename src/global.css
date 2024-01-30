@@ -1,0 +1,80 @@
+
+@font-face {
+  font-family: monserrat;
+  src: url(../src/assets/fonts/Montserrat-Regular.woff2);
+  font-weight: 400;
+}
+@font-face {
+  font-family: monserrat;
+  src: url(../src/assets/fonts/Montserrat-Bold.woff);
+  font-weight: bold;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family:monserrat ,Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+
+}
+
+
+
+:root {
+  --paddinginline: 3em;
+  --color-gold: #005f9f;
+  --maincolor: #005f9f;
+
+  --main-color-250: #dbf1ff;
+  --main-color-300: #c6e8ff;
+  --main-color-350: #94d1f9;
+  --main-color-400: #59bbfd;
+  --main-color-450: #36a1e8;
+  --main-color-500: #197ec1;
+  --main-color-550: #0e6ead;
+  --main-color-600: #095588;
+  --main-color-700: #00375c;
+  --mobile: 1000px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  background-color: #111;
+  width: 15px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color-500);
+  border: 3.2px solid #111;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--main-color-700);
+}
+
+/* SELECTION */
+::selection {
+  background: #ffbf0035;
+}
+
+
+@keyframes start {
+  0% {
+    opacity: 0;
+    translate: -80px;
+
+  }
+
+  100% {
+    opacity: 1;
+  }
+
+}
+
+@keyframes show {
+  100%{
+    opacity: 1;
+  }
+}
