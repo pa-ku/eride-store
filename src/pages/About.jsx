@@ -28,7 +28,6 @@ export default function About() {
         <SectionContainer>
           <SubTitle>Calidad Inigualable</SubTitle>
           <TextImageCtn>
-            <Image src={imageStore} alt="" />
             <Text>
               Nos enorgullece ofrecer una amplia gama de scooters de la más alta
               calidad. Cada monopatin que vendemos está cuidadosamente
@@ -46,7 +45,7 @@ export default function About() {
             explorar nuestra selección, hacer pedidos y realizar pagos sin
             problemas desde la comodidad de tu hogar.
           </Text>
-            <Image src={imageStore3} alt="" />
+          <Image src={imageStore3} alt="" />
         </SectionContainer>
       </Wrapper>
     </>
@@ -55,14 +54,19 @@ export default function About() {
 
 const Image = styled.img`
 width: 350px;
-border-radius: 40px;
+border-radius: 10px;
+object-fit: contain;
+
 `
 
 const TextImageCtn = styled.div`
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
-  gap: 50px;
+  gap: 30px;
+  @media(max-width:700px){
+  flex-direction: column-reverse;
+  }
 `;
 
 const Wrapper = styled.div`

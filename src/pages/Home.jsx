@@ -14,11 +14,13 @@ const ProductSection = styled.main`
   gap: 2em;
   flex-direction: column;
   padding-block: 4em;
-
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: start;
+  @media(max-width:700px){
+  gap: 6em;
+  }
 `;
 const ProductContainer = styled.div`
   display: flex;

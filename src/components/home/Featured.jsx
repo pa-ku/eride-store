@@ -45,6 +45,7 @@ const ProductImageContainer = styled.div`
   justify-content: start;
   @media (max-width: 700px) {
     height: 340px;
+width: 100%;
 
   }
 `;
@@ -62,7 +63,14 @@ const ProductImage = styled.img`
     
   }
 `;
-
+const FavCtn = styled.div`
+  position: absolute;
+  right: 0px;
+  scale: 1.2;
+  @media(max-width:700px){
+margin-right: 20px;
+  }
+`;
 const ProductTitle = styled.p`
   color: #111;
   font-size: 1.5rem;
@@ -134,14 +142,7 @@ export default function Featured() {
   );
 }
 
-const FavCtn = styled.div`
-  position: absolute;
-  right: 0px;
-  scale: 1.2;
-  @media(max-width:700px){
-    right: 20px;
-  }
-`;
+
 
 const DiscountLabel = styled.p`
   background-color: var(--main-color-500);

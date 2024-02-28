@@ -29,7 +29,8 @@ export default function LinkButton({
   $fontsize,
   logo,
   title,
-  onClick
+  onClick,
+  className
 
 }) {
   return (
@@ -40,6 +41,7 @@ export default function LinkButton({
       $weightLight={$weightLight}
       title={title}
       onClick={onClick}
+      className={className}
     >
       {logo}
       {text}

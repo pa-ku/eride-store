@@ -46,16 +46,15 @@ const Img = styled.img`
   opacity: 0.5;
   pointer-events: none;
   transition: 200ms;
-  /*   &:hover {
-    opacity: 1;
-  } */
+  object-fit: contain;
   @media (max-width: 700px) {
-    width: 150px;
+    width: 120px;
+    height: 40px;
   }
 `;
 
 export default function OurBrands() {
-  const brandArr = [,brand2,brand_zero,brand_inmotion,brand_maxyou,brand4,brand5
+  const brandArr = [, brand2, brand_zero, brand_inmotion, brand_maxyou, brand4, brand5
 
   ];
   return (

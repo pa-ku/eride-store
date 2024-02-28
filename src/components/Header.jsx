@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import imgLogo from "../assets/icons/logo.webp";
 import FavIcon from "@mui/icons-material/FavoriteBorder";
-
-import SearchIcon from "@mui/icons-material/Search";
 import { device } from "../responsive";
 import LinkButton from "./ui/LinkButton";
 import { Link } from "react-router-dom";
@@ -44,10 +42,17 @@ const CtnRightBar = styled.div`
   height: 100%;
   justify-content: end;
   z-index: 9;
+  @media(max-width:700px){
+    .hide-mobile{
+  display: none;
+    }
+  }
 `;
 
 const Linked = styled(Link)`
   width: max-content;
+
+
 `;
 
 export default function Header({ $Home }) {
@@ -59,9 +64,10 @@ export default function Header({ $Home }) {
         </Linked>
         <CtnRightBar>
           <SearchBar />
-          <LinkButton to={"/product/monopatines"} text={"Monopatines"} />
-          <LinkButton to={"/product/monociclos"} text={"Monociclos"} />
+          <LinkButton className={'hide-mobile'} to={"/product/monopatines"} text={"Monopatines"} />
+          <LinkButton className={'hide-mobile'} to={"/product/monociclos"} text={"Monociclos"} />
           <LinkButton
+            id={'fav-btn'}
             to={"/favorites"}
             logo={<FavIcon></FavIcon>}
             title={"Favoritos"}
