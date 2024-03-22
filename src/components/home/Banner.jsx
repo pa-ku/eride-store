@@ -11,7 +11,7 @@ const WrapperBanner = styled.div`
   justify-content: center;
   background-image: url(${ImgBanner});
   background-size: cover;
-  background-position: 100%;
+  background-position: center;
   @media (max-width: 800px) {
     background-size: cover;
     background-position: 50%;

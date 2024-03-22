@@ -7,13 +7,13 @@ import { useLocation } from "react-router";
 export default function AllProducts() {
   const location = useLocation();
   const category = location.pathname.split("/")[2];
-
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("");
   const [brandText, setBrandText] = useState("Marca");
   const [priceText, setPriceText] = useState("Precio");
   const [brandSection, setBrandSection] = useState(false);
   const [priceSection, setPriceSection] = useState(false);
+  const [catSection, setCatSection] = useState(false);
 
   const brands = [
     "todas",
@@ -29,10 +29,30 @@ export default function AllProducts() {
     setBrandSection(true);
     setPriceSection(false);
   }
-  function HandlePrice() {
-    setPriceSection(true);
+
+function handleOption(e){
+const value = e.target.value
+
+switch (value) {
+  case 'brand':
+    setBrandSection(brandSection ? false : true);
+    setPriceSection(false);
+    setCatSection(false);
+    break;
+case 'price':
+  setPriceSection(priceSection ? false : true);
+  setBrandSection(false);
+    setCatSection(false);
+  break; 
+  case 'cat':
+    setCatSection(catSection ? false : true);
+    setPriceSection(false);
     setBrandSection(false);
-  }
+  break;
+  default:
+    break;
+}
+}
 
   function handleChoiceBrand(e) {
     const value = e.target.value;
@@ -55,8 +75,8 @@ export default function AllProducts() {
       <Wrapper>
         <OptionCtn>
           <SelectContainer>
-            <OptionButton onClick={HandleBrand}>{brandText}</OptionButton>
-            {brandSection === true && (
+            <OptionButton value={'brand'} onClick={handleOption} >{brandText}</OptionButton>
+            {brandSection && (
               <FilterSection>
                 {brands.map((brand) => (
                   <FilterButton
@@ -72,8 +92,8 @@ export default function AllProducts() {
           </SelectContainer>
 
           <SelectContainer>
-            <OptionButton >Categoria </OptionButton>
-       
+            <OptionButton value={'cat'} onClick={handleOption}>Categoria </OptionButton>
+       {catSection && 
               <FilterSection>
                 <FilterButton
                   value="todas"
@@ -95,12 +115,12 @@ export default function AllProducts() {
                 >
                   Monociclos
                 </FilterButton>
-              </FilterSection>
+              </FilterSection>}
 
           </SelectContainer>
           <SelectContainer>
-            <OptionButton onClick={HandlePrice}>{priceText} </OptionButton>
-            {priceSection === true && (
+            <OptionButton value={'price'} onClick={handleOption}>{priceText} </OptionButton>
+            {priceSection && (
               <FilterSection>
                 <FilterButton
                   value="new"

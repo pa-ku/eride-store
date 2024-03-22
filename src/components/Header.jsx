@@ -10,17 +10,14 @@ import SearchBar from "./SearchBar";
 const Head = styled.header`
   width: 100%;
   height: 4em;
-
   background-color: #111;
   background-color: ${(props) => props.$Home && "rgb(0, 0, 0)"};
   display: grid;
-
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-template-rows: auto;
   align-items: center;
   justify-content: space-between;
   padding-inline: var(--paddinginline);
-
   @media ${device.mobile} {
     grid-template-columns: repeat(auto-fit, minmax(10px, 10px));
     padding-inline: 1em;
