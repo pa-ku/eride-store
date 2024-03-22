@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Title from "../components/ui/Title";
-import imageStore from "../assets/img/aboutusimg.webp";
 import imageStore2 from "../assets/img/aboutussanjuan.webp";
 import imageStore3 from "../assets/img/aboutusshipping.webp";
 
