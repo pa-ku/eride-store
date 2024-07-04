@@ -92,33 +92,6 @@ case 'price':
           </SelectContainer>
 
           <SelectContainer>
-            <OptionButton value={'cat'} onClick={handleOption}>Categoria </OptionButton>
-       {catSection && 
-              <FilterSection>
-                <FilterButton
-                  value="todas"
-                  name="Destacado"
-                >
-                  Todas
-                </FilterButton>
-                <FilterButton
-                  value="monopatin"
-                  name="Mas bajo"
-  
-                >
-                  Monopatines
-                </FilterButton>
-                <FilterButton
-                  value="monociclo"
-                  name="Más alto"
-
-                >
-                  Monociclos
-                </FilterButton>
-              </FilterSection>}
-
-          </SelectContainer>
-          <SelectContainer>
             <OptionButton value={'price'} onClick={handleOption}>{priceText} </OptionButton>
             {priceSection && (
               <FilterSection>
@@ -166,6 +139,7 @@ case 'price':
 const ProductContainer = styled.div`
   & h2 {
     text-transform: uppercase;
+    padding-bottom: 2em;
   }
 `;
 

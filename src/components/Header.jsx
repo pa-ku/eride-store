@@ -62,7 +62,6 @@ export default function Header({ $Home }) {
         <CtnRightBar>
           <SearchBar />
           <LinkButton className={'hide-mobile'} to={"/product/monopatines"} text={"Monopatines"} />
-          <LinkButton className={'hide-mobile'} to={"/product/monociclos"} text={"Monociclos"} />
           <LinkButton
             id={'fav-btn'}
             to={"/favorites"}

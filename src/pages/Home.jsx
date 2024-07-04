@@ -29,6 +29,10 @@ const ProductContainer = styled.div`
 `;
 
 export default function Home() {
+function navigateTo(){
+
+}
+
   return (
     <>
       <Header $Home />
@@ -49,7 +53,7 @@ export default function Home() {
           <Title text={"Más Vendido"} />
           <Product filters={{ filter: "popular" }} />
         </ProductContainer>
-<MainButton typeLink={true} to={"/product"}> Ver todos los productos</MainButton>
+<MainButton typeLink={true} to={"product/monopatines"}> Ver todos los productos</MainButton>
       </ProductSection>
       <AboutMe />
       <Footer />

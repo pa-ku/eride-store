@@ -10,7 +10,7 @@ import brand5 from "../../assets/img/brand5.webp"
 const Wrapper = styled.div`
   background-color: #f5f5f5;
   text-align: center;
-  padding-block: 1em;
+  padding-block: 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;

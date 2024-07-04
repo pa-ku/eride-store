@@ -9,7 +9,6 @@ const BtnNav = styled(Link)`
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  font-weight: ${(props) => (props.$weightLight ? "400" : "800")};
   border-bottom: 1px solid rgba(34, 34, 34, 0);
   font-size: 1.1rem;
   transition: 0.2s;
