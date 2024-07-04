@@ -118,6 +118,8 @@ const ButtonCtn = styled.div`
 `;
 
 export default function Footer() {
+  const d = new Date();
+  let year = d.getFullYear();
   return (
     <FooterCtn>
       <Wrapper>
@@ -157,7 +159,7 @@ export default function Footer() {
       </Wrapper>
 
       <CtnRights>
-        <TxtCopyright>Copyright © 2021 - 2023 Eride </TxtCopyright>
+        <TxtCopyright>Copyright © 2021 - {year} Eride </TxtCopyright>
       </CtnRights>
       <BackgroundImage src={svg} alt="" />
     </FooterCtn>
