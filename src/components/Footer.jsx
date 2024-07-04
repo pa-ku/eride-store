@@ -121,22 +121,7 @@ export default function Footer() {
   return (
     <FooterCtn>
       <Wrapper>
-        <Section>
-          <TitleText>NOSOTROS</TitleText>
-          <ButtonCtn>
-            <LinkButton
-              to={"/about"}
-              text={"Sobre Eride"}
-              $weightLight={true}
-            />
-            <LinkButton
-              to={"/about"}
-              text={"Trabaja con nosotros"}
-              $weightLight={true}
-            />
-          </ButtonCtn>
-        </Section>
-
+      
         <Section>
           <TitleText>CONTACTO</TitleText>
 
