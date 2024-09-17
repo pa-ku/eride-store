@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Title from '../ui/Title.jsx'
 import MainButton from '../ui/MainButton.jsx'
 import FavButton from '../ui/FavButton.jsx'
+import { calcDiscount } from '../../utils/calcDiscount.js'
 
 const Wrapper = styled.div`
   display: flex;
@@ -91,8 +92,8 @@ const ProductDescription = styled.p`
   margin-bottom: 10px;
 `
 
-export default function ProductFeatured(data) {
-  const [images, discount, title, price, description] = data
+export default function ProductFeatured({ data }) {
+  const { title, price, discount, description, images, _id: id } = data
   return (
     <>
       <Wrapper>
@@ -100,20 +101,12 @@ export default function ProductFeatured(data) {
         <ProductWrapper>
           <ProductInfoContainer>
             <ProductTitle>{title}</ProductTitle>
-            <ProductOldPrice>
-              {'$' +
-                oldPrice
-                  .toString()
-                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
-            </ProductOldPrice>
-            <ProductPrice>
-              {'$' +
-                price
-                  .toString()
-                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
-            </ProductPrice>
+            {discount && (
+              <ProductOldPrice>{calcDiscount(price, discount)}</ProductOldPrice>
+            )}
+            <ProductPrice>{price}</ProductPrice>
 
-            <ProductDescription>{bike.description}</ProductDescription>
+            <ProductDescription>{description}</ProductDescription>
 
             <MainButton typeLink to={'/product/id/' + id}>
               Ver más
@@ -123,8 +116,8 @@ export default function ProductFeatured(data) {
             <FavCtn>
               <FavButton id={id} />
             </FavCtn>
-            <DiscountLabel>{discount}</DiscountLabel>
-            <ProductImage src={bike.img[0]} alt='' />
+            <DiscountLabel>{discount}%</DiscountLabel>
+            {images && <ProductImage src={images[0]} alt='' />}
           </ProductImageContainer>
         </ProductWrapper>
       </Wrapper>

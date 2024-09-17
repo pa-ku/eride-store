@@ -7,12 +7,16 @@ import Shipping from '../components/Shipping.jsx'
 import Carousel from '../components/Carousel.jsx'
 
 import MainButton from '../components/ui/MainButton.jsx'
+import { formatPrice } from '../utils/formatPrice.js'
+import { calcDiscount } from '../utils/calcDiscount.js'
 
 export default function ProductShowcase() {
   const location = useLocation()
   const productId = location.pathname.split('/')[3]
-  const [data, setData] = useState([])
+  const [data, setData] = useState({})
   const [shipping, setShipping] = useState(false)
+
+  console.log(data)
 
   useEffect(() => {
     fetchAll()
@@ -26,7 +30,6 @@ export default function ProductShowcase() {
       if (!res.ok) {
         throw new Error('Recurso no encontrado', res.status)
       }
-      console.log(data)
     } catch (err) {
       console.error('¡Hubo un problema con la solicitud!', err)
     }
@@ -76,33 +79,40 @@ export default function ProductShowcase() {
             <ReturnContainer>
               <ReturnTitle>Devolución gratis</ReturnTitle>
               <ReturnSubtitle>
-                {' '}
                 Tenés 30 días desde que lo recibís.
               </ReturnSubtitle>
             </ReturnContainer>
-
-            <PriceTxt>
-              $
-              {product.price
-                .toString()
-                .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
-            </PriceTxt>
-            <MainButton onClick={handleShipping}>COMPRAR</MainButton>
+            <div className='flex flex-col items-start'>
+              {data.price && (
+                <p className='text-gray-500 line-through'>
+                  ${formatPrice(data.price)}
+                </p>
+              )}
+              <span className='flex items-center gap-2'>
+                {data.discount && (
+                  <p className='text-3xl'>
+                    ${calcDiscount(data.price, data.discount)}
+                  </p>
+                )}
+                <p className='text-primary-700 text-xl'>{data.discount}% OFF</p>
+              </span>
+              {/*  <MainButton onClick={handleShipping}>COMPRAR</MainButton> */}
+            </div>
           </InfoCtn>
         </ProductCtn>
 
         <SpecsWrapper>
           <Title $noBackground={true} text={'ESPECIFICACIÓNES'} />
           <SpecsContainer>
-            {data.specs.map((spec) => (
+            {/*       {data.specs.map(({ category, name, info }) => (
               <div key={spec.name}>
                 <SpecRow>
-                  <SpecsTitle>{spec.category}</SpecsTitle>
-                  <SpecsName>{spec.name}</SpecsName>
-                  <SpecsInfo>{spec.info}</SpecsInfo>
+                  <SpecsTitle>{category}</SpecsTitle>
+                  <SpecsName>{name}</SpecsName>
+                  <SpecsInfo>{info}</SpecsInfo>
                 </SpecRow>
               </div>
-            ))}
+            ))} */}
           </SpecsContainer>
         </SpecsWrapper>
       </Wrapper>

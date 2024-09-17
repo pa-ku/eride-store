@@ -3,6 +3,7 @@ import { device } from '../responsive'
 import { Link } from 'react-router-dom'
 import FavButton from './ui/FavButton'
 import { useEffect } from 'react'
+import { calcDiscount } from '../utils/calcDiscount'
 
 const DiscountTxt = styled.p`
   background-color: var(--main-color-500);
@@ -34,7 +35,9 @@ export default function ProductCard({ id, images, price, title, discount }) {
           </ImageContainer>
           <PrinceCtn>
             <TxtPrice>${price}</TxtPrice>
-            <Txtdiscount>{discount && discount}</Txtdiscount>
+            <Txtdiscount>
+              {discount && calcDiscount(price, discount)}
+            </Txtdiscount>
             <Shipping>Envío gratis</Shipping>
           </PrinceCtn>
           <Title className='Title'>{title}</Title>

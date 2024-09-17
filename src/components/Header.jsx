@@ -5,23 +5,6 @@ import { device } from '../responsive'
 import LinkButton from './ui/LinkButton'
 import { Link } from 'react-router-dom'
 
-const Head = styled.header`
-  width: 100%;
-  height: 4em;
-  background-color: #111;
-  background-color: ${(props) => props.$Home && 'rgb(0, 0, 0)'};
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-template-rows: auto;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: var(--paddinginline);
-  @media ${device.mobile} {
-    grid-template-columns: repeat(auto-fit, minmax(10px, 10px));
-    padding-inline: 1em;
-  }
-`
-
 const Logo = styled.img`
   width: 150px;
 
@@ -30,44 +13,38 @@ const Logo = styled.img`
   }
 `
 
-const CtnRightBar = styled.div`
-  display: flex;
-  gap: 2em;
-  align-items: center;
-  height: 100%;
-  justify-content: end;
-  z-index: 9;
-  @media (max-width: 700px) {
-    .hide-mobile {
-      display: none;
-    }
-  }
-`
-
 export default function Header() {
   return (
     <>
-      <Head>
+      <header className='flex h-14 bg-slate-800 xl:px-10 justify-between w-full'>
         <Link className='w-max' title='Home' to={'/'}>
           <Logo src={imgLogo} alt='' />
         </Link>
-        <CtnRightBar>
-          <LinkButton
-            className={'hide-mobile'}
+        <div className='flex gap-4 items-center '>
+          <Link
+            className='text-white px-3 py-1 hover:bg-gray-700 rounded-lg'
             to={'/product/scooters'}
-            text={'Monopatines'}
-          />
-          <LinkButton
-            id={'fav-btn'}
-            to={'/favorites'}
-            logo={<FavIcon></FavIcon>}
-            title={'Favoritos'}
-          />
-          <Link>Ingresar</Link>
-          <Link>Registrarse</Link>
+          >
+            Monopatines
+          </Link>
 
-        </CtnRightBar>
-      </Head>
+          <Link className='text-white p-1 rounded-full hover:bg-gray-700'>
+            <FavIcon></FavIcon>
+          </Link>
+          <Link
+            className='text-white px-3 py-1 hover:bg-gray-700 border hover:text-primary-500 hover:border-primary-500 rounded-lg'
+            to={'/user/login'}
+          >
+            Ingresar
+          </Link>
+          <Link
+            className='text-white px-3 py-1 bg-primary-600 hover:bg-primary-500 rounded-lg'
+            to={'/user/register'}
+          >
+            Registrarse
+          </Link>
+        </div>
+      </header>
     </>
   )
 }
