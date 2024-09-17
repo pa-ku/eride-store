@@ -1,7 +1,11 @@
+import { useState } from 'react'
+
 export default function Login() {
+  const [message, setMessage] = useState('')
+
   async function fetchUser(email, password) {
     try {
-      const res = await fetch('api/user/login', {
+      const res = await fetch('http://localhost:5000/api/user/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -10,11 +14,12 @@ export default function Login() {
       })
 
       const data = await res.json()
+      setMessage(data.error)
+      console.log(data);
+      
       if (!res.ok) {
-        throw new Error('Recurso no encontrado', res.status)
+        throw new Error(res)
       }
-
-      console.log('Respuesta del servidor:', data)
     } catch (err) {
       console.error('¡Hubo un problema con la solicitud!', err)
     }
@@ -22,14 +27,8 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault()
-
-    // Aquí accedemos a los valores usando e.target
     const email = e.target.email.value
     const password = e.target.password.value
-
-    console.log('Email:', email)
-    console.log('Password:', password)
-
     fetchUser(email, password)
   }
 
@@ -64,10 +63,11 @@ export default function Login() {
 
           <button
             type='submit'
-            className='w-full rounded-lg bg-gradient-to-bl from-primary-500 to-primary-800 py-3 text-lg text-white'
+            className='w-full rounded-lg bg-primary-500 py-3 text-lg text-white'
           >
             Enviar
           </button>
+          <p>{message}</p>
         </form>
       </div>
     </>

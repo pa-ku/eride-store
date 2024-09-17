@@ -7,6 +7,7 @@ import Shipping from '../components/Shipping.jsx'
 import Carousel from '../components/Carousel.jsx'
 import { formatPrice } from '../utils/formatPrice.js'
 import { calcDiscount } from '../utils/calcDiscount.js'
+import MainButton from '../components/ui/MainButton.jsx'
 
 export default function ProductShowcase() {
   const location = useLocation()
@@ -31,6 +32,10 @@ export default function ProductShowcase() {
     } catch (err) {
       console.error('¡Hubo un problema con la solicitud!', err)
     }
+  }
+
+  function handleShipping() {
+    setShipping(true)
   }
 
   // Agrega 6 días a la fecha actual
@@ -80,7 +85,7 @@ export default function ProductShowcase() {
                 Tenés 30 días desde que lo recibís.
               </ReturnSubtitle>
             </ReturnContainer>
-            <div className='flex flex-col items-start'>
+            <div className='flex flex-col  items-start'>
               {data.discount && (
                 <>
                   <p className='text-gray-500 line-through'>
@@ -99,8 +104,8 @@ export default function ProductShowcase() {
               {data.price && !data.discount && (
                 <p className='text-3xl'>${formatPrice(data.price)}</p>
               )}
-              {/*  <MainButton onClick={handleShipping}>COMPRAR</MainButton> */}
             </div>
+            <MainButton onClick={handleShipping}>COMPRAR</MainButton>
           </InfoCtn>
         </ProductCtn>
 
