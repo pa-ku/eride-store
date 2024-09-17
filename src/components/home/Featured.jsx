@@ -92,13 +92,8 @@ const ProductDescription = styled.p`
   margin-bottom: 10px;
 `
 
-export default function Featured() {
-  const bike = bikes[0]
-  const discountValue = [((bike.oldPrice - bike.price) / bike.oldPrice) * 100]
-
-  const discountParts = discountValue.toString()
-  const discount = discountParts.substring(0, 2) + '%'
-
+export default function Featured(data) {
+  const [images, discount, title, price, description] = data
   return (
     <>
       <Wrapper>

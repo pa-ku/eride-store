@@ -64,6 +64,9 @@ export default function Header() {
             logo={<FavIcon></FavIcon>}
             title={'Favoritos'}
           />
+          <Link>Ingresar</Link>
+          <Link>Registrarse</Link>
+
         </CtnRightBar>
       </Head>
     </>
@@ -81,7 +84,6 @@ export function SearchBar() {
     outline-none focus-visible:border-primary'
           placeholder=' '
         />
-
         <p
           className='pointer-events-none absolute -translate-y-8 px-3 
   font-bold text-slate-300 duration-300 peer-placeholder-shown:translate-y-0

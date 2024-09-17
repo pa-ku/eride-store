@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { device } from '../responsive'
-
 import { Link } from 'react-router-dom'
 import FavButton from './ui/FavButton'
+import { useEffect } from 'react'
 
 const DiscountTxt = styled.p`
   background-color: var(--main-color-500);
@@ -21,7 +21,7 @@ const DiscountTxt = styled.p`
 export default function ProductCard({ id, images, price, title, discount }) {
   return (
     <>
-      <WrapperCard href=''>
+      <WrapperCard>
         {discount && <DiscountTxt>{discount}%</DiscountTxt>}
 
         <FavCtn>
@@ -33,15 +33,8 @@ export default function ProductCard({ id, images, price, title, discount }) {
             <Image loading='lazy' src={images} />
           </ImageContainer>
           <PrinceCtn>
-            <TxtPrice>
-              ${price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
-            </TxtPrice>
-            <Txtdiscount>
-              {discount &&
-                `${discount
-                  .toString()
-                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}`}
-            </Txtdiscount>
+            <TxtPrice>${price}</TxtPrice>
+            <Txtdiscount>{discount && discount}</Txtdiscount>
             <Shipping>Envío gratis</Shipping>
           </PrinceCtn>
           <Title className='Title'>{title}</Title>

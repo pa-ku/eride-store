@@ -7,6 +7,8 @@ import Footer from '../components/Footer'
 import AboutMe from '../components/home/About'
 import OurBrands from '../components/home/OurBrands'
 import MainButton from '../components/ui/MainButton'
+import { useEffect, useState } from 'react'
+import ProductCard from '../components/ProductCard'
 
 const ProductSection = styled.main`
   gap: 2em;
@@ -27,6 +29,26 @@ const ProductContainer = styled.div`
 `
 
 export default function Home() {
+  const [itemsData, setItemsData] = useState([])
+
+  async function fetchAllScooters() {
+    try {
+      const res = await fetch(`http://localhost:5000/api/scooters`)
+      const data = await res.json()
+      setItemsData(data)
+      if (!res.ok) {
+        throw new Error('Recurso no encontrado', res.status)
+      }
+
+      console.log(data)
+    } catch (err) {
+      console.error('¡Hubo un problema con la solicitud!', err)
+    }
+  }
+
+  useEffect(() => {
+    fetchAllScooters()
+  }, [])
   return (
     <>
       <Header $Home />
@@ -35,23 +57,25 @@ export default function Home() {
         subtitle='No te conformes con menos cuando se trata de tu pasión'
       />
       <OurBrands />
-      {/*   <ProductSection>
-        <Featured />
+      <Featured
+        data={itemsData.filter((item) =>
+          item._id.includes('66e48c2575b6b2509c12de9a')
+        )}
+      />
+      <Title text={'Las mejores '} accent={'Ofertas'} />
+      {data.map(({ title, images, _id: id, description, discount }) => (
+        <ProductCard
+          key={id}
+          images={images[0]}
+          title={title}
+          id={id}
+          discount={discount}
+          description={description}
+        />
+      ))}
 
-        <ProductContainer>
-          <Title text={'Las mejores '} accent={'Ofertas'} />
-          <Product filters={{ filter: 'oferta' }} />
-        </ProductContainer>
+      <Title text={'Más Vendido'} />
 
-        <ProductContainer>
-          <Title text={'Más Vendido'} />
-          <Product filters={{ filter: 'popular' }} />
-        </ProductContainer>
-        <MainButton typeLink={true} to={'product/monopatines'}>
-          {' '}
-          Ver todos los productos
-        </MainButton>
-      </ProductSection> */}
       <AboutMe />
       <Footer />
     </>
