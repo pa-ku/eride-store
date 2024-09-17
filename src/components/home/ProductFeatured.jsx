@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import Title from '../ui/Title.jsx'
-import { bikes } from '../../../data.js'
 import MainButton from '../ui/MainButton.jsx'
 import FavButton from '../ui/FavButton.jsx'
 
@@ -100,29 +99,29 @@ export default function ProductFeatured(data) {
         <Title accent={'Destacado'} />
         <ProductWrapper>
           <ProductInfoContainer>
-            <ProductTitle>{bike.title}</ProductTitle>
+            <ProductTitle>{title}</ProductTitle>
             <ProductOldPrice>
               {'$' +
-                bike.oldPrice
+                oldPrice
                   .toString()
                   .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
             </ProductOldPrice>
             <ProductPrice>
               {'$' +
-                bike.price
+                price
                   .toString()
                   .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
             </ProductPrice>
 
             <ProductDescription>{bike.description}</ProductDescription>
 
-            <MainButton typeLink to={'/product/id/' + bike._id}>
+            <MainButton typeLink to={'/product/id/' + id}>
               Ver más
             </MainButton>
           </ProductInfoContainer>
           <ProductImageContainer>
             <FavCtn>
-              <FavButton id={bike._id} />
+              <FavButton id={id} />
             </FavCtn>
             <DiscountLabel>{discount}</DiscountLabel>
             <ProductImage src={bike.img[0]} alt='' />

@@ -3,16 +3,9 @@ import styled from 'styled-components'
 import Title from '../components/ui/Title'
 import AboutMe from '../components/home/About'
 import OurBrands from '../components/home/OurBrands'
-Featured
 import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import ProductFeatured from '../components/home/ProductFeatured'
-
-const ProductContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`
 
 export default function Home() {
   const [itemsData, setItemsData] = useState([])
@@ -42,24 +35,32 @@ export default function Home() {
         subtitle='No te conformes con menos cuando se trata de tu pasión'
       />
       <OurBrands />
-      <ProductFeatured
+      {/*   <ProductFeatured
         data={itemsData.filter((item) =>
           item._id.includes('66e48c2575b6b2509c12de9a')
         )}
-      />
-      <Title text={'Las mejores '} accent={'Ofertas'} />
-      {data.map(({ title, images, _id: id, description, discount }) => (
-        <ProductCard
-          key={id}
-          images={images[0]}
-          title={title}
-          id={id}
-          discount={discount}
-          description={description}
-        />
-      ))}
-
-      <Title text={'Más Vendido'} />
+      /> */}
+      <section>
+        <Title text={'Las mejores '} accent={'Ofertas'} />
+        <div className='flex gap-4 items-center justify-center'>
+          {itemsData
+            .slice(0, 5)
+            .map(({ title, images, _id: id, price, description, discount }) => (
+              <ProductCard
+                key={id}
+                images={images[0]}
+                title={title}
+                id={id}
+                price={price}
+                discount={discount}
+                description={description}
+              />
+            ))}
+        </div>
+      </section>
+      <section>
+        <Title text={'Más Vendido'} />
+      </section>
       <AboutMe />
     </>
   )
