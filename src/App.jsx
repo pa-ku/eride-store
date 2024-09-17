@@ -6,7 +6,7 @@ import ProductCategory from './pages/AllProducts'
 import ProductSection from './pages/ProductShowcase'
 import Favorites from './pages/Favorites'
 import CreateProduct from './pages/CreateProduct'
-import MainLayout from './pages/layouts/MainLayout'
+import Layout from './pages/layouts/Layout'
 import ScrollToTop from './components/ScrollToTop'
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route index path='/' element={<Home />} />
-          {/*    <Route element={<MainLayout />}>
+           <Route element={<Layout />}>
             <Route path="/product">
               <Route path="monopatines/" element={<ProductCategory />} />
               <Route path="monociclos/" element={<ProductCategory />} />
@@ -24,9 +24,14 @@ function App() {
               <Route path="create" element={<CreateProduct />} />
             </Route>
 
+            <Route path="/user">
+              <Route path="/login" element={< />} />
+              <Route path="/register" element={< />} />
+            </Route>
+
             <Route path="/about" element={<About />} />
             <Route path="/favorites" element={<Favorites />} />
-          </Route> */}
+          </Route> 
         </Routes>
       </BrowserRouter>
     </>
