@@ -15,8 +15,8 @@ export default function Login() {
 
       const data = await res.json()
       setMessage(data.error)
-      console.log(data);
-      
+      console.log(data)
+
       if (!res.ok) {
         throw new Error(res)
       }
@@ -45,7 +45,7 @@ export default function Login() {
             name='email'
             type='email'
             required
-            className='rounded-lg bg-gray-200 p-3 placeholder:text-gray-700 placeholder-shown:border-gray-400 valid:border-l-8 valid:border-emerald-400'
+            className='input-form'
             placeholder='email'
           />
 
@@ -54,7 +54,7 @@ export default function Login() {
               <input
                 name='password'
                 type='password'
-                className='rounded-l-lg bg-gray-200 w-full p-3 placeholder-shown:border-gray-400 valid:border-l-8 valid:border-emerald-400 placeholder:text-gray-700'
+                className='input-form'
                 placeholder='password'
                 required
               />

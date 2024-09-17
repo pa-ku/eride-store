@@ -46,14 +46,14 @@ export default function Register() {
               name='name'
               type='text'
               required
-              className='rounded-lg bg-gray-200 p-3 placeholder:text-gray-700 placeholder-shown:border-gray-400 valid:border-l-8 valid:border-emerald-400'
+              className='input-form'
               placeholder='Nombre'
             />
             <input
               name='lastname'
               type='text'
               required
-              className='rounded-lg bg-gray-200 p-3 placeholder:text-gray-700 placeholder-shown:border-gray-400 valid:border-l-8 valid:border-emerald-400'
+              className='input-form'
               placeholder='Apellido'
             />
           </div>
@@ -62,7 +62,7 @@ export default function Register() {
             name='email'
             type='email'
             required
-            className='rounded-lg bg-gray-200 p-3 placeholder:text-gray-700 placeholder-shown:border-gray-400 valid:border-l-8 valid:border-emerald-400'
+            className='input-form'
             placeholder='email'
           />
 
@@ -71,7 +71,7 @@ export default function Register() {
               <input
                 name='password'
                 type='password'
-                className='rounded-l-lg bg-gray-200 w-full p-3 placeholder-shown:border-gray-400 valid:border-l-8 valid:border-emerald-400 placeholder:text-gray-700'
+                className='input-form'
                 placeholder='password'
                 required
               />
@@ -80,7 +80,7 @@ export default function Register() {
 
           <button
             type='submit'
-            className='w-full rounded-lg bg-gradient-to-bl from-primary-500 to-primary-800 py-3 text-lg text-white'
+            className='w-full rounded-lg bg-primary-500 py-3 text-lg text-white'
           >
             Enviar
           </button>

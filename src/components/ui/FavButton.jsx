@@ -1,32 +1,48 @@
-import React from "react";
+import React, { useState } from 'react'
 
-import styled from "styled-components";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import useLocalStorage from "use-local-storage";
+import styled from 'styled-components'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import useLocalStorage from 'use-local-storage'
+import { Link } from 'react-router-dom'
 
 export default function FavButton({ id }) {
-  const [favorites, setFavorites] = useLocalStorage("favorites", []);
-  const isFavorite = favorites.includes(id);
+  const [favorites, setFavorites] = useLocalStorage('favorites', [])
+  const isFavorite = favorites.includes(id)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [toolkit, setToolkit] = useState(false)
 
   const handleFavorite = () => {
-    if (isFavorite === false) {
-      setFavorites((prevFavorites) => [...prevFavorites, id]);
-    } else {
-      setFavorites((prevFavorites) =>
-        prevFavorites.filter((favId) => favId !== id)
-      );
-    }
-  };
+    if (!isAdmin) {
+      setToolkit(true)
+      setTimeout(() => {
+        return setToolkit(false)
+      }, 2000)
+    } 
+  }
 
   return (
     <>
-      <FavCtn>
+      <FavCtn className='relative'>
+        {toolkit && (
+          <div
+            className={`p-2 bg-gray-100 w-max -top-10 right-6 rounded-lg z-50 text-black text-md absolute  `}
+          >a
+            <p>Para agregar favoritos</p>
+
+            <Link
+              className='hover:bg-primary-500 px-2 rounded-lg hover:text-white text-primary-500'
+              to={'/user/login'}
+            >
+              ingresa a tu cuenta
+            </Link>
+          </div>
+        )}
         <FavoriteBtn
-          title={isFavorite ? "Eliminar favorito" : "Añadir favorito"}
-          className="Favorite"
+          title={isFavorite ? 'Eliminar favorito' : 'Añadir favorito'}
+          className='Favorite'
           onChange={handleFavorite}
-          type="checkbox"
+          type='checkbox'
           checked={isFavorite}
         />
         {isFavorite === true && <FavIco $animation={isFavorite}></FavIco>}
@@ -34,7 +50,7 @@ export default function FavButton({ id }) {
         <FavoriteBorderIcon></FavoriteBorderIcon>
       </FavCtn>
     </>
-  );
+  )
 }
 
 const FavoriteBtn = styled.input`
@@ -58,7 +74,7 @@ const FavoriteBtn = styled.input`
 
     margin-inline: 1em;
   }
-`;
+`
 
 const FavCtn = styled.label`
   background-color: rgba(255, 255, 255, 0);
@@ -69,20 +85,20 @@ const FavCtn = styled.label`
   position: absolute;
   transition: 0.2s;
   right: 0px;
-  top:0px;
+  top: 0px;
   bottom: 0px;
   right: 0px;
   scale: 1.1;
 
   z-index: 100;
-`;
+`
 const FavIco = styled(FavoriteIcon)`
   position: absolute;
   transform: bottom;
   color: #ff5858;
   scale: 0;
   opacity: 0;
-  animation: 0.3s ${(props) => (props.$animation ? "favIn" : "favOut")} forwards;
+  animation: 0.3s ${(props) => (props.$animation ? 'favIn' : 'favOut')} forwards;
   @keyframes favIn {
     0% {
       scale: 0;
@@ -101,4 +117,4 @@ const FavIco = styled(FavoriteIcon)`
       opacity: 0;
     }
   }
-`;
+`

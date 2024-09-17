@@ -84,3 +84,7 @@
     opacity: 1;
   }
 }
+
+.input-form {
+  @apply rounded-l-lg bg-gray-100 w-full p-3 placeholder:text-gray-700;
+}
