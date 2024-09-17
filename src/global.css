@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: monserrat;
   src: url(../src/assets/fonts/Montserrat-Regular.woff2);

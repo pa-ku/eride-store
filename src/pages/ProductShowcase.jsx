@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Title from '../components/ui/Title.jsx'
 import { useLocation } from 'react-router'
@@ -11,21 +11,30 @@ import MainButton from '../components/ui/MainButton.jsx'
 export default function ProductSection() {
   const location = useLocation()
   const productId = location.pathname.split('/')[3]
-  const product = bikes.find((bike) => bike._id === productId)
-  const [errMsj, setErrMsj] = useState('')
-  const [shipping, setShipping] = useState()
+  const [data, setData] = useState([])
+  const [shipping, setShipping] = useState(false)
 
-  /*   const searchParams = useSearchParams();
-  const selectedColor = searchParams.get("size");
-  const selectedSize = searchParams.get("color"); */
+  useEffect(() => {
+    fetchAll()
+  }, [])
 
-  function handleShipping() {
-    setShipping(true)
+  async function fetchAll() {
+    try {
+      const res = await fetch(`http://localhost:5000/api/scooters/${productId}`)
+      const data = await res.json()
+      setData(data)
+      if (!res.ok) {
+        throw new Error('Recurso no encontrado', res.status)
+      }
+
+      console.log(data)
+    } catch (err) {
+      console.error('¡Hubo un problema con la solicitud!', err)
+    }
   }
 
-  var hoy = new Date()
-
   // Agrega 6 días a la fecha actual
+  var hoy = new Date()
   var seisDiasDespues = new Date()
   seisDiasDespues.setDate(hoy.getDate() + 6)
   var diaDeLaSemana =
@@ -37,26 +46,28 @@ export default function ProductSection() {
 
   return (
     <>
-      {/*  <Wrapper>
+      <Wrapper>
         {shipping === true && (
           <Shipping
-            title={product.title}
-            price={product.price}
+            title={data.title}
+            price={data.price}
             shipping={shipping}
             setShipping={setShipping}
           />
         )}
         <ProductCtn>
           <ImgCtn>
-            <Carousel render={product.img.length} images={product.img} />
+            {data.images && (
+              <Carousel render={data.images.length} images={data.images} />
+            )}
             <FavCtn>
-              <FavButton id={product._id} />
+              <FavButton id={data._id} />
             </FavCtn>
           </ImgCtn>
 
           <InfoCtn>
-            <Title text={product.title} />
-            <DescriptionTxt>{product.description}</DescriptionTxt>
+            <Title text={data.title} />
+            <DescriptionTxt>{data.description}</DescriptionTxt>
 
             <FreeShippingCtn>
               <ReturnTitle>Llega gratis </ReturnTitle>
@@ -66,7 +77,7 @@ export default function ProductSection() {
             <ReturnContainer>
               <ReturnTitle>Devolución gratis</ReturnTitle>
               <ReturnSubtitle>
-                {" "}
+                {' '}
                 Tenés 30 días desde que lo recibís.
               </ReturnSubtitle>
             </ReturnContainer>
@@ -75,30 +86,27 @@ export default function ProductSection() {
               $
               {product.price
                 .toString()
-                .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
             </PriceTxt>
-
-            <ErrMsj>{errMsj}</ErrMsj>
-
             <MainButton onClick={handleShipping}>COMPRAR</MainButton>
           </InfoCtn>
         </ProductCtn>
 
         <SpecsWrapper>
-          <Title $noBackground={true} text={"ESPECIFICACIÓNES"} />
+          <Title $noBackground={true} text={'ESPECIFICACIÓNES'} />
           <SpecsContainer>
-            {product.specs.map((spec) => (
-              <div key={spec.nombre}>
+            {data.specs.map((spec) => (
+              <div key={spec.name}>
                 <SpecRow>
-                  <SpecsTitle>{spec.title}</SpecsTitle>
-                  <SpecsName>{spec.nombre}</SpecsName>
+                  <SpecsTitle>{spec.category}</SpecsTitle>
+                  <SpecsName>{spec.name}</SpecsName>
                   <SpecsInfo>{spec.info}</SpecsInfo>
                 </SpecRow>
               </div>
             ))}
           </SpecsContainer>
         </SpecsWrapper>
-      </Wrapper> */}
+      </Wrapper>
     </>
   )
 }
