@@ -81,19 +81,24 @@ export default function ProductShowcase() {
               </ReturnSubtitle>
             </ReturnContainer>
             <div className='flex flex-col items-start'>
-              {data.price && (
-                <p className='text-gray-500 line-through'>
-                  ${formatPrice(data.price)}
-                </p>
-              )}
-              <span className='flex items-center gap-2'>
-                {data.discount && (
-                  <p className='text-3xl'>
-                    ${calcDiscount(data.price, data.discount)}
+              {data.discount && (
+                <>
+                  <p className='text-gray-500 line-through'>
+                    ${formatPrice(data.price)}
                   </p>
-                )}
-                <p className='text-primary-700 text-xl'>{data.discount}% OFF</p>
-              </span>
+                  <span className='flex items-center gap-2'>
+                    <p className='text-3xl'>
+                      ${calcDiscount(data.price, data.discount)}
+                    </p>
+                    <p className='text-primary-00 text-xl'>
+                      {data.discount}% OFF
+                    </p>
+                  </span>
+                </>
+              )}
+              {data.price && !data.discount && (
+                <p className='text-3xl'>${formatPrice(data.price)}</p>
+              )}
               {/*  <MainButton onClick={handleShipping}>COMPRAR</MainButton> */}
             </div>
           </InfoCtn>

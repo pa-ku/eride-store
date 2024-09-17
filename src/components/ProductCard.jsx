@@ -39,11 +39,18 @@ export default function ProductCard({ id, images, price, title, discount }) {
             <Image loading='lazy' src={images} />
           </ImageContainer>
           <div className='flex items-center gap-2'>
-            <TxtPrice>${formatPrice(price)}</TxtPrice>
-            <p className='line-through text-gray-500'>
-              {discount && '$'}
-              {discount && calcDiscount(price, discount)}
-            </p>
+            {discount && (
+              <>
+                <TxtPrice>
+                  ${discount && calcDiscount(price, discount)}
+                </TxtPrice>
+                <p className='line-through text-gray-500'>
+                  {discount && '$'}
+                  {formatPrice(price)}
+                </p>
+              </>
+            )}
+            {!discount && <TxtPrice>${formatPrice(price)}</TxtPrice>}
           </div>
           <Shipping>Envío gratis</Shipping>
           <Title className='Title'>{title}</Title>
@@ -52,18 +59,6 @@ export default function ProductCard({ id, images, price, title, discount }) {
     </>
   )
 }
-
-const PrinceCtn = styled.div``
-
-const Txtdiscount = styled.p`
-  text-decoration: line-through;
-  color: #888;
-  font-size: 14px;
-
-  color: var(--main-color-550);
-
-  font-weight: 600;
-`
 
 const FavCtn = styled.div`
   position: absolute;

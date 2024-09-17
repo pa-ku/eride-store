@@ -1,4 +1,7 @@
 export function formatPrice(price) {
-  const result = price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')
-  return result
+  if (typeof price === 'string') {
+    return price.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')
+  } else {
+    return price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')
+  }
 }

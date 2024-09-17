@@ -29,9 +29,9 @@ export default function Header() {
             Monopatines
           </Link>
 
-          <Link className='text-white p-1 rounded-full hover:bg-gray-700'>
+          {/* <Link className='text-white p-1 rounded-full hover:bg-gray-700'>
             <FavIcon></FavIcon>
-          </Link>
+          </Link> */}
           <Link
             className='text-white px-3 py-1 hover:bg-gray-700 border hover:text-primary-500 hover:border-primary-500 rounded-lg'
             to={'/user/login'}
