@@ -6,6 +6,7 @@ import OurBrands from '../components/home/OurBrands'
 import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import ProductFeatured from '../components/home/ProductFeatured'
+import { Link } from 'react-router-dom'
 
 export default function Home() {
   const [itemsData, setItemsData] = useState([])
@@ -79,6 +80,12 @@ export default function Home() {
               )}
           </div>
         </section>
+        <Link
+          to={'/product/scooters'}
+          className='px-4 py-2 bg-primary-400 rounded-lg text-lg text-white'
+        >
+          Ver todos los productos
+        </Link>
       </main>
       |
       <AboutMe />

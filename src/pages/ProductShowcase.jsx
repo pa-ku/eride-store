@@ -104,15 +104,16 @@ export default function ProductShowcase() {
         <SpecsWrapper>
           <Title $noBackground={true} text={'ESPECIFICACIÓNES'} />
           <SpecsContainer>
-            {/*       {data.specs.map(({ category, name, info }) => (
-              <div key={spec.name}>
-                <SpecRow>
-                  <SpecsTitle>{category}</SpecsTitle>
-                  <SpecsName>{name}</SpecsName>
-                  <SpecsInfo>{info}</SpecsInfo>
-                </SpecRow>
-              </div>
-            ))} */}
+            {data.specs &&
+              data.specs.map(({ category, name, info }) => (
+                <div key={name}>
+                  <SpecRow>
+                    {category && <SpecsTitle>{category}</SpecsTitle>}
+                    <SpecsName>{name}</SpecsName>
+                    <SpecsInfo>{info}</SpecsInfo>
+                  </SpecRow>
+                </div>
+              ))}
           </SpecsContainer>
         </SpecsWrapper>
       </Wrapper>

@@ -33,13 +33,13 @@ export default function ProductCard({ id, images, price, title, discount }) {
           <ImageContainer>
             <Image loading='lazy' src={images} />
           </ImageContainer>
-          <PrinceCtn>
+          <div className='flex items-center gap-2'>
             <TxtPrice>${price}</TxtPrice>
-            <Txtdiscount>
+            <p className='line-through text-gray-500'>
               {discount && calcDiscount(price, discount)}
-            </Txtdiscount>
-            <Shipping>Envío gratis</Shipping>
-          </PrinceCtn>
+            </p>
+          </div>
+          <Shipping>Envío gratis</Shipping>
           <Title className='Title'>{title}</Title>
         </CardLink>
       </WrapperCard>
