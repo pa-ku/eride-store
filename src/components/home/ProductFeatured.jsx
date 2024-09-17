@@ -116,7 +116,9 @@ export default function ProductFeatured({ data }) {
             <FavCtn>
               <FavButton id={id} />
             </FavCtn>
-            <DiscountLabel>{discount}%</DiscountLabel>
+            <p className='bg-primary-600 text-xl w-max absolute font-bold text-white px-2 rounded-b-lg'>
+              {discount}% OFF
+            </p>
             {images && <ProductImage src={images[0]} alt='' />}
           </ProductImageContainer>
         </ProductWrapper>

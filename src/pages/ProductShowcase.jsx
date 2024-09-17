@@ -5,8 +5,6 @@ import { useLocation } from 'react-router'
 import FavButton from '../components/ui/FavButton.jsx'
 import Shipping from '../components/Shipping.jsx'
 import Carousel from '../components/Carousel.jsx'
-
-import MainButton from '../components/ui/MainButton.jsx'
 import { formatPrice } from '../utils/formatPrice.js'
 import { calcDiscount } from '../utils/calcDiscount.js'
 
@@ -19,10 +17,10 @@ export default function ProductShowcase() {
   console.log(data)
 
   useEffect(() => {
-    fetchAll()
-  }, [])
+    fetchOneItem()
+  }, [productId])
 
-  async function fetchAll() {
+  async function fetchOneItem() {
     try {
       const res = await fetch(`http://localhost:5000/api/scooters/${productId}`)
       const data = await res.json()

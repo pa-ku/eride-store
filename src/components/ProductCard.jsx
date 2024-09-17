@@ -23,7 +23,11 @@ export default function ProductCard({ id, images, price, title, discount }) {
   return (
     <>
       <WrapperCard>
-        {discount && <DiscountTxt>{discount}%</DiscountTxt>}
+        {discount && (
+          <p className='bg-primary-600 w-max px-2 py-1 rounded-b-lg text-white font-bold'>
+            {discount}%
+          </p>
+        )}
 
         <FavCtn>
           <FavButton id={id} />
