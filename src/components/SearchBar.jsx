@@ -6,14 +6,22 @@ export default function SearchBar() {
   const [query, setQuery] = useState('')
   const [data, setData] = useState([])
   const [filterByQuery, setFilterByQuery] = useState([])
+  const [showResults, setShowResults] = useState(false)
+  const [alreadyFecth, setAlreadyFetch] = useState(false)
 
   async function fetchScooters() {
-    try {
-      const res = await fetch('http://localhost:5000/api/scooters')
-      const data = await res.json()
-      setData(data)
-    } catch (error) {
-      console.log(error)
+    setShowResults(true)
+
+    if (!alreadyFecth) {
+      try {
+        const res = await fetch('http://localhost:5000/api/scooters')
+        const data = await res.json()
+        console.log('fetch')
+        setData(data)
+        setAlreadyFetch(true)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
@@ -24,14 +32,14 @@ export default function SearchBar() {
     setFilterByQuery(filteredByQuery)
   }, [query])
 
-  /*   useEffect(() => {
+  useEffect(() => {
     // Función que se ejecuta cuando se hace clic fuera del SearchBar
     function handleClickOutside(event) {
       if (
         searchBarRef.current &&
         !searchBarRef.current.contains(event.target)
       ) {
-        setQuery('') // Limpia el input si el clic es fuera del searchBar
+        setShowResults(false) // Limpia el input si el clic es fuera del searchBar
       }
     }
 
@@ -43,7 +51,6 @@ export default function SearchBar() {
       document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [setQuery])
- */
 
   return (
     <span className='relative' ref={searchBarRef}>
@@ -75,7 +82,7 @@ peer-focus:-translate-x-20 peer-focus:font-bold peer-focus:text-slate-300'
           ✕
         </button>
       </div>
-      {query !== '' && filterByQuery.length > 0 && (
+      {showResults && query !== '' && filterByQuery.length > 0 && (
         <div className='mt-2 z-10 flex flex-col gap-2 shadow-lg w-full bg-white absolute  '>
           {filterByQuery.slice(0, 6).map(({ title, _id: id }) => (
             <Link
