@@ -109,10 +109,9 @@ export default function ProductFeatured({ data }) {
                 </p>
               )}
               <span className='flex items-center gap-2'>
-                <p className='text-3xl text-primary-700 '>
+                <p className='text-3xl text-primary-600 '>
                   {formatPrice(price)}
                 </p>
-                <p className=' text-xl'> {discount}% OFF</p>
               </span>
             </div>
 
@@ -126,7 +125,10 @@ export default function ProductFeatured({ data }) {
             <FavCtn>
               <FavButton id={id} />
             </FavCtn>
-
+            <p className='absolute text-primary-600 text-2xl'>
+              {' '}
+              {discount}% OFF
+            </p>
             {images && (
               <img className='size-96 object-contain' src={images[0]} alt='' />
             )}
