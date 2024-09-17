@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import Title from '../ui/Title'
+import Title from '../ui/Title.jsx'
 import { bikes } from '../../../data.js'
-import MainButton from '../ui/MainButton'
-import FavButton from '../ui/FavButton'
+import MainButton from '../ui/MainButton.jsx'
+import FavButton from '../ui/FavButton.jsx'
 
 const Wrapper = styled.div`
   display: flex;
@@ -92,7 +92,7 @@ const ProductDescription = styled.p`
   margin-bottom: 10px;
 `
 
-export default function Featured(data) {
+export default function ProductFeatured(data) {
   const [images, discount, title, price, description] = data
   return (
     <>

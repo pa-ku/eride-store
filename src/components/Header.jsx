@@ -4,7 +4,6 @@ import FavIcon from '@mui/icons-material/FavoriteBorder'
 import { device } from '../responsive'
 import LinkButton from './ui/LinkButton'
 import { Link } from 'react-router-dom'
-import SearchBar from './SearchBar'
 
 const Head = styled.header`
   width: 100%;

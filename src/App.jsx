@@ -6,7 +6,7 @@ import ProductCategory from './pages/AllProducts'
 import ProductSection from './pages/ProductShowcase'
 import Favorites from './pages/Favorites'
 import CreateProduct from './pages/CreateProduct'
-import Layout from './pages/layouts/Layout'
+import Layout from './pages/Layout'
 import ScrollToTop from './components/ScrollToTop'
 import Register from './pages/Register'
 import Login from './pages/Login'
@@ -21,15 +21,17 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route index path='/' element={<Home />} />
+
             <Route path='/product'>
               <Route path='monopatines/' element={<AllProducts />} />
               <Route path='id/:id' element={<ProductShowcase />} />
             </Route>
 
-            <Route path='/user'>
+          {/*   <Route path='/user'>
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
-            </Route>
+            </Route> */}
+
             <Route path='/about' element={<About />} />
             <Route path='/favorites' element={<Favorites />} />
           </Route>

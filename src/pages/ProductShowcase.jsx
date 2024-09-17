@@ -26,7 +26,6 @@ export default function ProductShowcase() {
       if (!res.ok) {
         throw new Error('Recurso no encontrado', res.status)
       }
-
       console.log(data)
     } catch (err) {
       console.error('¡Hubo un problema con la solicitud!', err)

@@ -1,27 +1,13 @@
 import Banner from '../components/home/Banner'
-import Product from '../components/ProductsLayout'
 import styled from 'styled-components'
 import Title from '../components/ui/Title'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
 import AboutMe from '../components/home/About'
 import OurBrands from '../components/home/OurBrands'
-import MainButton from '../components/ui/MainButton'
+Featured
 import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
+import ProductFeatured from '../components/home/ProductFeatured'
 
-const ProductSection = styled.main`
-  gap: 2em;
-  flex-direction: column;
-  padding-block: 4em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: start;
-  @media (max-width: 700px) {
-    gap: 6em;
-  }
-`
 const ProductContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -56,7 +42,7 @@ export default function Home() {
         subtitle='No te conformes con menos cuando se trata de tu pasión'
       />
       <OurBrands />
-      <Featured
+      <ProductFeatured
         data={itemsData.filter((item) =>
           item._id.includes('66e48c2575b6b2509c12de9a')
         )}
