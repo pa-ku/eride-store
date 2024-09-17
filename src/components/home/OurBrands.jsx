@@ -10,7 +10,6 @@ import brand5 from '../../assets/img/brand5.webp'
 const Wrapper = styled.div`
   background-color: #f5f5f5;
   text-align: center;
-  padding-block: 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,7 +25,6 @@ const ImgContainer = styled.div`
   width: 100%;
   flex-wrap: wrap;
   gap: 3em;
-  height: 100%;
   filter: grayscale(1);
   @media (max-width: 700px) {
     overflow: auto;
@@ -40,21 +38,8 @@ const ImgContainer = styled.div`
   }
 `
 
-const Img = styled.img`
-  height: 60px;
-  opacity: 0.5;
-  pointer-events: none;
-  transition: 200ms;
-  object-fit: contain;
-  @media (max-width: 700px) {
-    width: 120px;
-    height: 40px;
-  }
-`
-
 export default function OurBrands() {
   const brandArr = [
-    ,
     brand2,
     brand_zero,
     brand_inmotion,
@@ -66,7 +51,12 @@ export default function OurBrands() {
     <Wrapper>
       <ImgContainer>
         {brandArr.map((image, index) => (
-          <Img key={index} src={image} alt='Imagen Marca' />
+          <img
+            className='w-36 object-contain cursor-pointer duration-300 hover:scale-110'
+            key={index}
+            src={image}
+            alt='Imagen Marca'
+          />
         ))}
       </ImgContainer>
     </Wrapper>

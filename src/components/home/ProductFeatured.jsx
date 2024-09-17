@@ -48,18 +48,6 @@ const ProductImageContainer = styled.div`
   }
 `
 
-const ProductImage = styled.img`
-  display: flex;
-  align-items: start;
-  object-fit: contain;
-  justify-content: start;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  @media (max-width: 700px) {
-    padding-inline: 10px;
-  }
-`
 const FavCtn = styled.div`
   position: absolute;
   right: 0px;
@@ -75,17 +63,6 @@ const ProductTitle = styled.p`
   margin-bottom: 10px;
   font-weight: 600;
   z-index: 1;
-`
-
-const ProductPrice = styled.p`
-  font-size: 1.5rem;
-  color: #000000;
-`
-const ProductOldPrice = styled.p`
-  font-size: 1.2rem;
-  text-decoration: line-through;
-  color: var(--main-color-550);
-  height: 15px;
 `
 
 const ProductDescription = styled.p`
@@ -138,31 +115,3 @@ export default function ProductFeatured({ data }) {
     </>
   )
 }
-
-const DiscountLabel = styled.p`
-  background-color: var(--main-color-500);
-  width: max-content;
-  height: 35px;
-  padding: 0.2em 0.5em;
-  font-size: 22px;
-  font-weight: 800;
-  color: white;
-  position: relative;
-  text-align: start;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  &:after {
-    content: '';
-    position: absolute;
-    height: 0;
-    width: 0;
-    left: 100%;
-    top: 0;
-    border-top: 35px solid transparent;
-    border-left: 20px solid var(--main-color-500);
-  }
-  @media (max-width: 700px) {
-    font-size: 20px;
-  }
-`
