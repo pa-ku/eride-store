@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Title from "../components/ui/Title";
-import Product from "../components/Product";
+import Product from "../components/ProductsLayout";
 import { useLocation } from "react-router";
 
 export default function AllProducts() {

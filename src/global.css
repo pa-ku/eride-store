@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: monserrat;
   src: url(../src/assets/fonts/Montserrat-Regular.woff2);
@@ -14,17 +13,14 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family:monserrat ,Verdana, Geneva, Tahoma, sans-serif;
+  font-family: monserrat, Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
-
 }
-
 
 :root {
   --paddinginline: 3em;
   --color-gold: #005f9f;
   --maincolor: #005f9f;
-
   --main-color-250: #dbf1ff;
   --main-color-300: #c6e8ff;
   --main-color-350: #94d1f9;
@@ -41,7 +37,6 @@
 ::-webkit-scrollbar {
   background-color: #111;
   width: 15px;
-
 }
 
 ::-webkit-scrollbar-thumb {
@@ -58,22 +53,19 @@
   background: #ffbf0035;
 }
 
-
 @keyframes start {
   0% {
     opacity: 0;
     translate: -80px;
-
   }
 
   100% {
     opacity: 1;
   }
-
 }
 
 @keyframes show {
-  100%{
+  100% {
     opacity: 1;
   }
 }

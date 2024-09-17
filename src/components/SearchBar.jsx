@@ -1,35 +1,47 @@
-import React from "react";
-import { useState, useMemo } from "react";
-import { bikes } from "../../data.js";
-import styled from "styled-components";
-import SearchIcon from "@mui/icons-material/Search";
-import LinkButton from "./ui/LinkButton.jsx";
-import { Link } from "react-router-dom";
-export default function SearchBar() {
-  const [query, setQuery] = useState("");
-  const [isOpen, setIsOpen] = useState(true);
+import { useState, useMemo, useEffect } from 'react'
+
+import styled from 'styled-components'
+import SearchIcon from '@mui/icons-material/Search'
+import LinkButton from './ui/LinkButton.jsx'
+import { Link } from 'react-router-dom'
+
+export default async function SearchBar() {
+  const [query, setQuery] = useState('')
+  const [isOpen, setIsOpen] = useState(true)
+  const [data, setData] = useState([])
 
   function handleSearch() {
-    setIsOpen(true);
+    setIsOpen(true)
   }
 
   function handleOnKeydown(e) {
     if (e.keyCode == 27) {
-      setQuery("");
-      console.log("esc");
+      setQuery('')
+      console.log('esc')
     } else if (e.keyCode == 13) {
     }
   }
 
-  const filteredItems = useMemo(() => {
-    if (query === "") {
-      return bikes;
-    } else {
-      return bikes.filter((item) => {
-        return item.title.toLowerCase().includes(query.toLowerCase());
-      });
+  async function fetchScooters() {
+    try {
+      const res = await fetch('http://localhost:5000/api/scooters')
+      const data = await res.json()
+      setData(data)
+      return data
+    } catch (error) {
+      console.log(error)
     }
-  }, [bikes, query]);
+  }
+
+  useEffect(() => {
+    fetchScooters()
+  }, [])
+
+  const filteredItems = useMemo(() => {
+    return data.filter((item) => {
+      return item.title.toLowerCase().includes(query.toLowerCase())
+    })
+  }, [data, query])
 
   return (
     <>
@@ -40,11 +52,11 @@ export default function SearchBar() {
             <SearchBarInput
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Busca en Xtreme"
+              placeholder='Busca en Xtreme'
               onKeyDown={handleOnKeydown}
             />
-            {query != "" && (
-              <InputCloseButton onClick={() => setQuery("")}>
+            {query != '' && (
+              <InputCloseButton onClick={() => setQuery('')}>
                 ×
               </InputCloseButton>
             )}
@@ -53,25 +65,25 @@ export default function SearchBar() {
           <LinkButton
             onClick={handleSearch}
             logo={<SearchIcon></SearchIcon>}
-            title={"Favoritos"}
+            title={'Favoritos'}
           />
         )}
 
-        {query != "" && (
+        {query != '' && (
           <ItemsWrapper>
             {filteredItems.slice(0, 5).map((item) => (
               <>
                 <ItemLink
-                  onClick={() => setQuery("")}
+                  onClick={() => setQuery('')}
                   to={`/product/id/${item._id}`}
                 >
-                  <ItemImg src={item.img[0]} alt="" />
+                  <ItemImg src={item.image[0]} alt='' />
                   <ItemInfoCtn>
                     <ItemTitle>{item.title}</ItemTitle>
                     <ItemPrice>
                       {item.price
                         .toString()
-                        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                        .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
                     </ItemPrice>
                   </ItemInfoCtn>
                 </ItemLink>
@@ -81,16 +93,8 @@ export default function SearchBar() {
         )}
       </SearchBarContainer>
     </>
-  );
+  )
 }
-
-const SearchIco = styled(SearchIcon)`
-  color: #999;
-  position: absolute;
-  z-index: 10;
-  left: 10px;
-  scale: 0.9;
-`;
 
 const InputCtn = styled.div`
   position: relative;
@@ -99,7 +103,7 @@ const InputCtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: end;
-`;
+`
 const InputCloseButton = styled.button`
   position: absolute;
   top: 0px;
@@ -114,7 +118,7 @@ const InputCloseButton = styled.button`
   &:hover {
     color: var(--main-color-400);
   }
-`;
+`
 
 const SearchBarContainer = styled.div`
   position: relative;
@@ -124,10 +128,10 @@ const SearchBarContainer = styled.div`
     display: none;
     ${(props) =>
       props.isOpen
-        ? "position: absolute; left: 0px;  right: 0px;   top: 0px; "
-        : ""}
+        ? 'position: absolute; left: 0px;  right: 0px;   top: 0px; '
+        : ''}
   }
-`;
+`
 const SearchBarInput = styled.input`
   background-color: #454545;
   border: 0px;
@@ -144,7 +148,7 @@ const SearchBarInput = styled.input`
     height: 4.8em;
     border-radius: 0px;
   }
-`;
+`
 
 const ItemsWrapper = styled.div`
   height: max-content;
@@ -167,23 +171,23 @@ const ItemsWrapper = styled.div`
       opacity: 1;
     }
   }
-`;
+`
 
 const ItemTitle = styled.p`
   font-size: 1rem;
   text-align: start;
-`;
+`
 const ItemPrice = styled.p`
   color: var(--main-color-550);
   font: 800;
   font-size: 1.2rem;
-`;
+`
 
 const ItemImg = styled.img`
   width: 100px;
   height: 100px;
   object-fit: contain;
-`;
+`
 
 const ItemLink = styled(Link)`
   background-color: #fff;
@@ -210,7 +214,7 @@ const ItemLink = styled(Link)`
       opacity: 1;
     }
   }
-`;
+`
 
 const ItemInfoCtn = styled.div`
   display: flex;
@@ -219,4 +223,4 @@ const ItemInfoCtn = styled.div`
 
   flex-direction: column;
   padding-left: 10px;
-`;
+`

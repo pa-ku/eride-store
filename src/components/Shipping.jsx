@@ -1,57 +1,57 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import FormInput from "./ui/FormInput";
-import Title from "./ui/Title";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import InputCheckBox from "../components/ui/InputCheckBox";
-import MainButton from "./ui/MainButton";
-import axios from "axios";
+import { useState } from 'react'
+import styled from 'styled-components'
+import FormInput from './ui/FormInput'
+import Title from './ui/Title'
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import InputCheckBox from '../components/ui/InputCheckBox'
+import MainButton from './ui/MainButton'
+import axios from 'axios'
 
 export default function Shipping({ title, price, setShipping, shipping }) {
-  const [preferenceId, setPreferenceIdId] = useState(null);
-  const [pay, setPay] = useState(false);
-  initMercadoPago("APP_USR-400ac6bd-a71b-4e78-9dfe-7f390acd7f68", {
-    locale: "es-AR",
-  });
-  const [hasNumber, setHasNumber] = useState(false);
-  const [fillMsj, setFillMsj] = useState("");
-  const [shippingData, setShippingData] = useState({});
+  const [preferenceId, setPreferenceIdId] = useState(null)
+  const [pay, setPay] = useState(false)
+  initMercadoPago('APP_USR-400ac6bd-a71b-4e78-9dfe-7f390acd7f68', {
+    locale: 'es-AR',
+  })
+  const [hasNumber, setHasNumber] = useState(false)
+  const [fillMsj, setFillMsj] = useState('')
+  const [shippingData, setShippingData] = useState({})
 
   const HandleInput = (event) => {
-    const value = event.target.value;
-    setShippingData({ ...shippingData, [event.target.name]: value });
-  };
+    const value = event.target.value
+    setShippingData({ ...shippingData, [event.target.name]: value })
+  }
 
   const handleStreet = (event) => {
-    setHasNumber((prevHasNumber) => !prevHasNumber);
+    setHasNumber((prevHasNumber) => !prevHasNumber)
     setShippingData((prevShippingData) => {
       // Crear una copia del objeto prevShippingData
-      const updatedShippingData = { ...prevShippingData };
+      const updatedShippingData = { ...prevShippingData }
 
       // Establecer el valor en "Con Numeracion" o undefined según el valor de hasNumber
-      updatedShippingData[event.target.name] = hasNumber && undefined;
+      updatedShippingData[event.target.name] = hasNumber && undefined
 
-      return updatedShippingData;
-    });
-  };
+      return updatedShippingData
+    })
+  }
 
   const createPreference = async () => {
     try {
       const response = await axios.post(
-        "https://eride-api.vercel.app/api/payment/create_preference",
+        'https://eride-api.vercel.app/api/payment/create_preference',
         {
           description: title,
           price: price,
           quantity: 1,
         }
-      );
+      )
 
-      const { id } = response.data;
-      return id; //retorna el id
+      const { id } = response.data
+      return id //retorna el id
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   const errorList = [
     /*     shippingData.nombre,
@@ -61,96 +61,96 @@ export default function Shipping({ title, price, setShipping, shipping }) {
     shippingData.calle,
     shippingData.NCalle,
     shippingData.email, */
-  ];
+  ]
 
   const handleBuy = async () => {
-    console.log(shippingData);
-    if (errorList.every((item) => item !== undefined && item !== "")) {
-      setPay(true);
-      const id = await createPreference();
+    console.log(shippingData)
+    if (errorList.every((item) => item !== undefined && item !== '')) {
+      setPay(true)
+      const id = await createPreference()
       if (id) {
-        setPreferenceIdId(id);
+        setPreferenceIdId(id)
       }
     } else {
-      setFillMsj("Rellena el formulario de envio");
+      setFillMsj('Rellena el formulario de envio')
     }
-  };
+  }
 
   return (
     <Wrapper>
       <FormWrapper>
         <CloseButton
           onClick={() => {
-            setShipping(false);
-            setShippingData({});
+            setShipping(false)
+            setShippingData({})
           }}
-          title="Cerrar modal"
+          title='Cerrar modal'
         >
           🞪
         </CloseButton>
 
         {shipping === true && pay === false && (
           <>
-            <Title text={"Datos de Envío"} />
+            <Title text={'Datos de Envío'} />
             <FreeShippingTxt>
               Todos nuestros productos cuentan con <b>ENVIO GRATIS</b>
             </FreeShippingTxt>
             <InputCtn>
               <FormInput
-                required={"required"}
-                type={"text"}
-                name={"nombre"}
-                placeholder={"Nombre y Apellido"}
+                required={'required'}
+                type={'text'}
+                name={'nombre'}
+                placeholder={'Nombre y Apellido'}
                 onChange={HandleInput}
                 value={shippingData.nombre}
               />
               <FormInput
                 onChange={HandleInput}
-                type={"text"}
-                name={"cp"}
-                placeholder={"Codigo Postal"}
+                type={'text'}
+                name={'cp'}
+                placeholder={'Codigo Postal'}
                 value={shippingData.cp}
               />
               <FormInput
                 onChange={HandleInput}
-                name={"provincia"}
-                type={"text"}
-                placeholder={"Provincia"}
+                name={'provincia'}
+                type={'text'}
+                placeholder={'Provincia'}
               />
               <FormInput
                 onChange={HandleInput}
-                name={"localidad"}
-                type={"text"}
-                placeholder={"Localidad"}
+                name={'localidad'}
+                type={'text'}
+                placeholder={'Localidad'}
               />
               <FormInput
                 onChange={HandleInput}
-                type={"text"}
-                name={"calle"}
-                placeholder={"Calle"}
+                type={'text'}
+                name={'calle'}
+                placeholder={'Calle'}
               />
               <FormInputContainer>
                 <InputCheckBox
-                  type={"checkbox"}
+                  type={'checkbox'}
                   $isText
-                  name={"NCalle"}
+                  name={'NCalle'}
                   onClick={handleStreet}
-                  text={"Sin Numeracion"}
+                  text={'Sin Numeracion'}
                 />
                 {hasNumber === false && (
                   <FormInput
                     onChange={HandleInput}
-                    type={"text"}
-                    name={"NCalle"}
-                    placeholder={"Numero de Calle"}
+                    type={'text'}
+                    name={'NCalle'}
+                    placeholder={'Numero de Calle'}
                   />
                 )}
               </FormInputContainer>
               <FormInput
                 onChange={HandleInput}
-                type={"email"}
-                name={"email"}
-                placeholder={"Email"}
+                type={'email'}
+                name={'email'}
+                placeholder={'Email'}
               />
             </InputCtn>
             <FillMsj>{fillMsj}</FillMsj>
@@ -160,7 +160,7 @@ export default function Shipping({ title, price, setShipping, shipping }) {
         {pay === true && (
           <>
             <PayCtn>
-              <Title text={"PAGO"} />
+              <Title text={'PAGO'} />
               <BuyInfoCtn>
                 <p>
                   <b>♦ Producto:</b> {title}
@@ -171,7 +171,7 @@ export default function Shipping({ title, price, setShipping, shipping }) {
                 </p>
                 <p>
                   <b>♦ Total:</b> $
-                  {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+                  {price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1.')}
                 </p>
               </BuyInfoCtn>
               {preferenceId && <Wallet initialization={{ preferenceId }} />}
@@ -180,12 +180,12 @@ export default function Shipping({ title, price, setShipping, shipping }) {
         )}
       </FormWrapper>
     </Wrapper>
-  );
+  )
 }
 
 const FillMsj = styled.p`
   color: red;
-`;
+`
 const FormInputContainer = styled.div`
   display: flex;
   align-items: center;
@@ -193,7 +193,7 @@ const FormInputContainer = styled.div`
   width: 100%;
 
   gap: 1em;
-`;
+`
 
 const CloseButton = styled.button`
   position: absolute;
@@ -208,7 +208,7 @@ const CloseButton = styled.button`
   &:hover {
     color: red;
   }
-`;
+`
 
 const FreeShippingTxt = styled.p`
   color: var(--main-color-550);
@@ -216,7 +216,7 @@ const FreeShippingTxt = styled.p`
   font-size: 14px;
   text-align: start;
   width: 40ch;
-`;
+`
 
 const BuyInfoCtn = styled.div`
   text-align: start;
@@ -225,7 +225,7 @@ const BuyInfoCtn = styled.div`
   flex-direction: column;
   gap: 0.5em;
   padding-top: 1em;
-`;
+`
 
 const Wrapper = styled.div`
   position: absolute;
@@ -240,7 +240,7 @@ const Wrapper = styled.div`
   bottom: 0px;
   z-index: 100;
   text-align: center;
-`;
+`
 const FormWrapper = styled.div`
   display: flex;
   position: relative;
@@ -255,7 +255,7 @@ const FormWrapper = styled.div`
   background-color: #fff;
   padding: 2em;
   border-radius: 8px;
-`;
+`
 
 const InputCtn = styled.div`
   display: flex;
@@ -265,7 +265,7 @@ const InputCtn = styled.div`
   gap: 1em;
   margin-bottom: 1em;
   width: 100%;
-`;
+`
 
 const PayCtn = styled.div`
   display: flex;
@@ -277,4 +277,4 @@ const PayCtn = styled.div`
   opacity: 0;
   animation: 1s show forwards 0.4s;
   padding: 1em;
-`;
+`

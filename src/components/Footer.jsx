@@ -1,10 +1,7 @@
-import React from "react";
 import styled from "styled-components";
-
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import LinkButton from "./ui/LinkButton";
 import svg from "../assets/low.svg";
 import mercado from "../assets/icons/mercado.svg";
 

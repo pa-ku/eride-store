@@ -1,30 +1,16 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Title from "../components/ui/Title";
-import Card from "../components/Card";
-import { bikes } from "../../data.js";
+import styled from 'styled-components'
+import Title from '../components/ui/Title'
+import ProductCard from '../components/ProductCard.jsx'
 
 export default function Favorites() {
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const favorites = JSON.parse(localStorage.getItem("favorites"));
-
-  useEffect(() => {
-    if (favorites.length > 0) {
-      const filtered = bikes.filter((item) => favorites.includes(item._id));
-      setFilteredProducts(filtered);
-    }
-  }, []);
-
   return (
     <>
       <Wrapper>
-        <Title text={"FAVORITOS"} />
-        {favorites.length === 0 && (
-          <Msj>Agrega tus productos favoritos y velos en esta sección!</Msj>
-        )}
+        <Title text={'FAVORITOS'} />
+        <Msj>Agrega tus productos favoritos y velos en esta sección!</Msj>
         <Container>
-          {filteredProducts.map((item) => (
-            <Card
+          {/*   {filteredProducts.map((item) => (
+            <ProductCard
               key={item.title}
               id={item._id}
               img={item.img[0]}
@@ -33,11 +19,11 @@ export default function Favorites() {
               price={item.price}
               size={item.size}
             />
-          ))}
+          ))} */}
         </Container>
       </Wrapper>
     </>
-  );
+  )
 }
 
 const Wrapper = styled.div`
@@ -52,11 +38,11 @@ const Wrapper = styled.div`
   justify-content: start;
 
   min-height: 800px;
-`;
+`
 
 const Msj = styled.p`
   padding-inline: 20px;
-`;
+`
 
 const Container = styled.div`
   width: 80em;
@@ -73,4 +59,4 @@ const Container = styled.div`
     gap: 0em;
     width: 100%;
   }
-`;
+`
