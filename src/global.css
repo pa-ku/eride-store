@@ -35,6 +35,17 @@
   --main-color-600: #095588;
   --main-color-700: #00375c;
   --mobile: 1000px;
+
+  --primary-100: #c8e5f9;
+  --primary-200: #a4d4f4;
+  --primary-300: #7fc3f0;
+  --primary-400: #5bb2ec;
+  --primary-500: #36a1e7;
+  --primary-600: #1a8edb;
+  --primary-700: #1576b7;
+  --primary-800: #115e92;
+  --primary-900: #0d476e;
+  --primary-1000: #092f49;
 }
 
 /* Scrollbar */
