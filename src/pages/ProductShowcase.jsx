@@ -8,7 +8,7 @@ import Carousel from '../components/Carousel.jsx'
 
 import MainButton from '../components/ui/MainButton.jsx'
 
-export default function ProductSection() {
+export default function ProductShowcase() {
   const location = useLocation()
   const productId = location.pathname.split('/')[3]
   const [data, setData] = useState([])

@@ -51,7 +51,6 @@ export default function Home() {
   }, [])
   return (
     <>
-      <Header $Home />
       <Banner
         title='SOLO LO MEJOR'
         subtitle='No te conformes con menos cuando se trata de tu pasión'
@@ -75,9 +74,7 @@ export default function Home() {
       ))}
 
       <Title text={'Más Vendido'} />
-
       <AboutMe />
-      <Footer />
     </>
   )
 }

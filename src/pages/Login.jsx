@@ -1,3 +1,6 @@
-export default function Login() {
-  returun(<h2>Login</h2>)
-}
+export default function Login(){
+  return(
+  <>
+  <h1>Login</h1>
+  </>
+)}
