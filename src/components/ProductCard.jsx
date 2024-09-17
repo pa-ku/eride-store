@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import FavButton from './ui/FavButton'
 import { useEffect } from 'react'
 import { calcDiscount } from '../utils/calcDiscount'
+import { formatPrice } from '../utils/formatPrice'
 
 const DiscountTxt = styled.p`
   background-color: var(--main-color-500);
@@ -38,8 +39,9 @@ export default function ProductCard({ id, images, price, title, discount }) {
             <Image loading='lazy' src={images} />
           </ImageContainer>
           <div className='flex items-center gap-2'>
-            <TxtPrice>${price}</TxtPrice>
+            <TxtPrice>${formatPrice(price)}</TxtPrice>
             <p className='line-through text-gray-500'>
+              {discount && '$'}
               {discount && calcDiscount(price, discount)}
             </p>
           </div>

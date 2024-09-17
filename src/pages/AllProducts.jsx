@@ -26,7 +26,7 @@ export default function AllProducts() {
     fetchAllScooters()
   }, [])
 
-  function filterByBrad(brandSelected) {
+  function filterByBrand(brandSelected) {
     if (brandSelected === 'todas') {
       setDataFiltered(itemsData)
     } else {
@@ -38,15 +38,15 @@ export default function AllProducts() {
   }
 
   function handlePrice(value) {
+    let sortedData
     if (value === 'sortMinPrice') {
-      const sortMinPrice = itemsData.sort((a, b) => a.price - b.price)
-      console.log(sortMinPrice)
-
-      setItemsData(sortMinPrice)
+      sortedData = [...dataFiltered].sort((a, b) => a.price - b.price)
     }
     if (value === 'sortMaxPrice') {
-      const sortMaxPrice = itemsData.sort((a, b) => a.price - b.price)
-      setItemsData(sortMaxPrice)
+      sortedData = [...dataFiltered].sort((a, b) => b.price - a.price)
+    }
+    if (value === 'featured') {
+      sortedData = [...dataFiltered].sort((a, b) => b.discount - a.discount)
     }
   }
 
@@ -58,7 +58,7 @@ export default function AllProducts() {
             <h3 className='font-bold text-xl'>Marcas</h3>
             <FilterButton
               defaultChecked
-              onChange={(e) => filterByBrad(e.target.value)}
+              onChange={(e) => filterByBrand(e.target.value)}
               name={'brands'}
               value={'todas'}
             >
@@ -66,9 +66,10 @@ export default function AllProducts() {
             </FilterButton>
             {productBrands.map((brand) => (
               <FilterButton
-                onChange={(e) => filterByBrad(e.target.value)}
+                onChange={(e) => filterByBrand(e.target.value)}
                 name={'brands'}
                 value={brand}
+                featured
               >
                 {brand}
               </FilterButton>
@@ -79,6 +80,7 @@ export default function AllProducts() {
             <h3 className='font-bold text-xl'>Precio</h3>
             <FilterButton
               onChange={(e) => handlePrice(e.target.value)}
+              value={'featured'}
               name={'price'}
             >
               Destacado
