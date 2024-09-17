@@ -27,7 +27,7 @@ export default function FavButton({ id }) {
         {toolkit && (
           <div
             className={`p-2 bg-gray-100 w-max -top-10 right-6 rounded-lg z-50 text-black text-md absolute  `}
-          >a
+          >
             <p>Para agregar favoritos</p>
 
             <Link
