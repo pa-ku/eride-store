@@ -9,14 +9,14 @@ export default function AllProducts() {
   async function fetchAllScooters() {
     try {
       const res = await fetch(`http://localhost:5000/api/scooters`)
+      if (!res.ok) {
+        throw new Error('Recurso no encontrado', res.status)
+      }
       const data = await res.json()
       const getUniqueBrands = [...new Set(data.map((item) => item.brand))]
       setProductBrands(getUniqueBrands)
       setItemsData(data)
       setDataFiltered(data)
-      if (!res.ok) {
-        throw new Error('Recurso no encontrado', res.status)
-      }
     } catch (err) {
       console.error('¡Hubo un problema con la solicitud!', err)
     }
@@ -45,9 +45,7 @@ export default function AllProducts() {
     if (value === 'sortMaxPrice') {
       sortedData = [...dataFiltered].sort((a, b) => b.price - a.price)
     }
-    if (value === 'featured') {
-      sortedData = [...dataFiltered].sort((a, b) => b.discount - a.discount)
-    }
+    setDataFiltered(sortedData)
   }
 
   return (
@@ -78,13 +76,7 @@ export default function AllProducts() {
 
           <div className='space-y-1'>
             <h3 className='font-bold text-xl'>Precio</h3>
-            <FilterButton
-              onChange={(e) => handlePrice(e.target.value)}
-              value={'featured'}
-              name={'price'}
-            >
-              Destacado
-            </FilterButton>
+          
             <FilterButton
               onChange={(e) => handlePrice(e.target.value)}
               name={'price'}
@@ -142,9 +134,8 @@ function FilterButton({ children, name, defaultChecked, onChange, value }) {
       <p
         className='pointer-events-none rounded-md
    px-2 
-  peer-checked:bg-primary-200
-  peer-checked:shadow-center 
-  peer-checked:shadow-primary-500'
+  peer-checked:bg-primary-100
+'
       >
         {children}
       </p>

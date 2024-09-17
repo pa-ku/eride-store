@@ -3,6 +3,7 @@ import Title from '../ui/Title.jsx'
 import MainButton from '../ui/MainButton.jsx'
 import FavButton from '../ui/FavButton.jsx'
 import { calcDiscount } from '../../utils/calcDiscount.js'
+import { formatPrice } from '../../utils/formatPrice.js'
 
 const Wrapper = styled.div`
   display: flex;
@@ -101,10 +102,19 @@ export default function ProductFeatured({ data }) {
         <ProductWrapper>
           <ProductInfoContainer>
             <ProductTitle>{title}</ProductTitle>
-            {discount && (
-              <ProductOldPrice>{calcDiscount(price, discount)}</ProductOldPrice>
-            )}
-            <ProductPrice>{price}</ProductPrice>
+            <div>
+              {discount && (
+                <p className='line-through text-gray-500'>
+                  $ {calcDiscount(price, discount)}
+                </p>
+              )}
+              <span className='flex items-center gap-2'>
+                <p className='text-3xl text-primary-700 '>
+                  {formatPrice(price)}
+                </p>
+                <p className=' text-xl'> {discount}% OFF</p>
+              </span>
+            </div>
 
             <ProductDescription>{description}</ProductDescription>
 
@@ -116,10 +126,10 @@ export default function ProductFeatured({ data }) {
             <FavCtn>
               <FavButton id={id} />
             </FavCtn>
-            <p className='bg-primary-600 text-xl w-max absolute font-bold text-white px-2 rounded-b-lg'>
-              {discount}% OFF
-            </p>
-            {images && <ProductImage src={images[0]} alt='' />}
+
+            {images && (
+              <img className='size-96 object-contain' src={images[0]} alt='' />
+            )}
           </ProductImageContainer>
         </ProductWrapper>
       </Wrapper>
