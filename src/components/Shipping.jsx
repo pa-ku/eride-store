@@ -4,8 +4,6 @@ import FormInput from './ui/FormInput'
 import Title from './ui/Title'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import InputCheckBox from '../components/ui/InputCheckBox'
-import MainButton from './ui/MainButton'
-import axios from 'axios'
 
 export default function Shipping({ title, price, setShipping, shipping }) {
   const [preferenceId, setPreferenceIdId] = useState(null)
@@ -36,24 +34,32 @@ export default function Shipping({ title, price, setShipping, shipping }) {
 
   const createPreference = async () => {
     try {
-      const response = await axios.post(
+      const res = await fetch(
         'https://eride-api.vercel.app/api/payment/create_preference',
         {
-          description: title,
-          price: price,
-          quantity: 1,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            description: title,
+            price: price,
+            quantity: 1,
+          }),
         }
       )
 
-      const { id } = response.data
-      return id //retorna el id
+      const data = await res.json() // Convertir la respuesta a JSON
+      return data.id // Retorna el id
     } catch (err) {
       console.log(err)
     }
   }
 
+  const errorList = [{ name: true }]
+
   const handleBuy = async (e) => {
-    e.prevent.default()
+    e.preventDefault()
     if (errorList.every((item) => item !== undefined && item !== '')) {
       setPay(true)
       const id = await createPreference()
@@ -67,7 +73,7 @@ export default function Shipping({ title, price, setShipping, shipping }) {
 
   return (
     <Wrapper>
-      <form className='bg-white p-7 rounded-lg shadow-xl'>
+      <div className='bg-white p-7 rounded-lg shadow-xl'>
         {shipping === true && pay === false && (
           <>
             <div className='flex justify-between w-full'>
@@ -86,70 +92,72 @@ export default function Shipping({ title, price, setShipping, shipping }) {
             <FreeShippingTxt>
               Todos nuestros productos cuentan con <b>ENVIO GRATIS</b>
             </FreeShippingTxt>
-            <InputCtn>
-              <FormInput
-                type={'text'}
-                name={'nombre'}
-                placeholder={'Nombre y Apellido'}
-                onChange={HandleInput}
-                value={shippingData.nombre}
-              />
-              <FormInput
-                onChange={HandleInput}
-                type={'text'}
-                name={'cp'}
-                placeholder={'Codigo Postal'}
-                value={shippingData.cp}
-              />
-              <FormInput
-                onChange={HandleInput}
-                name={'provincia'}
-                type={'text'}
-                placeholder={'Provincia'}
-              />
-              <FormInput
-                onChange={HandleInput}
-                name={'localidad'}
-                type={'text'}
-                placeholder={'Localidad'}
-              />
-              <FormInput
-                onChange={HandleInput}
-                type={'text'}
-                name={'calle'}
-                placeholder={'Calle'}
-              />
-              <FormInputContainer>
-                <InputCheckBox
-                  type={'checkbox'}
-                  $isText
-                  name={'NCalle'}
-                  onClick={handleStreet}
-                  text={'Sin Numeracion'}
+            <form>
+              <InputCtn>
+                <FormInput
+                  type={'text'}
+                  name={'nombre'}
+                  placeholder={'Nombre y Apellido'}
+                  onChange={HandleInput}
+                  value={shippingData.nombre}
                 />
-                {hasNumber === false && (
-                  <FormInput
-                    onChange={HandleInput}
-                    type={'text'}
+                <FormInput
+                  onChange={HandleInput}
+                  type={'text'}
+                  name={'cp'}
+                  placeholder={'Codigo Postal'}
+                  value={shippingData.cp}
+                />
+                <FormInput
+                  onChange={HandleInput}
+                  name={'provincia'}
+                  type={'text'}
+                  placeholder={'Provincia'}
+                />
+                <FormInput
+                  onChange={HandleInput}
+                  name={'localidad'}
+                  type={'text'}
+                  placeholder={'Localidad'}
+                />
+                <FormInput
+                  onChange={HandleInput}
+                  type={'text'}
+                  name={'calle'}
+                  placeholder={'Calle'}
+                />
+                <FormInputContainer>
+                  <InputCheckBox
+                    type={'checkbox'}
+                    $isText
                     name={'NCalle'}
-                    placeholder={'Numero de Calle'}
+                    onClick={handleStreet}
+                    text={'Sin Numeracion'}
                   />
-                )}
-              </FormInputContainer>
-              <FormInput
-                onChange={HandleInput}
-                type={'email'}
-                name={'email'}
-                placeholder={'Email'}
-              />
-            </InputCtn>
-            <FillMsj>{fillMsj}</FillMsj>
-            <button
-              className='w-full bg-primary-500 text-white text-xl rounded-lg py-3'
-              onClick={(e) => handleBuy(e)}
-            >
-              Confirmar
-            </button>
+                  {hasNumber === false && (
+                    <FormInput
+                      onChange={HandleInput}
+                      type={'text'}
+                      name={'NCalle'}
+                      placeholder={'Numero de Calle'}
+                    />
+                  )}
+                </FormInputContainer>
+                <FormInput
+                  onChange={HandleInput}
+                  type={'email'}
+                  name={'email'}
+                  placeholder={'Email'}
+                />
+              </InputCtn>
+              <p className='text-red-500'>{fillMsj}</p>
+              <button
+                className='w-full bg-primary-500 text-white text-xl rounded-lg py-3'
+                onClick={(e) => handleBuy(e)}
+              >
+                Confirmar
+              </button>
+            </form>
           </>
         )}
         {pay === true && (
@@ -173,14 +181,11 @@ export default function Shipping({ title, price, setShipping, shipping }) {
             </PayCtn>
           </>
         )}
-      </form>
+      </div>
     </Wrapper>
   )
 }
 
-const FillMsj = styled.p`
-  color: red;
-`
 const FormInputContainer = styled.div`
   display: flex;
   align-items: center;
