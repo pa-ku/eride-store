@@ -50,50 +50,53 @@ export default function AllProducts() {
 
   return (
     <>
-      <div className='flex'>
-        <aside className='pl-3 py-3 flex flex-col gap-5 w-96 h-screen '>
-          <div className='space-y-1'>
+      <div className='flex flex-col md:flex-row'>
+        <aside className='bg-gray-100 pl-3 py-3 flex flex-col w-full gap-5 md:w-96 md:h-screen '>
+          <div className='space-y-1  flex md:block flex-wrap'>
             <h3 className='font-bold text-xl'>Marcas</h3>
-            <FilterButton
-              defaultChecked
-              onChange={(e) => filterByBrand(e.target.value)}
-              name={'brands'}
-              value={'todas'}
-            >
-              Todas
-            </FilterButton>
-            {productBrands.map((brand) => (
+            <div className='md:block gap-2 md:gap-0 flex flex-wrap w-full'>
               <FilterButton
+                defaultChecked
                 onChange={(e) => filterByBrand(e.target.value)}
                 name={'brands'}
-                value={brand}
-                featured
+                value={'todas'}
               >
-                {brand}
+                Todas
               </FilterButton>
-            ))}
+              {productBrands.map((brand) => (
+                <FilterButton
+                  onChange={(e) => filterByBrand(e.target.value)}
+                  name={'brands'}
+                  value={brand}
+                  featured
+                >
+                  {brand}
+                </FilterButton>
+              ))}
+            </div>
           </div>
 
           <div className='space-y-1'>
             <h3 className='font-bold text-xl'>Precio</h3>
-          
-            <FilterButton
-              onChange={(e) => handlePrice(e.target.value)}
-              name={'price'}
-              value={'sortMinPrice'}
-            >
-              Más bajo
-            </FilterButton>
-            <FilterButton
-              onChange={(e) => handlePrice(e.target.value)}
-              name={'price'}
-              value={'sortMaxPrice'}
-            >
-              Más Alto
-            </FilterButton>
+            <div className='flex md:block'>
+              <FilterButton
+                onChange={(e) => handlePrice(e.target.value)}
+                name={'price'}
+                value={'sortMinPrice'}
+              >
+                Más bajo
+              </FilterButton>
+              <FilterButton
+                onChange={(e) => handlePrice(e.target.value)}
+                name={'price'}
+                value={'sortMaxPrice'}
+              >
+                Más Alto
+              </FilterButton>
+            </div>
           </div>
         </aside>
-        <div className='py-20'>
+        <div className='py-10 md:py-20'>
           <h1 className='text-4xl pb-10 text-center'>Monopatines</h1>
 
           <section className='w-full gap-4 flex flex-wrap items-center justify-center'>
