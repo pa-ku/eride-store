@@ -52,18 +52,8 @@ export default function Shipping({ title, price, setShipping, shipping }) {
     }
   }
 
-  const errorList = [
-    /*     shippingData.nombre,
-    shippingData.cp,
-    shippingData.calle,
-    shippingData.provincia,
-    shippingData.calle,
-    shippingData.NCalle,
-    shippingData.email, */
-  ]
-
-  const handleBuy = async () => {
-    console.log(shippingData)
+  const handleBuy = async (e) => {
+    e.prevent.default()
     if (errorList.every((item) => item !== undefined && item !== '')) {
       setPay(true)
       const id = await createPreference()
@@ -77,26 +67,27 @@ export default function Shipping({ title, price, setShipping, shipping }) {
 
   return (
     <Wrapper>
-      <FormWrapper>
-        <CloseButton
-          onClick={() => {
-            setShipping(false)
-            setShippingData({})
-          }}
-          title='Cerrar modal'
-        >
-          🞪
-        </CloseButton>
-
+      <form className='bg-white p-7 rounded-lg shadow-xl'>
         {shipping === true && pay === false && (
           <>
-            <Title text={'Datos de Envío'} />
+            <div className='flex justify-between w-full'>
+              <h1 className='text-3xl'>Datos de Envío</h1>
+              <button
+                className='text-3xl text-primary-600 hover:bg-gray-100 size-9 flex items-center justify-center p-2 rounded-full'
+                onClick={() => {
+                  setShipping(false)
+                  setShippingData({})
+                }}
+                title='Cerrar modal'
+              >
+                🞪
+              </button>
+            </div>
             <FreeShippingTxt>
               Todos nuestros productos cuentan con <b>ENVIO GRATIS</b>
             </FreeShippingTxt>
             <InputCtn>
               <FormInput
-                required={'required'}
                 type={'text'}
                 name={'nombre'}
                 placeholder={'Nombre y Apellido'}
@@ -153,7 +144,12 @@ export default function Shipping({ title, price, setShipping, shipping }) {
               />
             </InputCtn>
             <FillMsj>{fillMsj}</FillMsj>
-            <MainButton onClick={handleBuy}>Confirmar</MainButton>
+            <button
+              className='w-full bg-primary-500 text-white text-xl rounded-lg py-3'
+              onClick={(e) => handleBuy(e)}
+            >
+              Confirmar
+            </button>
           </>
         )}
         {pay === true && (
@@ -177,7 +173,7 @@ export default function Shipping({ title, price, setShipping, shipping }) {
             </PayCtn>
           </>
         )}
-      </FormWrapper>
+      </form>
     </Wrapper>
   )
 }
@@ -192,21 +188,6 @@ const FormInputContainer = styled.div`
   width: 100%;
 
   gap: 1em;
-`
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 0px;
-  right: 10px;
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  font-weight: 800;
-  font-size: 35px;
-  transition: 300ms;
-  cursor: pointer;
-  &:hover {
-    color: red;
-  }
 `
 
 const FreeShippingTxt = styled.p`
@@ -239,21 +220,6 @@ const Wrapper = styled.div`
   bottom: 0px;
   z-index: 100;
   text-align: center;
-`
-const FormWrapper = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  text-align: start;
-  box-shadow: 0px 0px 10px 1px var(--main-color-400);
-  gap: 1em;
-  opacity: 0;
-  width: 550px;
-
-  animation: 500ms show forwards;
-  background-color: #fff;
-  padding: 2em;
-  border-radius: 8px;
 `
 
 const InputCtn = styled.div`
