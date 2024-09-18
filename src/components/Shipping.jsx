@@ -27,7 +27,6 @@ export default function Shipping({ title, price, setShipping, shipping }) {
     setShippingData((prevShippingData) => {
       // Crear una copia del objeto prevShippingData
       const updatedShippingData = { ...prevShippingData }
-
       // Establecer el valor en "Con Numeracion" o undefined según el valor de hasNumber
       updatedShippingData[event.target.name] = hasNumber && undefined
 
