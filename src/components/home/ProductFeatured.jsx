@@ -4,6 +4,7 @@ import MainButton from '../ui/MainButton.jsx'
 import FavButton from '../ui/FavButton.jsx'
 import { calcDiscount } from '../../utils/calcDiscount.js'
 import { formatPrice } from '../../utils/formatPrice.js'
+import { Link } from 'react-router-dom'
 
 const Wrapper = styled.div`
   display: flex;
@@ -75,7 +76,7 @@ export default function ProductFeatured({ data }) {
   return (
     <>
       <Wrapper>
-        <Title accent={'Destacado'} />
+        <h2 className='text-4xl'>Destacado</h2>
         <ProductWrapper>
           <ProductInfoContainer>
             <ProductTitle>{title}</ProductTitle>
@@ -94,20 +95,27 @@ export default function ProductFeatured({ data }) {
 
             <ProductDescription>{description}</ProductDescription>
 
-            <MainButton typeLink to={'/product/id/' + id}>
-              Ver más
-            </MainButton>
+            <Link
+              className='w-full hover:bg-primary-400 bg-primary-500 md:w-40 py-3 text-center text-white font-bold'
+              to={'/product/id/' + id}
+            >
+              Saber Más
+            </Link>
           </ProductInfoContainer>
-          <ProductImageContainer>
+          <ProductImageContainer className='px-2'>
             <FavCtn>
               <FavButton id={id} />
             </FavCtn>
-            <p className='absolute text-primary-600 text-2xl'>
+            <p className='absolute font-bold text-primary-400 text-2xl'>
               {' '}
               {discount}% OFF
             </p>
             {images && (
-              <img className='size-96 object-contain' src={images[0]} alt='' />
+              <img
+                className=' size-80 md:size-96 object-contain'
+                src={images[0]}
+                alt=''
+              />
             )}
           </ProductImageContainer>
         </ProductWrapper>
