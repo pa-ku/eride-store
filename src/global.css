@@ -88,3 +88,22 @@
 .input-form {
   @apply rounded-l-lg bg-gray-100 w-full p-3 placeholder:text-gray-700;
 }
+
+@keyframes favIn {
+  0% {
+    scale: 0;
+  }
+  95% {
+    scale: 1.1;
+  }
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+@keyframes favOut {
+  to {
+    scale: 1;
+    opacity: 0;
+  }
+}

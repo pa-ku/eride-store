@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import imgLogo from '../assets/icons/logo.webp'
-import FavIcon from '@mui/icons-material/FavoriteBorder'
 import { device } from '../responsive'
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'

@@ -1,9 +1,5 @@
 import React, { useState } from 'react'
-
 import styled from 'styled-components'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-
 import { Link } from 'react-router-dom'
 
 export default function FavButton({ id }) {
@@ -45,9 +41,26 @@ export default function FavButton({ id }) {
           type='checkbox'
           checked={isFavorite}
         />
-        {isFavorite === true && <FavIco $animation={isFavorite}></FavIco>}
-
-        <FavoriteBorderIcon></FavoriteBorderIcon>
+        {isFavorite === true && <p>asd</p>}
+        <label
+          htmlFor='favorite'
+          className='relative m-0 flex size-7 cursor-pointer items-center justify-center stroke-red-400 p-0'
+        >
+          <input
+            id='favorite'
+            className='peer absolute appearance-none opacity-0'
+            type='checkbox'
+          />
+          <svg
+            className='h-full w-full text-transparent duration-200 peer-checked:text-primary-500'
+            viewBox='0 0 24 24'
+            strokeWidth='1.5'
+            fill='currentColor'
+          >
+            <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+            <path d='M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572' />
+          </svg>
+        </label>
       </div>
     </>
   )
@@ -73,32 +86,5 @@ const FavoriteBtn = styled.input`
     margin: 0em;
 
     margin-inline: 1em;
-  }
-`
-
-const FavIco = styled(FavoriteIcon)`
-  position: absolute;
-  transform: bottom;
-  color: #ff5858;
-  scale: 0;
-  opacity: 0;
-  animation: 0.3s ${(props) => (props.$animation ? 'favIn' : 'favOut')} forwards;
-  @keyframes favIn {
-    0% {
-      scale: 0;
-    }
-    95% {
-      scale: 1.1;
-    }
-    100% {
-      scale: 1;
-      opacity: 1;
-    }
-  }
-  @keyframes favOut {
-    to {
-      scale: 1;
-      opacity: 0;
-    }
   }
 `

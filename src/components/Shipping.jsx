@@ -48,9 +48,8 @@ export default function Shipping({ title, price, setShipping, shipping }) {
           }),
         }
       )
-
-      const data = await res.json() // Convertir la respuesta a JSON
-      return data.id // Retorna el id
+      const data = await res.json()
+      return data.id
     } catch (err) {
       console.log(err)
     }
