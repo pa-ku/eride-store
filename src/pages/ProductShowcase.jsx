@@ -52,14 +52,14 @@ export default function ProductShowcase() {
   return (
     <>
       <Wrapper>
-        {/*     {shipping === true && (
+        {shipping === true && (
           <Shipping
             title={data.title}
             price={data.price}
             shipping={shipping}
             setShipping={setShipping}
           />
-        )} */}
+        )}
         <div className='px-4 flex flex-col items-center lg:items-start justify-center lg:flex-row'>
           <div className='flex'>
             {data.images && (
