@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import useLocalStorage from 'use-local-storage'
+
 import { Link } from 'react-router-dom'
 
 export default function FavButton({ id }) {
-  const [favorites, setFavorites] = useLocalStorage('favorites', [])
+  const [favorites, setFavorites] = useState('favorites', [])
   const isFavorite = favorites.includes(id)
   const [isAdmin, setIsAdmin] = useState(false)
   const [toolkit, setToolkit] = useState(false)
@@ -18,15 +18,15 @@ export default function FavButton({ id }) {
       setTimeout(() => {
         return setToolkit(false)
       }, 2000)
-    } 
+    }
   }
 
   return (
     <>
-      <FavCtn className='relative'>
+      <div className='text-red-500 relative'>
         {toolkit && (
           <div
-            className={`p-2 bg-gray-100 w-max -top-10 right-6 rounded-lg z-50 text-black text-md absolute  `}
+            className={`p-2 z-10 bg-gray-100 w-max -left-44 -top-16 rounded-lg text-black absolute  `}
           >
             <p>Para agregar favoritos</p>
 
@@ -48,7 +48,7 @@ export default function FavButton({ id }) {
         {isFavorite === true && <FavIco $animation={isFavorite}></FavIco>}
 
         <FavoriteBorderIcon></FavoriteBorderIcon>
-      </FavCtn>
+      </div>
     </>
   )
 }
@@ -76,22 +76,6 @@ const FavoriteBtn = styled.input`
   }
 `
 
-const FavCtn = styled.label`
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  color: #ff8383;
-  cursor: pointer;
-  opacity: 1;
-  position: absolute;
-  transition: 0.2s;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
-  scale: 1.1;
-
-  z-index: 100;
-`
 const FavIco = styled(FavoriteIcon)`
   position: absolute;
   transform: bottom;

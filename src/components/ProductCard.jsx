@@ -6,20 +6,6 @@ import { useEffect } from 'react'
 import { calcDiscount } from '../utils/calcDiscount'
 import { formatPrice } from '../utils/formatPrice'
 
-const DiscountTxt = styled.p`
-  background-color: var(--main-color-500);
-  width: 55px;
-  height: 28px;
-  position: absolute;
-  font-size: 15px;
-  color: white;
-  border-radius: 0px 0px 4px 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-`
-
 export default function ProductCard({ id, images, price, title, discount }) {
   return (
     <>

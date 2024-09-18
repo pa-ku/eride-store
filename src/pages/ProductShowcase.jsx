@@ -60,18 +60,18 @@ export default function ProductShowcase() {
             setShipping={setShipping}
           />
         )}
-        <ProductCtn>
-          <ImgCtn>
+        <div className='px-4 flex flex-col items-center lg:items-start justify-center lg:flex-row'>
+          <div className='flex'>
             {data.images && (
               <Carousel render={data.images.length} images={data.images} />
             )}
-            <FavCtn>
-              <FavButton id={data._id} />
-            </FavCtn>
-          </ImgCtn>
+          </div>
 
-          <InfoCtn>
-            <Title text={data.title} />
+          <div className='space-y-2'>
+            <div className='flex gap-1'>
+              <h1 className='text-4xl'>{data.title} </h1>
+              <FavButton id={data._id} />
+            </div>
             <DescriptionTxt>{data.description}</DescriptionTxt>
 
             <FreeShippingCtn>
@@ -95,7 +95,7 @@ export default function ProductShowcase() {
                     <p className='text-3xl'>
                       ${calcDiscount(data.price, data.discount)}
                     </p>
-                    <p className='text-primary-00 text-xl'>
+                    <p className='text-primary-600 text-xl'>
                       {data.discount}% OFF
                     </p>
                   </span>
@@ -106,8 +106,8 @@ export default function ProductShowcase() {
               )}
             </div>
             <MainButton onClick={handleShipping}>COMPRAR</MainButton>
-          </InfoCtn>
-        </ProductCtn>
+          </div>
+        </div>
 
         <SpecsWrapper>
           <Title $noBackground={true} text={'ESPECIFICACIÓNES'} />

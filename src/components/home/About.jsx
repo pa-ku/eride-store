@@ -30,7 +30,6 @@ const SectionContainer = styled.div`
   display: flex;
   align-items: start;
   justify-content: center;
-
   gap: 2em;
   @media (max-width: 700px) {
     flex-wrap: wrap;

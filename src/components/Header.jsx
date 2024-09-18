@@ -16,12 +16,12 @@ const Logo = styled.img`
 export default function Header() {
   return (
     <>
-      <header className='flex h-14 bg-slate-800 xl:px-10 justify-between w-full'>
+      <header className='flex h-14 items-center bg-slate-800 xl:px-10 justify-between w-full'>
         <Link className='w-max' title='Home' to={'/'}>
           <Logo src={imgLogo} alt='' />
         </Link>
         <div className='flex gap-4 items-center '>
-         <SearchBar ></SearchBar>
+          <SearchBar></SearchBar>
           <Link
             className='text-white px-3 py-1 hover:bg-gray-700 rounded-lg'
             to={'/product/scooters'}

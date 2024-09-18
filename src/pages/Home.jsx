@@ -9,21 +9,28 @@ import ProductFeatured from '../components/home/ProductFeatured'
 import { Link } from 'react-router-dom'
 
 export default function Home() {
-  const [itemsData, setItemsData] = useState([])
+  const [itemsHasDiscount, setItemsHasDiscount] = useState([])
+  const [itemsNoDiscount, setItemsNoDiscount] = useState([])
+
   async function fetchAllScooters() {
     try {
       const res = await fetch(`http://localhost:5000/api/scooters`)
       const data = await res.json()
-      setItemsData(data)
+
       if (!res.ok) {
         throw new Error('Recurso no encontrado', res.status)
       }
+
+      const hasDiscount = data.filter((item) => item.discount != null)
+      const noDiscount = data.filter((item) => item.discount == null)
+      setItemsHasDiscount(hasDiscount)
+      setItemsNoDiscount(noDiscount)
     } catch (err) {
       console.error('¡Hubo un problema con la solicitud!', err)
     }
   }
 
-  const featuredProduct = itemsData.find(
+  const featuredProduct = itemsHasDiscount.find(
     (item) => item._id === '66e4906be4f50256a4d1f2b5'
   )
 
@@ -42,8 +49,8 @@ export default function Home() {
         {featuredProduct && <ProductFeatured data={featuredProduct} />}
         <section>
           <Title text={'Las mejores '} accent={'Ofertas'} />
-          <div className='flex-wrap flex gap-4 items-center justify-center'>
-            {itemsData
+          <div className='pt-5 flex-wrap flex gap-4 items-center justify-center'>
+            {itemsHasDiscount
               .slice(0, 5)
               .map(
                 ({ title, images, _id: id, price, description, discount }) => (
@@ -62,8 +69,8 @@ export default function Home() {
         </section>
         <section>
           <Title text={'Más Vendido'} />
-          <div className='flex flex-wrap gap-4 items-center justify-center'>
-            {itemsData
+          <div className='pt-5 flex flex-wrap gap-4 items-center justify-center'>
+            {itemsNoDiscount
               .slice(0, 5)
               .map(
                 ({ title, images, _id: id, price, description, discount }) => (
@@ -91,8 +98,4 @@ export default function Home() {
       <AboutMe />
     </>
   )
-}
-
-function Featured() {
-  return <></>
 }
