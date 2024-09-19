@@ -11,9 +11,10 @@ export default function FavButton({ id }) {
   const handleFavorite = () => {
     if (!isAdmin) {
       setToolkit(true)
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         return setToolkit(false)
       }, 2000)
+      return () => clearTimeout(timer)
     }
   }
 

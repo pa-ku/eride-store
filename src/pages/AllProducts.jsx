@@ -65,6 +65,7 @@ export default function AllProducts() {
               </FilterButton>
               {productBrands.map((brand) => (
                 <FilterButton
+                  key={brand}
                   onChange={(e) => filterByBrand(e.target.value)}
                   name={'brands'}
                   value={brand}
@@ -104,6 +105,7 @@ export default function AllProducts() {
               dataFiltered.map(
                 ({ title, price, discount, _id: id, images }) => (
                   <ProductCard
+                    key={id}
                     title={title}
                     price={price}
                     discount={discount}
