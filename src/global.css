@@ -7,11 +7,6 @@
   src: url(../src/assets/fonts/Montserrat-Regular.woff2);
   font-weight: 400;
 }
-@font-face {
-  font-family: monserrat;
-  src: url(../src/assets/fonts/Montserrat-Bold.woff);
-  font-weight: bold;
-}
 
 *,
 *::before,

@@ -51,7 +51,7 @@ export default function AllProducts() {
   return (
     <>
       <div className='flex flex-col md:flex-row '>
-        <aside className='bg-gray-100 pl-3 py-3 flex flex-col w-full gap-5 md:w-48 md:h-screen '>
+        <aside className=' pl-3 md:items-center py-10 flex flex-col w-full gap-5 md:w-48 md:h-screen '>
           <div className='space-y-1  flex md:block flex-wrap'>
             <h3 className='font-bold text-xl'>Marcas</h3>
             <div className='md:block gap-4 md:space-y-1 flex flex-wrap '>
@@ -96,10 +96,10 @@ export default function AllProducts() {
             </div>
           </div>
         </aside>
-        <div className='w-full py-10 md:py-20 flex flex-col items-center justify-start'>
+        <div className='w-full py-10 md:py-20 '>
           <h1 className='text-4xl pb-10 text-center'>Monopatines</h1>
 
-          <section className='w-full gap-4 flex flex-wrap items-center justify-center'>
+          <section className='w-full gap-4 flex flex-wrap justify-center'>
             {itemsData &&
               dataFiltered.map(
                 ({ title, price, discount, _id: id, images }) => (

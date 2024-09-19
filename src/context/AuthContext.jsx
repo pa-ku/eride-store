@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 export const AuthContext = createContext()
 
 export function useAuth() {
@@ -10,9 +10,10 @@ export function useAuth() {
 }
 
 export function AuthContextProvider({ children }) {
-  function userLogin() {}
+  const [user, setUser] = useState({})
+  const [isAuth, setIsAuth] = useState(false)
 
-  function userRegister() {}
-
-  return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ isAuth }}>{children}</AuthContext.Provider>
+  )
 }
