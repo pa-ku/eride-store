@@ -1,7 +1,7 @@
 <div align="center">  
   <img src= "https://github.com/user-attachments/assets/066c61a5-1012-4d95-9384-3360f17e3403" width="200px">
 </div>
-Eride es una tienda de monopatines eléctricos que permite a los usuarios explorar un catálogo de productos,guardarlos y gestionar su compra facilmente y administrar el inventario desde una sección exclusiva para administradores.
+Eride es una tienda de monopatines eléctricos que permite a los usuarios explorar un catálogo de productos, gestionar su compra facilmente y administrar el inventario desde una sección exclusiva para administradores.
 
 ## Stack Tecnológico
 - **Frontend:** React + Tailwind CSS
