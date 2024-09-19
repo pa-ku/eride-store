@@ -10,8 +10,10 @@ export async function registerRequest(user) {
       body: JSON.stringify(user),
     })
     const data = await res.json()
-    console.log(data.message)
-    if (!res.ok) throw new Error(res)
+    if (res.ok) {
+      console.log('User registration successful')
+    }
+    return data
   } catch (err) {
     console.error('¡Hubo un problema con la solicitud!', err)
   }
@@ -28,7 +30,7 @@ export async function loginRequest(email, password) {
     })
     const data = await res.json()
     if (res.ok) {
-      console.log('respuesta ok')
+      console.log('Login successful')
     }
     return data
   } catch (error) {

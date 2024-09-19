@@ -1,17 +1,22 @@
 import { useState } from 'react'
 import { loginRequest } from '../api/auth'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Login() {
   const [message, setMessage] = useState('')
+  const navigate = useNavigate()
+
 
   async function handleSubmit(e) {
     e.preventDefault()
     const email = e.target.email.value
     const password = e.target.password.value
-
-    const data = await loginRequest(email, password)
-    setMessage(data.error)
-    console.log(data)
+    const res = await loginRequest(email, password)
+    if (!res.error) {
+      navigate('/')
+    } else {
+      setMessage(res.error)
+    }
   }
 
   return (
@@ -45,11 +50,17 @@ export default function Login() {
 
           <button
             type='submit'
-            className='w-full rounded-lg bg-primary-500 py-3 text-lg text-white'
+            className='w-full hover:bg-primary-400 rounded-lg bg-primary-500 py-3 text-lg text-white'
           >
             Enviar
           </button>
-          <p>{message}</p>
+          <Link
+            className='text-primary-600 hover:text-primary-400'
+            to={'/user/register'}
+          >
+            No tienes cuenta? registrate aqui
+          </Link>
+          <p className='h-10'>{message}</p>
         </form>
       </div>
     </>

@@ -1,36 +1,28 @@
+import { Link, useNavigate } from 'react-router-dom'
+import { registerRequest } from '../api/auth'
+import { useState } from 'react'
+
 export default function Register() {
-  async function fetchUser(email, password) {
-    try {
-      const res = await fetch('api/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      })
-
-      const data = await res.json()
-      if (!res.ok) {
-        throw new Error('Recurso no encontrado', res.status)
-      }
-
-      console.log('Respuesta del servidor:', data)
-    } catch (err) {
-      console.error('¡Hubo un problema con la solicitud!', err)
-    }
-  }
-
-  function handleSubmit(e) {
+  const [message, setMessage] = useState()
+  const navigate = useNavigate()
+  async function handleSubmit(e) {
     e.preventDefault()
 
     // Aquí accedemos a los valores usando e.target
+    const lastname = e.target.password.value
+    const name = e.target.password.value
     const email = e.target.email.value
     const password = e.target.password.value
 
-    console.log('Email:', email)
-    console.log('Password:', password)
+    const user = { lastname, name, password, email }
 
-    fetchUser(email, password)
+    const res = await registerRequest(user)
+
+    if (!res.error) {
+      navigate('/user/login')
+    } else {
+      setMessage(res.error)
+    }
   }
 
   return (
@@ -80,10 +72,17 @@ export default function Register() {
 
           <button
             type='submit'
-            className='w-full rounded-lg bg-primary-500 py-3 text-lg text-white'
+            className='w-full hover:bg-primary-400 rounded-lg bg-primary-500 py-3 text-lg text-white'
           >
             Enviar
           </button>
+          <Link
+            className='text-primary-600 hover:text-primary-400'
+            to={'/user/login'}
+          >
+            Ya tienes una cuenta? Ingresa aqui
+          </Link>
+          <p className='h-10'>{message}</p>
         </form>
       </div>
     </>
