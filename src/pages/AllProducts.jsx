@@ -50,11 +50,11 @@ export default function AllProducts() {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row'>
-        <aside className='bg-gray-100 pl-3 py-3 flex flex-col w-full gap-5 md:w-96 md:h-screen '>
+      <div className='flex flex-col md:flex-row '>
+        <aside className='bg-gray-100 pl-3 py-3 flex flex-col w-full gap-5 md:w-48 md:h-screen '>
           <div className='space-y-1  flex md:block flex-wrap'>
             <h3 className='font-bold text-xl'>Marcas</h3>
-            <div className='md:block gap-2 md:gap-0 flex flex-wrap w-full'>
+            <div className='md:block gap-4 md:space-y-1 flex flex-wrap '>
               <FilterButton
                 defaultChecked
                 onChange={(e) => filterByBrand(e.target.value)}
@@ -78,7 +78,7 @@ export default function AllProducts() {
 
           <div className='space-y-1'>
             <h3 className='font-bold text-xl'>Precio</h3>
-            <div className='flex md:block'>
+            <div className='flex md:block md:space-y-1'>
               <FilterButton
                 onChange={(e) => handlePrice(e.target.value)}
                 name={'price'}
@@ -96,7 +96,7 @@ export default function AllProducts() {
             </div>
           </div>
         </aside>
-        <div className='py-10 md:py-20'>
+        <div className='w-full py-10 md:py-20 flex flex-col items-center justify-start'>
           <h1 className='text-4xl pb-10 text-center'>Monopatines</h1>
 
           <section className='w-full gap-4 flex flex-wrap items-center justify-center'>

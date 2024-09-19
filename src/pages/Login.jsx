@@ -1,35 +1,17 @@
 import { useState } from 'react'
+import { loginRequest } from '../api/auth'
 
 export default function Login() {
   const [message, setMessage] = useState('')
 
-  async function fetchUser(email, password) {
-    try {
-      const res = await fetch('http://localhost:5000/api/user/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      })
-
-      const data = await res.json()
-      setMessage(data.error)
-      console.log(data)
-
-      if (!res.ok) {
-        throw new Error(res)
-      }
-    } catch (err) {
-      console.error('¡Hubo un problema con la solicitud!', err)
-    }
-  }
-
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     const email = e.target.email.value
     const password = e.target.password.value
-    fetchUser(email, password)
+
+    const data = await loginRequest(email, password)
+    setMessage(data.error)
+    console.log(data)
   }
 
   return (

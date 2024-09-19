@@ -107,7 +107,7 @@ export default function ProductFeatured({ data }) {
               <FavButton id={id} />
             </FavCtn>
             <p className='absolute font-bold text-primary-400 text-2xl'>
-              {' '}
+                
               {discount}% OFF
             </p>
             {images && (
