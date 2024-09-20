@@ -1,14 +1,14 @@
-import React from "react";
-import styled from "styled-components";
-import Title from "../components/ui/Title";
-import imageStore2 from "../assets/img/aboutussanjuan.webp";
-import imageStore3 from "../assets/img/aboutusshipping.webp";
+import React from 'react'
+import styled from 'styled-components'
+import Title from '../components/ui/Title'
+import imageStore2 from '../assets/img/aboutussanjuan.webp'
+import imageStore3 from '../assets/img/aboutusshipping.webp'
 
 export default function About() {
   return (
     <>
       <Wrapper>
-        <Title $noBackground text={"Conocé E-Ride"} />
+        <Title $noBackground text={'Conocé E-Ride'} />
 
         <SectionContainer>
           <SubTitle>Descubri el Poder de la Aventura</SubTitle>
@@ -17,8 +17,8 @@ export default function About() {
               En el corazón de la pintoresca provincia de San Juan, Argentina,
               se encuentra E-ride, tu destino definitivo para explorar el
               emocionante mundo de la movilidad electrica. Si sos un amante de
-              la aventura, E-ride tiene todo lo que
-              necesitas para comenzar tu viaje.
+              la aventura, E-ride tiene todo lo que necesitas para comenzar tu
+              viaje.
             </Text>
             <Image src={imageStore2} alt="" />
           </TextImageCtn>
@@ -48,14 +48,13 @@ export default function About() {
         </SectionContainer>
       </Wrapper>
     </>
-  );
+  )
 }
 
 const Image = styled.img`
-width: 350px;
-border-radius: 10px;
-object-fit: contain;
-
+  width: 350px;
+  border-radius: 10px;
+  object-fit: contain;
 `
 
 const TextImageCtn = styled.div`
@@ -63,10 +62,10 @@ const TextImageCtn = styled.div`
   align-items: start;
   justify-content: center;
   gap: 30px;
-  @media(max-width:700px){
-  flex-direction: column-reverse;
+  @media (max-width: 700px) {
+    flex-direction: column-reverse;
   }
-`;
+`
 
 const Wrapper = styled.div`
   height: 100%;
@@ -79,7 +78,7 @@ const Wrapper = styled.div`
   gap: 4em;
   flex-direction: column;
   background-color: #f5f5f5;
-`;
+`
 
 const SectionContainer = styled.div`
   display: flex;
@@ -90,15 +89,15 @@ const SectionContainer = styled.div`
   gap: 3em;
   padding-inline: 1em;
   max-width: 60ch;
-`;
+`
 const SubTitle = styled.h2`
   font-weight: 800;
-text-align: center;
+  text-align: center;
   font-size: 1.2rem;
   color: #666;
   width: 100%;
-`;
+`
 
 const Text = styled.p`
   width: 100%;
-`;
+`

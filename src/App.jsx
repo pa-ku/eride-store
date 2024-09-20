@@ -22,23 +22,23 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route element={<Layout />}>
-              <Route index path='/' element={<Home />} />
+              <Route index path="/" element={<Home />} />
 
-              <Route path='/product'>
-                <Route path='scooters' element={<AllProducts />} />
-                <Route path='id/:id' element={<ProductShowcase />} />
+              <Route path="/product">
+                <Route path="scooters" element={<AllProducts />} />
+                <Route path="id/:id" element={<ProductShowcase />} />
 
                 <Route element={<ProtectedRoute />}>
-                  <Route path='favorites' element={<Favorites />} />
+                  <Route path="favorites" element={<Favorites />} />
                 </Route>
               </Route>
 
-              <Route path='/user'>
-                <Route path='login' element={<Login />} />
-                <Route path='register' element={<Register />} />
+              <Route path="/user">
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
               </Route>
 
-              <Route path='/about' element={<About />} />
+              <Route path="/about" element={<About />} />
             </Route>
           </Routes>
         </BrowserRouter>

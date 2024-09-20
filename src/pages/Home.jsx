@@ -31,7 +31,7 @@ export default function Home() {
   }
 
   const featuredProduct = itemsHasDiscount.find(
-    (item) => item._id === '66e4906be4f50256a4d1f2b5'
+    (item) => item._id === '66e4906be4f50256a4d1f2b5',
   )
 
   useEffect(() => {
@@ -41,15 +41,15 @@ export default function Home() {
   return (
     <>
       <Banner
-        title='SOLO LO MEJOR'
-        subtitle='No te conformes con menos cuando se trata de tu pasión'
+        title="SOLO LO MEJOR"
+        subtitle="No te conformes con menos cuando se trata de tu pasión"
       />
       <OurBrands />
-      <main className='flex py-20 flex-col gap-20 items-center justify-center'>
+      <main className="flex flex-col items-center justify-center gap-20 py-20">
         {featuredProduct && <ProductFeatured data={featuredProduct} />}
         <section>
           <Title text={'Las mejores '} accent={'Ofertas'} />
-          <div className='pt-5 flex-wrap flex gap-4 items-center justify-center'>
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
             {itemsHasDiscount
               .slice(0, 5)
               .map(
@@ -63,13 +63,13 @@ export default function Home() {
                     discount={discount}
                     description={description}
                   />
-                )
+                ),
               )}
           </div>
         </section>
         <section>
           <Title text={'Más Vendido'} />
-          <div className='pt-5 flex flex-wrap gap-4 items-center justify-center'>
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
             {itemsNoDiscount
               .slice(0, 5)
               .map(
@@ -83,13 +83,13 @@ export default function Home() {
                     discount={discount}
                     description={description}
                   />
-                )
+                ),
               )}
           </div>
         </section>
         <Link
           to={'/product/scooters'}
-          className='px-4 py-2 bg-primary-400 rounded-lg text-lg text-white'
+          className="rounded-lg bg-primary-400 px-4 py-2 text-lg text-white"
         >
           Ver todos los productos
         </Link>

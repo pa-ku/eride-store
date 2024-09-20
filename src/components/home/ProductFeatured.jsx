@@ -76,18 +76,18 @@ export default function ProductFeatured({ data }) {
   return (
     <>
       <Wrapper>
-        <h2 className='text-4xl'>Destacado</h2>
+        <h2 className="text-4xl">Destacado</h2>
         <ProductWrapper>
           <ProductInfoContainer>
             <ProductTitle>{title}</ProductTitle>
             <div>
               {discount && (
-                <p className='line-through text-gray-500'>
+                <p className="text-gray-500 line-through">
                   $ {calcDiscount(price, discount)}
                 </p>
               )}
-              <span className='flex items-center gap-2'>
-                <p className='text-3xl text-primary-600 '>
+              <span className="flex items-center gap-2">
+                <p className="text-3xl text-primary-600">
                   {formatPrice(price)}
                 </p>
               </span>
@@ -96,25 +96,24 @@ export default function ProductFeatured({ data }) {
             <ProductDescription>{description}</ProductDescription>
 
             <Link
-              className='w-full hover:bg-primary-400 bg-primary-500 md:w-40 py-3 text-center text-white font-bold'
+              className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
               to={'/product/id/' + id}
             >
               Saber Más
             </Link>
           </ProductInfoContainer>
-          <ProductImageContainer className='px-2'>
+          <ProductImageContainer className="px-2">
             <FavCtn>
               <FavButton id={id} />
             </FavCtn>
-            <p className='absolute font-bold text-primary-400 text-2xl'>
-                
+            <p className="absolute text-2xl font-bold text-primary-400">
               {discount}% OFF
             </p>
             {images && (
               <img
-                className=' size-80 md:size-96 object-contain'
+                className="size-80 object-contain md:size-96"
                 src={images[0]}
-                alt=''
+                alt=""
               />
             )}
           </ProductImageContainer>

@@ -10,9 +10,8 @@ export default function ProductCard({ id, images, price, title, discount }) {
   return (
     <>
       <WrapperCard>
-      
         {discount && (
-          <p className='bg-primary-600 w-max px-2 py-1 rounded-b-lg text-white font-bold'>
+          <p className="w-max rounded-b-lg bg-primary-600 px-2 py-1 font-bold text-white">
             {discount}%
           </p>
         )}
@@ -23,15 +22,15 @@ export default function ProductCard({ id, images, price, title, discount }) {
 
         <CardLink to={`/product/id/${id}`}>
           <ImageContainer>
-            <Image loading='lazy' src={images} />
+            <Image loading="lazy" src={images} />
           </ImageContainer>
-          <div className='flex items-center gap-2'>
+          <div className="flex items-center gap-2">
             {discount && (
               <>
                 <TxtPrice>
                   ${discount && calcDiscount(price, discount)}
                 </TxtPrice>
-                <p className='line-through text-gray-500'>
+                <p className="text-gray-500 line-through">
                   {discount && '$'}
                   {formatPrice(price)}
                 </p>
@@ -40,7 +39,7 @@ export default function ProductCard({ id, images, price, title, discount }) {
             {!discount && <TxtPrice>${formatPrice(price)}</TxtPrice>}
           </div>
           <Shipping>Envío gratis</Shipping>
-          <Title className='Title'>{title}</Title>
+          <Title className="Title">{title}</Title>
         </CardLink>
       </WrapperCard>
     </>

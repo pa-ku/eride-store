@@ -5,12 +5,9 @@ import ProductCard from '../components/ProductCard.jsx'
 export default function Favorites() {
   return (
     <>
-<div>
-<h1 className='text-4xl text-center'></h1>
-
-
-</div>
+      <div>
+        <h1 className="text-center text-4xl"></h1>
+      </div>
     </>
   )
 }
-

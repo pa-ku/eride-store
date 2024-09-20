@@ -27,7 +27,7 @@ export default function SearchBar() {
 
   useEffect(() => {
     const filteredByQuery = data.filter((item) =>
-      item.title.toLowerCase().includes(query.toLowerCase())
+      item.title.toLowerCase().includes(query.toLowerCase()),
     )
     setFilterByQuery(filteredByQuery)
   }, [query])
@@ -53,40 +53,32 @@ export default function SearchBar() {
   }, [setQuery])
 
   return (
-    <span className='relative' ref={searchBarRef}>
-      <div className='relative flex h-max w-max items-center justify-start'>
+    <span className="relative" ref={searchBarRef}>
+      <div className="relative flex h-max w-max items-center justify-start">
         <input
-          type='text'
-          className='text-red peer rounded-lg border-[1px] 
-border-transparent bg-gray-300 px-3 py-1 caret-primary
-outline-none focus-visible:border-primary'
-          placeholder=' '
+          type="text"
+          className="text-red caret-primary focus-visible:border-primary peer rounded-lg border-[1px] border-transparent bg-gray-300 px-3 py-1 outline-none"
+          placeholder=" "
           value={query}
           onClick={fetchScooters}
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        <p
-          className='pointer-events-none absolute -translate-x-20 px-3 
-font-bold text-slate-300 duration-300 peer-placeholder-shown:translate-x-0
-peer-placeholder-shown:font-normal peer-placeholder-shown:text-slate-800 
-peer-focus:-translate-x-20 peer-focus:font-bold peer-focus:text-slate-300'
-        >
+        <p className="pointer-events-none absolute -translate-x-20 px-3 font-bold text-slate-300 duration-300 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:font-normal peer-placeholder-shown:text-slate-800 peer-focus:-translate-x-20 peer-focus:font-bold peer-focus:text-slate-300">
           Buscar
         </p>
         <button
           onClick={() => setQuery('')}
-          className='text-primary-700 text-xl
-           absolute right-2 peer-placeholder-shown:hidden'
+          className="absolute right-2 text-xl text-primary-700 peer-placeholder-shown:hidden"
         >
           ✕
         </button>
       </div>
       {showResults && query !== '' && filterByQuery.length > 0 && (
-        <div className='mt-2 z-10 flex flex-col gap-2 shadow-lg w-full bg-white absolute  '>
+        <div className="absolute z-10 mt-2 flex w-full flex-col gap-2 bg-white shadow-lg">
           {filterByQuery.slice(0, 6).map(({ title, _id: id }) => (
             <Link
-              className='flex p-2  hover:text-white hover:bg-primary-500 item-center justify-start '
+              className="item-center flex justify-start p-2 hover:bg-primary-500 hover:text-white"
               key={title}
               to={`/product/id/${id}`}
               onClick={() => setQuery('')}

@@ -31,7 +31,7 @@ export default function AllProducts() {
       setDataFiltered(itemsData)
     } else {
       const filteredBrands = itemsData.filter(
-        (item) => item.brand === brandSelected
+        (item) => item.brand === brandSelected,
       )
       setDataFiltered(filteredBrands)
     }
@@ -50,11 +50,11 @@ export default function AllProducts() {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row '>
-        <aside className=' pl-3 md:items-center py-10 flex flex-col w-full gap-5 md:w-48 md:h-screen '>
-          <div className='space-y-1  flex md:block flex-wrap'>
-            <h3 className='font-bold text-xl'>Marcas</h3>
-            <div className='md:block gap-4 md:space-y-1 flex flex-wrap '>
+      <div className="flex flex-col md:flex-row">
+        <aside className="flex w-full flex-col gap-5 py-10 pl-3 md:h-screen md:w-48 md:items-center">
+          <div className="flex flex-wrap space-y-1 md:block">
+            <h3 className="text-xl font-bold">Marcas</h3>
+            <div className="flex flex-wrap gap-4 md:block md:space-y-1">
               <FilterButton
                 defaultChecked
                 onChange={(e) => filterByBrand(e.target.value)}
@@ -77,9 +77,9 @@ export default function AllProducts() {
             </div>
           </div>
 
-          <div className='space-y-1'>
-            <h3 className='font-bold text-xl'>Precio</h3>
-            <div className='flex md:block md:space-y-1'>
+          <div className="space-y-1">
+            <h3 className="text-xl font-bold">Precio</h3>
+            <div className="flex md:block md:space-y-1">
               <FilterButton
                 onChange={(e) => handlePrice(e.target.value)}
                 name={'price'}
@@ -97,10 +97,10 @@ export default function AllProducts() {
             </div>
           </div>
         </aside>
-        <div className='w-full py-10 md:py-20 '>
-          <h1 className='text-4xl pb-10 text-center'>Monopatines</h1>
+        <div className="w-full py-10 md:py-20">
+          <h1 className="pb-10 text-center text-4xl">Monopatines</h1>
 
-          <section className='w-full gap-4 flex flex-wrap justify-center'>
+          <section className="flex w-full flex-wrap justify-center gap-4">
             {itemsData &&
               dataFiltered.map(
                 ({ title, price, discount, _id: id, images }) => (
@@ -112,7 +112,7 @@ export default function AllProducts() {
                     id={id}
                     images={images[0]}
                   />
-                )
+                ),
               )}
           </section>
         </div>
@@ -123,25 +123,16 @@ export default function AllProducts() {
 
 function FilterButton({ children, name, defaultChecked, onChange, value }) {
   return (
-    <div
-      className='relative flex w-fit items-center
-  justify-center'
-    >
+    <div className="relative flex w-fit items-center justify-center">
       <input
-        type='radio'
+        type="radio"
         name={name}
         value={value}
         defaultChecked={defaultChecked}
-        className='peer absolute h-full w-full 
-  cursor-pointer appearance-none'
+        className="peer absolute h-full w-full cursor-pointer appearance-none"
         onChange={onChange}
       />
-      <p
-        className='pointer-events-none rounded-md
-   px-2 
-  peer-checked:bg-primary-100
-'
-      >
+      <p className="pointer-events-none rounded-md px-2 peer-checked:bg-primary-100">
         {children}
       </p>
     </div>

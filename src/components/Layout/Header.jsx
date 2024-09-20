@@ -15,14 +15,14 @@ const Logo = styled.img`
 export default function Header() {
   return (
     <>
-      <header className='md:flex hidden h-14 items-center bg-slate-800 xl:px-10 justify-between w-full'>
-        <Link className='w-max' title='Home' to={'/'}>
-          <Logo src={imgLogo} alt='' />
+      <header className="hidden h-14 w-full items-center justify-between bg-slate-800 md:flex xl:px-10">
+        <Link className="w-max" title="Home" to={'/'}>
+          <Logo src={imgLogo} alt="" />
         </Link>
-        <div className='flex gap-4 items-center '>
+        <div className="flex items-center gap-4">
           <SearchBar></SearchBar>
           <Link
-            className='text-white px-3 py-1 hover:bg-gray-700 rounded-lg'
+            className="rounded-lg px-3 py-1 text-white hover:bg-gray-700"
             to={'/product/scooters'}
           >
             Monopatines
@@ -32,13 +32,13 @@ export default function Header() {
             <FavIcon></FavIcon>
           </Link> */}
           <Link
-            className='text-white px-3 py-1 hover:bg-gray-700 border hover:text-primary-500 hover:border-primary-500 rounded-lg'
+            className="rounded-lg border px-3 py-1 text-white hover:border-primary-500 hover:bg-gray-700 hover:text-primary-500"
             to={'/user/login'}
           >
             Ingresar
           </Link>
           <Link
-            className='text-white px-3 py-1 bg-primary-600 hover:bg-primary-500 rounded-lg'
+            className="rounded-lg bg-primary-600 px-3 py-1 text-white hover:bg-primary-500"
             to={'/user/register'}
           >
             Registrarse

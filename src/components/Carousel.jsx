@@ -1,5 +1,5 @@
-import { useState } from "react";
-import styled from "styled-components";
+import { useState } from 'react'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   background-color: #fff;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     flex-direction: column-reverse;
     width: 100%;
   }
-`;
+`
 
 const SideBarCtn = styled.div`
   display: flex;
@@ -29,7 +29,7 @@ const SideBarCtn = styled.div`
     height: 100px;
     width: 100%;
   }
-`;
+`
 
 const SideBarBtn = styled.button`
   width: 60px;
@@ -45,13 +45,13 @@ const SideBarBtn = styled.button`
   &:hover {
     border-color: var(--main-color-500);
   }
-`;
+`
 
 const SideBarImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-`;
+`
 
 const ImageContainer = styled.div`
   width: 600px;
@@ -63,18 +63,17 @@ const ImageContainer = styled.div`
     height: 250px;
     width: 100%;
   }
-`;
+`
 
 const Image = styled.img`
   object-fit: contain;
   width: 100%;
   height: 100%;
-    object-fit: contain;
-
-`;
+  object-fit: contain;
+`
 
 export default function Carousel({ render, images }) {
-  const [actualImg, setActualImg] = useState(0);
+  const [actualImg, setActualImg] = useState(0)
 
   return (
     <>
@@ -92,18 +91,18 @@ export default function Carousel({ render, images }) {
         </ImageContainer>
       </Wrapper>
     </>
-  );
+  )
 }
 export function SlideBar({ render, setActualImg, images }) {
-  const sideBarButtons = [];
+  const sideBarButtons = []
 
   for (let index = 0; index < render; index++) {
     sideBarButtons.push(
       <SideBarBtn key={index} onMouseEnter={() => setActualImg(index)}>
         <SideBarImg src={images[index]}></SideBarImg>
-      </SideBarBtn>
-    );
+      </SideBarBtn>,
+    )
   }
 
-  return sideBarButtons;
+  return sideBarButtons
 }

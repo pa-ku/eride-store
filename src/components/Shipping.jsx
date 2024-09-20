@@ -46,7 +46,7 @@ export default function Shipping({ title, price, setShipping, shipping }) {
             price: price,
             quantity: 1,
           }),
-        }
+        },
       )
       const data = await res.json()
       return data.id
@@ -72,18 +72,18 @@ export default function Shipping({ title, price, setShipping, shipping }) {
 
   return (
     <Wrapper>
-      <div className='bg-white p-7 rounded-lg shadow-xl'>
+      <div className="rounded-lg bg-white p-7 shadow-xl">
         {shipping === true && pay === false && (
           <>
-            <div className='flex justify-between w-full'>
-              <h1 className='text-3xl'>Datos de Envío</h1>
+            <div className="flex w-full justify-between">
+              <h1 className="text-3xl">Datos de Envío</h1>
               <button
-                className='text-3xl text-primary-600 hover:bg-gray-100 size-9 flex items-center justify-center p-2 rounded-full'
+                className="flex size-9 items-center justify-center rounded-full p-2 text-3xl text-primary-600 hover:bg-gray-100"
                 onClick={() => {
                   setShipping(false)
                   setShippingData({})
                 }}
-                title='Cerrar modal'
+                title="Cerrar modal"
               >
                 🞪
               </button>
@@ -149,9 +149,9 @@ export default function Shipping({ title, price, setShipping, shipping }) {
                   placeholder={'Email'}
                 />
               </InputCtn>
-              <p className='text-red-500'>{fillMsj}</p>
+              <p className="text-red-500">{fillMsj}</p>
               <button
-                className='w-full bg-primary-500 text-white text-xl rounded-lg py-3'
+                className="w-full rounded-lg bg-primary-500 py-3 text-xl text-white"
                 onClick={(e) => handleBuy(e)}
               >
                 Confirmar
@@ -168,8 +168,9 @@ export default function Shipping({ title, price, setShipping, shipping }) {
                   <b>♦ Producto:</b> {title}
                 </p>
                 <p>
-                  <b>♦ Direccion:</b> {shippingData.calle} {shippingData.NCalle}
-                  , {shippingData.provincia}, {shippingData.localidad}
+                  <b>♦ Direccion:</b> {shippingData.calle}{' '}
+                  {shippingData.NCalle}, {shippingData.provincia},{' '}
+                  {shippingData.localidad}
                 </p>
                 <p>
                   <b>♦ Total:</b> $

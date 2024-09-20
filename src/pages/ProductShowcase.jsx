@@ -60,16 +60,16 @@ export default function ProductShowcase() {
             setShipping={setShipping}
           />
         )}
-        <div className='px-4 flex flex-col items-center lg:items-start justify-center lg:flex-row'>
-          <div className='flex'>
+        <div className="flex flex-col items-center justify-center px-4 lg:flex-row lg:items-start">
+          <div className="flex">
             {data.images && (
               <Carousel render={data.images.length} images={data.images} />
             )}
           </div>
 
-          <div className='space-y-2'>
-            <div className='flex gap-1'>
-              <h1 className='text-4xl'>{data.title} </h1>
+          <div className="space-y-2">
+            <div className="flex gap-1">
+              <h1 className="text-4xl">{data.title} </h1>
               <FavButton id={data._id} />
             </div>
             <DescriptionTxt>{data.description}</DescriptionTxt>
@@ -85,24 +85,24 @@ export default function ProductShowcase() {
                 Tenés 30 días desde que lo recibís.
               </ReturnSubtitle>
             </ReturnContainer>
-            <div className='flex flex-col  items-start'>
+            <div className="flex flex-col items-start">
               {data.discount && (
                 <>
-                  <p className='text-gray-500 line-through'>
+                  <p className="text-gray-500 line-through">
                     ${formatPrice(data.price)}
                   </p>
-                  <span className='flex items-center gap-2'>
-                    <p className='text-3xl'>
+                  <span className="flex items-center gap-2">
+                    <p className="text-3xl">
                       ${calcDiscount(data.price, data.discount)}
                     </p>
-                    <p className='text-primary-600 text-xl'>
+                    <p className="text-xl text-primary-600">
                       {data.discount}% OFF
                     </p>
                   </span>
                 </>
               )}
               {data.price && !data.discount && (
-                <p className='text-3xl'>${formatPrice(data.price)}</p>
+                <p className="text-3xl">${formatPrice(data.price)}</p>
               )}
             </div>
             <MainButton onClick={handleShipping}>COMPRAR</MainButton>
