@@ -7,36 +7,34 @@ import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import ProductFeatured from '../components/home/ProductFeatured'
 import { Link } from 'react-router-dom'
-import { API_ROUTE } from '../api/auth'
+import { requestManyId } from '../api/scooters'
 
 export default function Home() {
-  const [itemsHasDiscount, setItemsHasDiscount] = useState([])
-  const [itemsNoDiscount, setItemsNoDiscount] = useState([])
+  const [data, setData] = useState()
+  const [bestSelled, setBestSelled] = useState()
 
-  async function fetchAllScooters() {
-    try {
-      const res = await fetch(`${API_ROUTE}/scooters`)
-      const data = await res.json()
+  const idArray = [
+    '66e4906be4f50256a4d1f2c6',
+    '66e4906be4f50256a4d1f2ba',
+    '66e4906be4f50256a4d1f2c3',
+    '66e4906be4f50256a4d1f2b6',
+  ]
 
-      if (!res.ok) {
-        throw new Error('Recurso no encontrado', res.status)
-      }
+  const selledArr = [
+    '66e4906be4f50256a4d1f2bb',
+    '66e4906be4f50256a4d1f2b9',
+    '66e4906be4f50256a4d1f2be',
+    '66e4906be4f50256a4d1f2c1',
+  ]
 
-      const hasDiscount = data.filter((item) => item.discount != null)
-      const noDiscount = data.filter((item) => item.discount == null)
-      setItemsHasDiscount(hasDiscount)
-      setItemsNoDiscount(noDiscount)
-    } catch (err) {
-      console.error('¡Hubo un problema con la solicitud!', err)
-    }
+  async function requestMany() {
+    const data = await requestManyId(idArray)
+    setData(data)
+    const bestSelled = await requestManyId(selledArr)
+    setBestSelled(bestSelled)
   }
-
-  const featuredProduct = itemsHasDiscount.find(
-    (item) => item._id === '66e4906be4f50256a4d1f2b5',
-  )
-
   useEffect(() => {
-    fetchAllScooters()
+    requestMany()
   }, [])
 
   return (
@@ -47,47 +45,17 @@ export default function Home() {
       />
       <OurBrands />
       <main className="flex flex-col items-center justify-center gap-20 py-20">
-        {featuredProduct && <ProductFeatured data={featuredProduct} />}
-        <section>
-          <Title text={'Las mejores '} accent={'Ofertas'} />
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-            {itemsHasDiscount
-              .slice(0, 5)
-              .map(
-                ({ title, images, _id: id, price, description, discount }) => (
-                  <ProductCard
-                    key={id}
-                    images={images[0]}
-                    title={title}
-                    id={id}
-                    price={price}
-                    discount={discount}
-                    description={description}
-                  />
-                ),
-              )}
-          </div>
-        </section>
-        <section>
-          <Title text={'Más Vendido'} />
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-            {itemsNoDiscount
-              .slice(0, 5)
-              .map(
-                ({ title, images, _id: id, price, description, discount }) => (
-                  <ProductCard
-                    key={title}
-                    images={images[0]}
-                    title={title}
-                    id={id}
-                    price={price}
-                    discount={discount}
-                    description={description}
-                  />
-                ),
-              )}
-          </div>
-        </section>
+        <ProductFeatured />
+
+        <ProductsRederedBySection
+          title="Las mejores ofertas"
+          data={data}
+        ></ProductsRederedBySection>
+
+        <ProductsRederedBySection
+          title="Más vendidos"
+          data={bestSelled}
+        ></ProductsRederedBySection>
         <Link
           to={'/product/scooters'}
           className="rounded-lg bg-primary-400 px-4 py-2 text-lg text-white"
@@ -98,5 +66,29 @@ export default function Home() {
       |
       <AboutMe />
     </>
+  )
+}
+
+export function ProductsRederedBySection({ title, data }) {
+  return (
+    <section className="flex h-[30em] flex-col gap-5">
+      <h2 className="text-center text-4xl">{title}</h2>
+      <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
+        {data &&
+          data.map(
+            ({ title, images, _id: id, price, description, discount }) => (
+              <ProductCard
+                key={title}
+                images={images[0]}
+                title={title}
+                id={id}
+                price={price}
+                discount={discount}
+                description={description}
+              />
+            ),
+          )}
+      </div>
+    </section>
   )
 }

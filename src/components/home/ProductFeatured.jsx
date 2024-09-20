@@ -3,14 +3,9 @@ import FavButton from '../ui/FavButton.jsx'
 import { calcDiscount } from '../../utils/calcDiscount.js'
 import { formatPrice } from '../../utils/formatPrice.js'
 import { Link } from 'react-router-dom'
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 3em;
-`
+import { useEffect } from 'react'
+import { requestOneById } from '../../api/scooters.js'
+import { useState } from 'react'
 
 const ProductWrapper = styled.div`
   display: flex;
@@ -69,54 +64,68 @@ const ProductDescription = styled.p`
   margin-bottom: 10px;
 `
 
-export default function ProductFeatured({ data }) {
-  const { title, price, discount, description, images, _id: id } = data
+export default function ProductFeatured() {
+  const [product, setProduct] = useState()
+
+  async function getOneProduct() {
+    const data = await requestOneById('66e4906be4f50256a4d1f2b5')
+    console.log(data)
+
+    setProduct(data)
+  }
+
+  useEffect(() => {
+    getOneProduct()
+  }, [])
+
   return (
     <>
-      <Wrapper>
+      <section className="flex h-[30em] flex-col items-center justify-start gap-10">
         <h2 className="text-4xl">Destacado</h2>
-        <ProductWrapper>
-          <ProductInfoContainer>
-            <ProductTitle>{title}</ProductTitle>
-            <div>
-              {discount && (
-                <p className="text-gray-500 line-through">
-                  $ {calcDiscount(price, discount)}
-                </p>
-              )}
-              <span className="flex items-center gap-2">
-                <p className="text-3xl text-primary-600">
-                  {formatPrice(price)}
-                </p>
-              </span>
-            </div>
+        {product && (
+          <>
+            <ProductWrapper>
+              <ProductInfoContainer>
+                <ProductTitle>{product.title}</ProductTitle>
+                <div>
+                  {product.discount && (
+                    <p className="text-gray-500 line-through">
+                      $ {calcDiscount(product.price, product.discount)}
+                    </p>
+                  )}
+                  <span className="flex items-center gap-2">
+                    <p className="text-3xl text-primary-600">
+                      {formatPrice(product.price)}
+                    </p>
+                  </span>
+                </div>
 
-            <ProductDescription>{description}</ProductDescription>
+                <ProductDescription>{product.description}</ProductDescription>
 
-            <Link
-              className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
-              to={'/product/id/' + id}
-            >
-              Saber Más
-            </Link>
-          </ProductInfoContainer>
-          <ProductImageContainer className="px-2">
-            <FavCtn>
-              <FavButton id={id} />
-            </FavCtn>
-            <p className="absolute text-2xl font-bold text-primary-400">
-              {discount}% OFF
-            </p>
-            {images && (
-              <img
-                className="size-80 object-contain md:size-96"
-                src={images[0]}
-                alt=""
-              />
-            )}
-          </ProductImageContainer>
-        </ProductWrapper>
-      </Wrapper>
+                <Link
+                  className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
+                  to={'/product/id/' + product.id}
+                >
+                  Saber Más
+                </Link>
+              </ProductInfoContainer>
+              <ProductImageContainer className="px-2">
+                <FavCtn>
+                  <FavButton id={product.id} />
+                </FavCtn>
+                <p className="absolute text-2xl font-bold text-primary-400">
+                  {product.discount}% OFF
+                </p>
+                <img
+                  className="size-80 object-contain md:size-96"
+                  src={product.images[0]}
+                  alt=""
+                />
+              </ProductImageContainer>
+            </ProductWrapper>
+          </>
+        )}
+      </section>
     </>
   )
 }
