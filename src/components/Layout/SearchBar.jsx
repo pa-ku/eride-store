@@ -16,7 +16,7 @@ export default function SearchBar() {
 
     if (!alreadyFecth) {
       try {
-        const res = await fetch(`${API_ROUTE} /scooters`)
+        const res = await fetch(`${API_ROUTE}/scooters`)
         const data = await res.json()
         console.log('fetch')
         setData(data)

@@ -1,5 +1,7 @@
-export const API_ROUTE = 'https://eride-api.vercel.app/api'
-/* 'http://localhost:3000/api' */
+const production = true
+export const API_ROUTE = production
+  ? 'https://eride-api.vercel.app/api'
+  : 'http://localhost:3000/api'
 
 export async function registerRequest(user) {
   try {
