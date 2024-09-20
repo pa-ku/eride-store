@@ -1,36 +1,21 @@
-import styled from "styled-components";
-import { device } from "../responsive";
+import styled from 'styled-components'
+import { device } from '../responsive'
+import { Link } from 'react-router-dom'
+import FavButton from './ui/FavButton'
+import { useEffect } from 'react'
+import { calcDiscount } from '../utils/calcDiscount'
+import { formatPrice } from '../utils/formatPrice'
 
-import { Link } from "react-router-dom";
-import FavButton from "./ui/FavButton";
-import { useEffect, useState } from "react";
-
-const DiscountTxt = styled.p`
-  background-color: var(--main-color-500);
-  width: 55px;
-  height: 28px;
-position: absolute;
-  font-size: 15px;
-  color: white;
-border-radius: 0px 0px 4px 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-
-`;
-
-export default function Card({ id, img, price, title, oldPrice }) {
-  const [discount, setDiscount] = useState();
-
-  useEffect(() => {
-    setDiscount(parseInt(((oldPrice - price) / oldPrice) * 100));
-  }, [oldPrice]);
-
+export default function ProductCard({ id, images, price, title, discount }) {
   return (
     <>
-      <WrapperCard href="">
-        {oldPrice && <DiscountTxt>{discount}%</DiscountTxt>}
+      <WrapperCard>
+      
+        {discount && (
+          <p className='bg-primary-600 w-max px-2 py-1 rounded-b-lg text-white font-bold'>
+            {discount}%
+          </p>
+        )}
 
         <FavCtn>
           <FavButton id={id} />
@@ -38,42 +23,29 @@ export default function Card({ id, img, price, title, oldPrice }) {
 
         <CardLink to={`/product/id/${id}`}>
           <ImageContainer>
-            <Image loading="lazy" src={img} />
+            <Image loading='lazy' src={images} />
           </ImageContainer>
-          <PrinceCtn>
-            <TxtPrice>
-              ${price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
-            </TxtPrice>
-            <TxtoldPrice>
-              {oldPrice &&
-                `${oldPrice
-                  .toString()
-                  .replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`}
-            </TxtoldPrice>
-            <Shipping>Envío gratis</Shipping>
-          </PrinceCtn>
-          <Title className="Title">{title}</Title>
+          <div className='flex items-center gap-2'>
+            {discount && (
+              <>
+                <TxtPrice>
+                  ${discount && calcDiscount(price, discount)}
+                </TxtPrice>
+                <p className='line-through text-gray-500'>
+                  {discount && '$'}
+                  {formatPrice(price)}
+                </p>
+              </>
+            )}
+            {!discount && <TxtPrice>${formatPrice(price)}</TxtPrice>}
+          </div>
+          <Shipping>Envío gratis</Shipping>
+          <Title className='Title'>{title}</Title>
         </CardLink>
       </WrapperCard>
     </>
-  );
+  )
 }
-
-const PrinceCtn = styled.div`
-
-
-`;
-
-const TxtoldPrice = styled.p`
-  text-decoration: line-through;
-  color: #888;
-  font-size: 14px;
-
-  color: var(--main-color-550);
-
-
-  font-weight: 600;
-`;
 
 const FavCtn = styled.div`
   position: absolute;
@@ -81,7 +53,7 @@ const FavCtn = styled.div`
   right: 0px;
   margin-top: 0.5em;
   margin-right: 1em;
-`;
+`
 
 const WrapperCard = styled.div`
   width: 16em;
@@ -113,16 +85,16 @@ const WrapperCard = styled.div`
       box-shadow: 0px 0px 0px 0px #333;
     }
   }
-`;
+`
 
 const Title = styled.p`
-padding-bottom: 20px;
+  padding-bottom: 20px;
   font-weight: 600;
   color: #444;
   @media ${device.mobile} {
     font-size: 1rem;
   }
-`;
+`
 
 const ImageContainer = styled.div`
   width: 100%;
@@ -130,11 +102,11 @@ const ImageContainer = styled.div`
   border-bottom: 1px solid #e4e4e4;
   display: flex;
   justify-content: center;
-padding: 20px;
+  padding: 20px;
   @media ${device.mobile} {
     height: 10em;
   }
-`;
+`
 
 const Image = styled.img`
   object-fit: contain;
@@ -145,19 +117,19 @@ const Image = styled.img`
   @media ${device.mobile} {
     width: 100%;
   }
-`;
+`
 
 const TxtPrice = styled.p`
   font-size: 25px;
   text-align: left;
-`;
+`
 
 const Shipping = styled.p`
   color: #16ad5f;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-`;
+`
 
 const CardLink = styled(Link)`
   display: flex;
@@ -166,4 +138,4 @@ const CardLink = styled(Link)`
   height: 100%;
   text-decoration: none;
   color: #111;
-`;
+`

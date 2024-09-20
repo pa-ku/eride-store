@@ -1,230 +1,149 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Title from "../components/ui/Title";
-import Product from "../components/Product";
-import { useLocation } from "react-router";
+import React, { useEffect, useState } from 'react'
+import ProductCard from '../components/ProductCard'
 
 export default function AllProducts() {
-  const location = useLocation();
-  const category = location.pathname.split("/")[2];
-  const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState("");
-  const [brandText, setBrandText] = useState("Marca");
-  const [priceText, setPriceText] = useState("Precio");
-  const [brandSection, setBrandSection] = useState(false);
-  const [priceSection, setPriceSection] = useState(false);
-  const [catSection, setCatSection] = useState(false);
+  const [itemsData, setItemsData] = useState([])
+  const [productBrands, setProductBrands] = useState([])
+  const [dataFiltered, setDataFiltered] = useState(itemsData)
 
-  const brands = [
-    "todas",
-    "segway",
-    "dualtron",
-    "vsett",
-    "maxyou",
-    "inmotion",
-    "zero",
-  ];
-
-  function HandleBrand() {
-    setBrandSection(true);
-    setPriceSection(false);
+  async function fetchAllScooters() {
+    try {
+      const res = await fetch(`http://localhost:5000/api/scooters`)
+      if (!res.ok) {
+        throw new Error('Recurso no encontrado', res.status)
+      }
+      const data = await res.json()
+      const getUniqueBrands = [...new Set(data.map((item) => item.brand))]
+      setProductBrands(getUniqueBrands)
+      setItemsData(data)
+      setDataFiltered(data)
+    } catch (err) {
+      console.error('¡Hubo un problema con la solicitud!', err)
+    }
   }
 
-function handleOption(e){
-const value = e.target.value
+  useEffect(() => {
+    fetchAllScooters()
+  }, [])
 
-switch (value) {
-  case 'brand':
-    setBrandSection(brandSection ? false : true);
-    setPriceSection(false);
-    setCatSection(false);
-    break;
-case 'price':
-  setPriceSection(priceSection ? false : true);
-  setBrandSection(false);
-    setCatSection(false);
-  break; 
-  case 'cat':
-    setCatSection(catSection ? false : true);
-    setPriceSection(false);
-    setBrandSection(false);
-  break;
-  default:
-    break;
-}
-}
-
-  function handleChoiceBrand(e) {
-    const value = e.target.value;
-    const name = e.target.name;
-    setBrandSection(false);
-    setBrandText(name);
-    setFilters({ ...filters, ["brand"]: value });
+  function filterByBrand(brandSelected) {
+    if (brandSelected === 'todas') {
+      setDataFiltered(itemsData)
+    } else {
+      const filteredBrands = itemsData.filter(
+        (item) => item.brand === brandSelected
+      )
+      setDataFiltered(filteredBrands)
+    }
   }
 
-  function handleChoicePrice(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-    setPriceSection(false);
-    setPriceText(name);
-    setSort(value);
+  function handlePrice(value) {
+    let sortedData
+    if (value === 'sortMinPrice') {
+      sortedData = [...dataFiltered].sort((a, b) => a.price - b.price)
+    }
+    if (value === 'sortMaxPrice') {
+      sortedData = [...dataFiltered].sort((a, b) => b.price - a.price)
+    }
+    setDataFiltered(sortedData)
   }
 
   return (
     <>
-      <Wrapper>
-        <OptionCtn>
-          <SelectContainer>
-            <OptionButton value={'brand'} onClick={handleOption} >{brandText}</OptionButton>
-            {brandSection && (
-              <FilterSection>
-                {brands.map((brand) => (
-                  <FilterButton
-                    onClick={handleChoiceBrand}
-                    value={brand}
-                    name={brand}
-                  >
-                    {brand}
-                  </FilterButton>
-                ))}
-              </FilterSection>
-            )}
-          </SelectContainer>
+      <div className='flex flex-col md:flex-row '>
+        <aside className=' pl-3 md:items-center py-10 flex flex-col w-full gap-5 md:w-48 md:h-screen '>
+          <div className='space-y-1  flex md:block flex-wrap'>
+            <h3 className='font-bold text-xl'>Marcas</h3>
+            <div className='md:block gap-4 md:space-y-1 flex flex-wrap '>
+              <FilterButton
+                defaultChecked
+                onChange={(e) => filterByBrand(e.target.value)}
+                name={'brands'}
+                value={'todas'}
+              >
+                Todas
+              </FilterButton>
+              {productBrands.map((brand) => (
+                <FilterButton
+                  key={brand}
+                  onChange={(e) => filterByBrand(e.target.value)}
+                  name={'brands'}
+                  value={brand}
+                  featured
+                >
+                  {brand}
+                </FilterButton>
+              ))}
+            </div>
+          </div>
 
-          <SelectContainer>
-            <OptionButton value={'price'} onClick={handleOption}>{priceText} </OptionButton>
-            {priceSection && (
-              <FilterSection>
-                <FilterButton
-                  value="new"
-                  name="Destacado"
-                  onClick={handleChoicePrice}
-                >
-                  Destacado
-                </FilterButton>
-                <FilterButton
-                  value="asc"
-                  name="Mas bajo"
-                  onClick={handleChoicePrice}
-                >
-                  Mas bajo
-                </FilterButton>
-                <FilterButton
-                  value="dec"
-                  name="Más alto"
-                  onClick={handleChoicePrice}
-                >
-                  Más alto
-                </FilterButton>
-              </FilterSection>
-            )}
-          </SelectContainer>
-        </OptionCtn>
-        <ProductContainer>
-          <Title accent={category} />
+          <div className='space-y-1'>
+            <h3 className='font-bold text-xl'>Precio</h3>
+            <div className='flex md:block md:space-y-1'>
+              <FilterButton
+                onChange={(e) => handlePrice(e.target.value)}
+                name={'price'}
+                value={'sortMinPrice'}
+              >
+                Más bajo
+              </FilterButton>
+              <FilterButton
+                onChange={(e) => handlePrice(e.target.value)}
+                name={'price'}
+                value={'sortMaxPrice'}
+              >
+                Más Alto
+              </FilterButton>
+            </div>
+          </div>
+        </aside>
+        <div className='w-full py-10 md:py-20 '>
+          <h1 className='text-4xl pb-10 text-center'>Monopatines</h1>
 
-          <Product
-            filters={{
-              price: sort,
-              brand: filters.brand,
-            }}
-            sort={sort}
-          />
-        </ProductContainer>
-      </Wrapper>
+          <section className='w-full gap-4 flex flex-wrap justify-center'>
+            {itemsData &&
+              dataFiltered.map(
+                ({ title, price, discount, _id: id, images }) => (
+                  <ProductCard
+                    key={id}
+                    title={title}
+                    price={price}
+                    discount={discount}
+                    id={id}
+                    images={images[0]}
+                  />
+                )
+              )}
+          </section>
+        </div>
+      </div>
     </>
-  );
+  )
 }
 
-const ProductContainer = styled.div`
-  & h2 {
-    text-transform: uppercase;
-    padding-bottom: 2em;
-  }
-`;
-
-const Wrapper = styled.div`
-  text-align: center;
-
-  min-height: 900px;
-  display: flex;
-  gap: 2em;
-  padding-bottom: 4em;
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-`;
-
-const OptionCtn = styled.div`
-  display: flex;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  margin-inline: auto;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 2em;
-  background-color: #fafafa;
-  padding-block: 2em;
-`;
-
-const FilterSection = styled.div`
-  width: 100%;
-  background-color: #fff;
-  position: absolute;
-  height: max-content;
-  z-index: 10;
-  top: 50px;
-  outline: 2px solid var(--main-color-350);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 12px;
-  overflow: hidden;
-`;
-
-const FilterButton = styled.button`
-  background-color: #fff;
-  border: 0px;
-  text-transform: uppercase;
-  width: 100%;
-  height: 40px;
-
-  transition: 200ms;
-  &:hover {
-    background-color: var(--main-color-350);
-    cursor: pointer;
-  }
-`;
-
-const OptionButton = styled.button`
-  width: 200px;
-  height: 40px;
-  color: var(--main-color-600);
-  background-color: var(--main-color-250);
-  border: none;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: 200ms;
-  border-radius: 12px;
-  border: 2px solid var(--main-color-500);
-
-  &:hover {
-    background-color: var(--main-color-450);
-    color: #fff;
-  }
-`;
-
-const SelectContainer = styled.div`
-  position: relative;
-  display: flex;
-  align-items: start;
-  justify-content: start;
-  flex-direction: column;
-  gap: 5px;
-  & * {
-    text-transform: uppercase;
-  }
-`;
+function FilterButton({ children, name, defaultChecked, onChange, value }) {
+  return (
+    <div
+      className='relative flex w-fit items-center
+  justify-center'
+    >
+      <input
+        type='radio'
+        name={name}
+        value={value}
+        defaultChecked={defaultChecked}
+        className='peer absolute h-full w-full 
+  cursor-pointer appearance-none'
+        onChange={onChange}
+      />
+      <p
+        className='pointer-events-none rounded-md
+   px-2 
+  peer-checked:bg-primary-100
+'
+      >
+        {children}
+      </p>
+    </div>
+  )
+}

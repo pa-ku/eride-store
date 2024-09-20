@@ -1,40 +1,70 @@
-import React from "react";
-
-import styled from "styled-components";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import useLocalStorage from "use-local-storage";
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export default function FavButton({ id }) {
-  const [favorites, setFavorites] = useLocalStorage("favorites", []);
-  const isFavorite = favorites.includes(id);
+  const [favorites, setFavorites] = useState('favorites', [])
+  const isFavorite = favorites.includes(id)
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [toolkit, setToolkit] = useState(false)
 
   const handleFavorite = () => {
-    if (isFavorite === false) {
-      setFavorites((prevFavorites) => [...prevFavorites, id]);
-    } else {
-      setFavorites((prevFavorites) =>
-        prevFavorites.filter((favId) => favId !== id)
-      );
+    if (!isAdmin) {
+      setToolkit(true)
+      const timer = setTimeout(() => {
+        return setToolkit(false)
+      }, 2000)
+      return () => clearTimeout(timer)
     }
-  };
+  }
 
   return (
     <>
-      <FavCtn>
+      <div className='text-red-500 relative'>
+        {toolkit && (
+          <div
+            className={`p-2 z-10 bg-gray-100 w-max -left-44 -top-16 rounded-lg text-black absolute  `}
+          >
+            <p>Para agregar favoritos</p>
+
+            <Link
+              className='hover:bg-primary-500 px-2 rounded-lg hover:text-white text-primary-500'
+              to={'/user/login'}
+            >
+              ingresa a tu cuenta
+            </Link>
+          </div>
+        )}
         <FavoriteBtn
-          title={isFavorite ? "Eliminar favorito" : "Añadir favorito"}
-          className="Favorite"
+          title={isFavorite ? 'Eliminar favorito' : 'Añadir favorito'}
+          className='Favorite'
           onChange={handleFavorite}
-          type="checkbox"
+          type='checkbox'
           checked={isFavorite}
         />
-        {isFavorite === true && <FavIco $animation={isFavorite}></FavIco>}
-
-        <FavoriteBorderIcon></FavoriteBorderIcon>
-      </FavCtn>
+        {isFavorite === true && <p>asd</p>}
+        <label
+          htmlFor='favorite'
+          className='relative m-0 flex size-7 cursor-pointer items-center justify-center stroke-red-400 p-0'
+        >
+          <input
+            id='favorite'
+            className='peer absolute appearance-none opacity-0'
+            type='checkbox'
+          />
+          <svg
+            className='h-full w-full text-transparent duration-200 peer-checked:text-primary-500'
+            viewBox='0 0 24 24'
+            strokeWidth='1.5'
+            fill='currentColor'
+          >
+            <path stroke='none' d='M0 0h24v24H0z' fill='none' />
+            <path d='M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572' />
+          </svg>
+        </label>
+      </div>
     </>
-  );
+  )
 }
 
 const FavoriteBtn = styled.input`
@@ -58,47 +88,4 @@ const FavoriteBtn = styled.input`
 
     margin-inline: 1em;
   }
-`;
-
-const FavCtn = styled.label`
-  background-color: rgba(255, 255, 255, 0);
-  border: none;
-  color: #ff8383;
-  cursor: pointer;
-  opacity: 1;
-  position: absolute;
-  transition: 0.2s;
-  right: 0px;
-  top:0px;
-  bottom: 0px;
-  right: 0px;
-  scale: 1.1;
-
-  z-index: 100;
-`;
-const FavIco = styled(FavoriteIcon)`
-  position: absolute;
-  transform: bottom;
-  color: #ff5858;
-  scale: 0;
-  opacity: 0;
-  animation: 0.3s ${(props) => (props.$animation ? "favIn" : "favOut")} forwards;
-  @keyframes favIn {
-    0% {
-      scale: 0;
-    }
-    95% {
-      scale: 1.1;
-    }
-    100% {
-      scale: 1;
-      opacity: 1;
-    }
-  }
-  @keyframes favOut {
-    to {
-      scale: 1;
-      opacity: 0;
-    }
-  }
-`;
+`

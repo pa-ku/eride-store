@@ -1,30 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @font-face {
   font-family: monserrat;
   src: url(../src/assets/fonts/Montserrat-Regular.woff2);
   font-weight: 400;
 }
-@font-face {
-  font-family: monserrat;
-  src: url(../src/assets/fonts/Montserrat-Bold.woff);
-  font-weight: bold;
-}
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family:monserrat ,Verdana, Geneva, Tahoma, sans-serif;
+  font-family: monserrat, Verdana, Geneva, Tahoma, sans-serif;
   margin: 0;
-
 }
-
 
 :root {
   --paddinginline: 3em;
   --color-gold: #005f9f;
   --maincolor: #005f9f;
-
   --main-color-250: #dbf1ff;
   --main-color-300: #c6e8ff;
   --main-color-350: #94d1f9;
@@ -35,13 +30,23 @@
   --main-color-600: #095588;
   --main-color-700: #00375c;
   --mobile: 1000px;
+
+  --primary-100: #c8e5f9;
+  --primary-200: #a4d4f4;
+  --primary-300: #7fc3f0;
+  --primary-400: #5bb2ec;
+  --primary-500: #36a1e7;
+  --primary-600: #1a8edb;
+  --primary-700: #1576b7;
+  --primary-800: #115e92;
+  --primary-900: #0d476e;
+  --primary-1000: #092f49;
 }
 
 /* Scrollbar */
 ::-webkit-scrollbar {
   background-color: #111;
   width: 15px;
-
 }
 
 ::-webkit-scrollbar-thumb {
@@ -58,22 +63,42 @@
   background: #ffbf0035;
 }
 
-
 @keyframes start {
   0% {
     opacity: 0;
     translate: -80px;
-
   }
 
   100% {
     opacity: 1;
   }
-
 }
 
 @keyframes show {
-  100%{
+  100% {
     opacity: 1;
+  }
+}
+
+.input-form {
+  @apply rounded-l-lg bg-gray-100 w-full p-3 placeholder:text-gray-700;
+}
+
+@keyframes favIn {
+  0% {
+    scale: 0;
+  }
+  95% {
+    scale: 1.1;
+  }
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+@keyframes favOut {
+  to {
+    scale: 1;
+    opacity: 0;
   }
 }

@@ -1,38 +1,50 @@
-import Home from "./pages/Home";
-import "./global.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import About from "./pages/About";
-import ProductCategory from "./pages/AllProducts";
-import ProductSection from "./pages/ProductShowcase";
-import Favorites from "./pages/Favorites";
-import CreateProduct from "./pages/CreateProduct";
-import MainLayout from "./pages/layouts/MainLayout";
-import ScrollToTop from "./components/ScrollToTop";
+import Home from './pages/Home'
+import './global.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import About from './pages/About'
+import Favorites from './pages/Favorites'
+/* import CreateProduct from './pages/CreateProduct' */
+import Layout from './pages/Layout'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import AllProducts from './pages/AllProducts'
+import ProductShowcase from './pages/ProductShowcase'
+import ProtectedRoute from './ProtectedRoute'
+import { AuthContextProvider } from './context/AuthContext'
 
-
-
+{
+  /* <Route path='create' element={<CreateProduct />} /> */
+}
 function App() {
   return (
     <>
-      <BrowserRouter>
-      <ScrollToTop />
-        <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route element={<MainLayout />}>
-            <Route path="/product">
-              <Route path="monopatines/" element={<ProductCategory />} />
-              <Route path="monociclos/" element={<ProductCategory />} />
-              <Route path="id/:id" element={<ProductSection />} />
-              <Route path="create" element={<CreateProduct />} />
-            </Route>
+      <AuthContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<Layout />}>
+              <Route index path='/' element={<Home />} />
 
-            <Route path="/about" element={<About />} />
-            <Route path="/favorites" element={<Favorites />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+              <Route path='/product'>
+                <Route path='scooters' element={<AllProducts />} />
+                <Route path='id/:id' element={<ProductShowcase />} />
+
+                <Route element={<ProtectedRoute />}>
+                  <Route path='favorites' element={<Favorites />} />
+                </Route>
+              </Route>
+
+              <Route path='/user'>
+                <Route path='login' element={<Login />} />
+                <Route path='register' element={<Register />} />
+              </Route>
+
+              <Route path='/about' element={<About />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AuthContextProvider>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

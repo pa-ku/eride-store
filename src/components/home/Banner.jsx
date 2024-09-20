@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import ImgBanner from "../../assets/img/banner-eride.webp";
+import React from 'react'
+import styled from 'styled-components'
+import ImgBanner from '../../assets/img/banner-eride.webp'
 import ImgBannerMobile from '../../assets/img/banner-eride-mobile.webp'
 
 const WrapperBanner = styled.div`
@@ -20,15 +20,12 @@ const WrapperBanner = styled.div`
     height: 300px;
     background-image: url(${ImgBannerMobile});
   }
-`;
+`
 
-
-export default function Banner({ title, subtitle }) {
+export default function Banner() {
   return (
     <>
-      <WrapperBanner>
-      </WrapperBanner>
+      <WrapperBanner></WrapperBanner>
     </>
-  );
+  )
 }
-
