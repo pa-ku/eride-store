@@ -8,6 +8,7 @@ import Carousel from '../components/Carousel.jsx'
 import { formatPrice } from '../utils/formatPrice.js'
 import { calcDiscount } from '../utils/calcDiscount.js'
 import MainButton from '../components/ui/MainButton.jsx'
+import { API_ROUTE } from '../api/auth.js'
 
 export default function ProductShowcase() {
   const location = useLocation()
@@ -23,7 +24,7 @@ export default function ProductShowcase() {
 
   async function fetchOneItem() {
     try {
-      const res = await fetch(`http://localhost:5000/api/scooters/${productId}`)
+      const res = await fetch(`${API_ROUTE}/scooters/${productId}`)
       const data = await res.json()
       setData(data)
       if (!res.ok) {

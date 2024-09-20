@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import Title from '../ui/Title.jsx'
-import MainButton from '../ui/MainButton.jsx'
 import FavButton from '../ui/FavButton.jsx'
 import { calcDiscount } from '../../utils/calcDiscount.js'
 import { formatPrice } from '../../utils/formatPrice.js'

@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import ProductFeatured from '../components/home/ProductFeatured'
 import { Link } from 'react-router-dom'
+import { API_ROUTE } from '../api/auth'
 
 export default function Home() {
   const [itemsHasDiscount, setItemsHasDiscount] = useState([])
@@ -14,7 +15,7 @@ export default function Home() {
 
   async function fetchAllScooters() {
     try {
-      const res = await fetch(`http://localhost:5000/api/scooters`)
+      const res = await fetch(`${API_ROUTE}/scooters`)
       const data = await res.json()
 
       if (!res.ok) {

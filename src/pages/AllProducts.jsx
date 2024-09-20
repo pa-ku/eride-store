@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
+import { API_ROUTE } from '../api/auth'
 
 export default function AllProducts() {
   const [itemsData, setItemsData] = useState([])
@@ -8,7 +9,7 @@ export default function AllProducts() {
 
   async function fetchAllScooters() {
     try {
-      const res = await fetch(`http://localhost:5000/api/scooters`)
+      const res = await fetch(`${API_ROUTE}/scooters`)
       if (!res.ok) {
         throw new Error('Recurso no encontrado', res.status)
       }

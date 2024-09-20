@@ -1,4 +1,5 @@
-const API = 'https://eride-api.vercel.app/api' || 'http://localhost:5000/api'
+export const API_ROUTE = 'https://eride-api.vercel.app/api'
+/* 'http://localhost:3000/api' */
 
 export async function registerRequest(user) {
   try {
