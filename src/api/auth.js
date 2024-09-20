@@ -1,11 +1,8 @@
-const production = true
-export const API_ROUTE = production
-  ? 'https://eride-api.vercel.app/api'
-  : 'http://localhost:3000/api'
+export const API_ROUTE = 'https://eride-api.vercel.app/api'
 
 export async function registerRequest(user) {
   try {
-    const res = await fetch(`${API}/user/register`, {
+    const res = await fetch(`${API_ROUTE}/user/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,7 +21,7 @@ export async function registerRequest(user) {
 
 export async function loginRequest(user) {
   try {
-    const res = await fetch(`${API}/user/login`, {
+    const res = await fetch(`${API_ROUTE}/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
