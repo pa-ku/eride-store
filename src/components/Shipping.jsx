@@ -93,7 +93,7 @@ export default function Shipping({ title, price, setShipping, shipping }) {
             </FreeShippingTxt>
             <form>
               <InputCtn>
-                <FormInput
+                <Input
                   type={'text'}
                   name={'nombre'}
                   placeholder={'Nombre y Apellido'}

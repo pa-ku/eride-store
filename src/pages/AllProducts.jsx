@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
-import { API_ROUTE } from '../api/auth'
+import { requestAllProducts } from '../api/scooters'
 
 export default function AllProducts() {
   const [itemsData, setItemsData] = useState([])
@@ -8,19 +8,11 @@ export default function AllProducts() {
   const [dataFiltered, setDataFiltered] = useState(itemsData)
 
   async function fetchAllScooters() {
-    try {
-      const res = await fetch(`${API_ROUTE}/scooters`)
-      if (!res.ok) {
-        throw new Error('Recurso no encontrado', res.status)
-      }
-      const data = await res.json()
-      const getUniqueBrands = [...new Set(data.map((item) => item.brand))]
-      setProductBrands(getUniqueBrands)
-      setItemsData(data)
-      setDataFiltered(data)
-    } catch (err) {
-      console.error('¡Hubo un problema con la solicitud!', err)
-    }
+    const data = await requestAllProducts()
+    const getUniqueBrands = [...new Set(data.map((item) => item.brand))]
+    setProductBrands(getUniqueBrands)
+    setItemsData(data)
+    setDataFiltered(data)
   }
 
   useEffect(() => {

@@ -29,6 +29,7 @@ export default function Register() {
     <>
       <div className="flex h-screen w-full items-center justify-center">
         <form
+          name="register"
           onSubmit={handleSubmit}
           className="mb-20 flex w-96 flex-col gap-3"
         >

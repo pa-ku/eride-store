@@ -80,7 +80,7 @@ export default function ProductFeatured() {
 
   return (
     <>
-      <section className="flex h-[30em] flex-col items-center justify-start gap-10">
+      <section className="flex flex-col items-center justify-start gap-10">
         <h2 className="text-4xl">Destacado</h2>
         {product && (
           <>

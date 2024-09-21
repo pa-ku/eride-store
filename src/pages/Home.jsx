@@ -1,6 +1,4 @@
 import Banner from '../components/home/Banner'
-import styled from 'styled-components'
-import Title from '../components/ui/Title'
 import AboutMe from '../components/home/About'
 import OurBrands from '../components/home/OurBrands'
 import { useEffect, useState } from 'react'
@@ -71,7 +69,7 @@ export default function Home() {
 
 export function ProductsRederedBySection({ title, data }) {
   return (
-    <section className="flex h-[30em] flex-col gap-5">
+    <section className="justify-start flex flex-col gap-5">
       <h2 className="text-center text-4xl">{title}</h2>
       <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
         {data &&

@@ -1,140 +1,55 @@
-import styled from 'styled-components'
-import { device } from '../responsive'
 import { Link } from 'react-router-dom'
 import FavButton from './ui/FavButton'
-import { useEffect } from 'react'
 import { calcDiscount } from '../utils/calcDiscount'
 import { formatPrice } from '../utils/formatPrice'
 
 export default function ProductCard({ id, images, price, title, discount }) {
   return (
     <>
-      <WrapperCard>
-        {discount && (
-          <p className="w-max rounded-b-lg bg-primary-600 px-2 py-1 font-bold text-white">
-            {discount}%
-          </p>
-        )}
-
-        <FavCtn>
-          <FavButton id={id} />
-        </FavCtn>
-
-        <CardLink to={`/product/id/${id}`}>
-          <ImageContainer>
-            <Image loading="lazy" src={images} />
-          </ImageContainer>
-          <div className="flex items-center gap-2">
-            {discount && (
-              <>
-                <TxtPrice>
-                  ${discount && calcDiscount(price, discount)}
-                </TxtPrice>
-                <p className="text-gray-500 line-through">
-                  {discount && '$'}
-                  {formatPrice(price)}
-                </p>
-              </>
-            )}
-            {!discount && <TxtPrice>${formatPrice(price)}</TxtPrice>}
+      <figure className="hover:shadox-xl relative w-full rounded-xl px-3 py-3 shadow-md duration-500 md:w-64">
+        <Link
+          to={`/product/id/${id}`}
+          className="flex h-full w-full cursor-pointer md:block"
+        >
+          <div className="rounded-t-xl bg-white md:border-b-2">
+            <span
+              aria-label="Descuento"
+              className="absolute right-0 hidden rounded-bl-xl rounded-tr-xl bg-primary-500 px-3 text-lg font-bold text-white md:flex"
+            >
+              {discount}%
+            </span>
+            <div className="absolute right-2 hidden md:left-2 md:flex">
+              <FavButton id={id} />
+            </div>
+            <img
+              alt="Product image"
+              className="m-auto flex h-32 w-max rounded-t-xl object-contain p-3 md:h-56"
+              src={images}
+            />
           </div>
-          <Shipping>Envío gratis</Shipping>
-          <Title className="Title">{title}</Title>
-        </CardLink>
-      </WrapperCard>
+          <figcaption className="rounded-b-xl bg-white text-slate-700">
+            <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
+              {discount && (
+                <>
+                  <p className="flex gap-2 text-2xl md:gap-0">
+                    ${discount && calcDiscount(price, discount)}
+                    <div className="z-10 right-2 md:left-2 md:hidden">
+                      <FavButton id={id} />
+                    </div>
+                  </p>
+                  <p className="text-gray-500 line-through">
+                    {discount && '$'}
+                    {formatPrice(price)}
+                  </p>
+                </>
+              )}
+              {!discount && <p className="text-2xl">${formatPrice(price)}</p>}
+            </div>
+            <p className="text-start text-green-600">Envío gratis</p>
+            <h2 className="text-start font-bold">{title}</h2>
+          </figcaption>
+        </Link>
+      </figure>
     </>
   )
 }
-
-const FavCtn = styled.div`
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  margin-top: 0.5em;
-  margin-right: 1em;
-`
-
-const WrapperCard = styled.div`
-  width: 16em;
-  height: 100%;
-  border-radius: 9px;
-  display: flex;
-  background-color: #fff;
-  flex-direction: column;
-  box-shadow: 0px 0px 10px 5px #cccccc29;
-  transition: 0.5s;
-  text-decoration: none;
-  color: black;
-  text-align: left;
-  padding: 0em 0.5em;
-  position: relative;
-  opacity: 0;
-  animation: 100ms show forwards;
-  &:hover {
-    box-shadow: 0px 0px 10px 5px #cccccc65;
-  }
-
-  @media ${device.mobile} {
-    width: 100%;
-    border-radius: 0;
-
-    box-shadow: 0px 0px 0px 0px #333;
-    outline: 1px solid #ececec;
-    &:hover {
-      box-shadow: 0px 0px 0px 0px #333;
-    }
-  }
-`
-
-const Title = styled.p`
-  padding-bottom: 20px;
-  font-weight: 600;
-  color: #444;
-  @media ${device.mobile} {
-    font-size: 1rem;
-  }
-`
-
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 15.5em;
-  border-bottom: 1px solid #e4e4e4;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  @media ${device.mobile} {
-    height: 10em;
-  }
-`
-
-const Image = styled.img`
-  object-fit: contain;
-  pointer-events: none;
-
-  max-height: 230px;
-  max-width: 230px;
-  @media ${device.mobile} {
-    width: 100%;
-  }
-`
-
-const TxtPrice = styled.p`
-  font-size: 25px;
-  text-align: left;
-`
-
-const Shipping = styled.p`
-  color: #16ad5f;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-`
-
-const CardLink = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  color: #111;
-`

@@ -1,4 +1,4 @@
-export const API_ROUTE = 'https://eride-api.vercel.app/api'
+import { API_ROUTE } from './API_ROUTE'
 
 export async function registerRequest(user) {
   try {

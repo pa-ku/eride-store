@@ -1,7 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { API_ROUTE } from '../../api/auth'
-
+import { requestAllProducts } from '../../api/scooters'
 
 export default function SearchBar() {
   const searchBarRef = useRef(null)
@@ -16,9 +15,7 @@ export default function SearchBar() {
 
     if (!alreadyFecth) {
       try {
-        const res = await fetch(`${API_ROUTE}/scooters`)
-        const data = await res.json()
-        console.log('fetch')
+        const data = await requestAllProducts()
         setData(data)
         setAlreadyFetch(true)
       } catch (error) {
