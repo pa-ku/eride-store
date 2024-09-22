@@ -15,6 +15,8 @@ export default function AllProducts() {
     setDataFiltered(data)
   }
 
+  console.log(itemsData)
+
   useEffect(() => {
     fetchAllScooters()
   }, [])
@@ -96,14 +98,14 @@ export default function AllProducts() {
           <section className="flex w-full flex-wrap justify-center gap-4">
             {itemsData &&
               dataFiltered.map(
-                ({ title, price, discount, _id: id, images }) => (
+                ({ title, price, discount, _id: id, coverImage }) => (
                   <ProductCard
                     key={id}
                     title={title}
                     price={price}
                     discount={discount}
                     id={id}
-                    images={images[0]}
+                    image={coverImage}
                   />
                 ),
               )}

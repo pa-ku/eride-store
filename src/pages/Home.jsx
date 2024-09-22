@@ -31,6 +31,7 @@ export default function Home() {
     const bestSelled = await requestManyId(selledArr)
     setBestSelled(bestSelled)
   }
+
   useEffect(() => {
     requestMany()
   }, [])
@@ -69,15 +70,15 @@ export default function Home() {
 
 export function ProductsRederedBySection({ title, data }) {
   return (
-    <section className="justify-start flex flex-col gap-5">
+    <section className="flex flex-col justify-start gap-5">
       <h2 className="text-center text-4xl">{title}</h2>
       <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
         {data &&
           data.map(
-            ({ title, images, _id: id, price, description, discount }) => (
+            ({ title, coverImage, _id: id, price, description, discount }) => (
               <ProductCard
                 key={title}
-                images={images[0]}
+                image={coverImage}
                 title={title}
                 id={id}
                 price={price}

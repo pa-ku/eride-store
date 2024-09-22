@@ -65,15 +65,11 @@ const ImageContainer = styled.div`
   }
 `
 
-const Image = styled.img`
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-`
-
-export default function Carousel({ render, images }) {
+export default function Carousel({ render, images,coverImage }) {
   const [actualImg, setActualImg] = useState(0)
+
+
+
 
   return (
     <>
@@ -87,7 +83,10 @@ export default function Carousel({ render, images }) {
         </SideBarCtn>
 
         <ImageContainer>
-          <Image src={images[actualImg]} />
+          <img
+            className="size-96 h-full w-full object-contain"
+            src={images[actualImg]}
+          />
         </ImageContainer>
       </Wrapper>
     </>

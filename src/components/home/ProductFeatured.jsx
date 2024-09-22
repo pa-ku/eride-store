@@ -69,8 +69,6 @@ export default function ProductFeatured() {
 
   async function getOneProduct() {
     const data = await requestOneById('66e4906be4f50256a4d1f2b5')
-    console.log(data)
-
     setProduct(data)
   }
 
@@ -104,7 +102,7 @@ export default function ProductFeatured() {
 
                 <Link
                   className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
-                  to={'/product/id/' + product.id}
+                  to={'/product/id/' + product._id}
                 >
                   Saber Más
                 </Link>
@@ -118,7 +116,7 @@ export default function ProductFeatured() {
                 </p>
                 <img
                   className="size-80 object-contain md:size-96"
-                  src={product.images[0]}
+                  src={product.coverImage}
                   alt=""
                 />
               </ProductImageContainer>

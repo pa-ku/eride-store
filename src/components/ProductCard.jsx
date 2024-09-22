@@ -3,7 +3,7 @@ import FavButton from './ui/FavButton'
 import { calcDiscount } from '../utils/calcDiscount'
 import { formatPrice } from '../utils/formatPrice'
 
-export default function ProductCard({ id, images, price, title, discount }) {
+export default function ProductCard({ id, image, price, title, discount }) {
   return (
     <>
       <figure className="hover:shadox-xl relative w-full rounded-xl px-3 py-3 shadow-md duration-500 md:w-64">
@@ -22,21 +22,22 @@ export default function ProductCard({ id, images, price, title, discount }) {
               <FavButton id={id} />
             </div>
             <img
+              loading="lazy"
               alt="Product image"
               className="m-auto flex h-32 w-max rounded-t-xl object-contain p-3 md:h-56"
-              src={images}
+              src={image}
             />
           </div>
           <figcaption className="rounded-b-xl bg-white text-slate-700">
             <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
               {discount && (
                 <>
-                  <p className="flex gap-2 text-2xl md:gap-0">
+                  <div className="flex gap-2 text-2xl md:gap-0">
                     ${discount && calcDiscount(price, discount)}
-                    <div className="z-10 right-2 md:left-2 md:hidden">
+                    <div className="right-2 z-10 md:left-2 md:hidden">
                       <FavButton id={id} />
                     </div>
-                  </p>
+                  </div>
                   <p className="text-gray-500 line-through">
                     {discount && '$'}
                     {formatPrice(price)}

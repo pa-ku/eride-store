@@ -1,5 +1,15 @@
 import { API_ROUTE } from './API_ROUTE'
 
+export async function requestNames() {
+  try {
+    const res = await fetch(`${API_ROUTE}/scooters/names`)
+    const data = await res.json()
+    return data
+  } catch (err) {
+    console.error('Hubo un problema con la solicitud!', err)
+  }
+}
+
 export async function requestOneById(productId) {
   try {
     const res = await fetch(`${API_ROUTE}/scooters/${productId}`)

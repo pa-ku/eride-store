@@ -22,6 +22,7 @@ export default function ProductShowcase() {
 
   async function fetchOneItem() {
     const data = await requestOneById(productId)
+    data.images.unshift(data.coverImage)
     setData(data)
   }
 
@@ -54,7 +55,11 @@ export default function ProductShowcase() {
           <section className="flex min-h-[30em] flex-col items-center justify-center px-4 lg:flex-row lg:items-start">
             <div className="flex">
               {data.images && (
-                <Carousel render={data.images.length} images={data.images} />
+                <Carousel
+                  coverImage={data.coverImage}
+                  render={data.images.length}
+                  images={data.images}
+                />
               )}
             </div>
 
