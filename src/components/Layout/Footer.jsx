@@ -167,14 +167,15 @@ export default function Footer() {
             Podés pagar con tarjeta, débito y efectivo. Tus datos y las compras
             están protegidas con
           </TxtSection>
-          <CtnLogos>
+          <div className="flex items-center justify-center">
             <a
               href="https://www.mercadopago.com.ar/c/pagar-online-con-mercadopago"
               target="_blank"
+              className="size-max hover:scale-105 duration-300" 
             >
-              <MpLogo src={mercado} alt="" />
+              <img className="h-12 w-36 object-cover" src={mercado} alt="" />
             </a>
-          </CtnLogos>
+          </div>
         </Section>
       </Wrapper>
 
