@@ -23,7 +23,7 @@ Eride es una tienda de monopatines eléctricos que permite a los usuarios explor
 - `/`: Página principal con el catálogo de productos.
 - `/pruduct/scooters/`: Todos los productos, filtrando solo title, imageCover, price, discount, id
 - `/pruduct/scooters/:id`: Regresa al elemento elegido completo
-- `/pruduct/scooters/multiple`: Enviando un array de ID's se puede obtener varios productos
+- `/pruduct/scooters/many`: Enviando un array de ID's se puede obtener varios productos
 - `/pruduct/scooters/names`: Para obtener solo los nombres y Id
 
 ### Protegidas
