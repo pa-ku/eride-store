@@ -16,7 +16,7 @@ export default function SearchBar() {
     if (!alreadyFecth) {
       try {
         const data = await requestNames()
-      
+
         setData(data)
         setAlreadyFetch(true)
       } catch (error) {
@@ -53,18 +53,18 @@ export default function SearchBar() {
   }, [setQuery])
 
   return (
-    <span className="relative" ref={searchBarRef}>
+    <span className="relative " ref={searchBarRef}>
       <div className="relative flex h-max w-max items-center justify-start">
         <input
           type="text"
-          className="text-red caret-primary focus-visible:border-primary peer rounded-lg border-[1px] border-transparent bg-gray-300 px-3 py-1 outline-none"
+          className="text-red caret-primary w-64 focus-visible:border-primary peer rounded-lg border-[1px] border-transparent bg-gray-300 px-3 py-1 outline-none"
           placeholder=" "
           value={query}
           onClick={fetchScooters}
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        <p className="pointer-events-none absolute -translate-x-20 px-3 font-bold text-slate-300 duration-300 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:font-normal peer-placeholder-shown:text-slate-800 peer-focus:-translate-x-20 peer-focus:font-bold peer-focus:text-slate-300">
+        <p className="pointer-events-none  absolute -translate-x-20 px-3 font-bold text-slate-300 duration-300 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:font-normal peer-placeholder-shown:text-slate-800 peer-focus:-translate-x-20 peer-focus:font-bold peer-focus:text-slate-300">
           Buscar
         </p>
         <button

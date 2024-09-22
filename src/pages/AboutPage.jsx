@@ -4,7 +4,7 @@ import Title from '../components/ui/Title'
 import imageStore2 from '../assets/img/aboutussanjuan.webp'
 import imageStore3 from '../assets/img/aboutusshipping.webp'
 
-export default function About() {
+export default function AboutPage() {
   return (
     <>
       <Wrapper>

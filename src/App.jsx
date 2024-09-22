@@ -1,7 +1,7 @@
 import Home from './pages/Home'
 import './global.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import About from './pages/About'
+import AboutPage from './pages/AboutPage'
 import Favorites from './pages/Favorites'
 /* import CreateProduct from './pages/CreateProduct' */
 import Layout from './pages/Layout'
@@ -38,7 +38,7 @@ function App() {
                 <Route path="register" element={<Register />} />
               </Route>
 
-              <Route path="/about" element={<About />} />
+              <Route path="/about" element={<AboutPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

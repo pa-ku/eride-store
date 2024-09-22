@@ -52,7 +52,7 @@ export default function OurBrands() {
       <ImgContainer>
         {brandArr.map((image, index) => (
           <img
-            className="w-36 cursor-pointer object-contain duration-300 hover:scale-110"
+            className="h-20 w-36 cursor-pointer object-contain duration-300 hover:scale-110"
             key={index}
             src={image}
             alt="Imagen Marca"

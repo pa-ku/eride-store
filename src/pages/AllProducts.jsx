@@ -11,11 +11,11 @@ export default function AllProducts() {
     const data = await requestAllProducts()
     const getUniqueBrands = [...new Set(data.map((item) => item.brand))]
     setProductBrands(getUniqueBrands)
+    console.log(data);
+    
     setItemsData(data)
     setDataFiltered(data)
   }
-
-  console.log(itemsData)
 
   useEffect(() => {
     fetchAllScooters()

@@ -63,10 +63,13 @@
   background: #ffbf0035;
 }
 
-@keyframes start {
+.animate-opacity {
+  animation: opacity 300ms forwards;
+}
+
+@keyframes opacity {
   0% {
     opacity: 0;
-    translate: -80px;
   }
 
   100% {

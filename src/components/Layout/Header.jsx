@@ -1,23 +1,16 @@
-import styled from 'styled-components'
+
 import imgLogo from '../../assets/icons/logo.webp'
-import { device } from '../../responsive'
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
 
-const Logo = styled.img`
-  width: 150px;
 
-  @media ${device.mobile} {
-    width: 130px;
-  }
-`
 
 export default function Header() {
   return (
     <>
       <header className="hidden h-14 w-full items-center justify-between bg-slate-800 md:flex xl:px-10">
         <Link className="w-max" title="Home" to={'/'}>
-          <Logo src={imgLogo} alt="" />
+          <img className='size-36 object-contain' src={imgLogo} alt="" />
         </Link>
         <div className="flex items-center gap-4">
           <SearchBar></SearchBar>

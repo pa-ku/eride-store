@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import svg from '../../assets/low.svg'
-import mercado from '../../assets/icons/mercado.svg'
+import mercado from '../../assets/icons/mercado.webp'
 
 const FooterCtn = styled.footer`
   padding-top: 2em;

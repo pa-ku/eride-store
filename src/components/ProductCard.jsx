@@ -6,7 +6,7 @@ import { formatPrice } from '../utils/formatPrice'
 export default function ProductCard({ id, image, price, title, discount }) {
   return (
     <>
-      <figure className="hover:shadox-xl relative w-full rounded-xl px-3 py-3 shadow-md duration-500 md:w-64">
+      <figure className="hover:shadox-xl relative w-96 rounded-xl px-3 py-3 shadow-md duration-500 md:w-64">
         <Link
           to={`/product/id/${id}`}
           className="flex h-full w-full cursor-pointer md:block"
@@ -24,7 +24,7 @@ export default function ProductCard({ id, image, price, title, discount }) {
             <img
               loading="lazy"
               alt="Product image"
-              className="m-auto flex h-32 w-max rounded-t-xl object-contain p-3 md:h-56"
+              className="m-auto flex h-32 w-44 rounded-t-xl object-contain p-3 md:h-56 md:w-64"
               src={image}
             />
           </div>

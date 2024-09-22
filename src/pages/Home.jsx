@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom'
 import { requestManyId } from '../api/scooters'
 
 export default function Home() {
-  const [data, setData] = useState()
-  const [bestSelled, setBestSelled] = useState()
+  const [data, setData] = useState([])
+  const [bestSelled, setBestSelled] = useState([])
 
   const idArray = [
     '66e4906be4f50256a4d1f2c6',
@@ -70,23 +70,22 @@ export default function Home() {
 
 export function ProductsRederedBySection({ title, data }) {
   return (
-    <section className="flex flex-col justify-start gap-5">
+    <section className="min-h-96 flex flex-col justify-start gap-5">
       <h2 className="text-center text-4xl">{title}</h2>
       <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-        {data &&
-          data.map(
-            ({ title, coverImage, _id: id, price, description, discount }) => (
-              <ProductCard
-                key={title}
-                image={coverImage}
-                title={title}
-                id={id}
-                price={price}
-                discount={discount}
-                description={description}
-              />
-            ),
-          )}
+        {data.map(
+          ({ title, coverImage, _id: id, price, description, discount }) => (
+            <ProductCard
+              key={title}
+              image={coverImage}
+              title={title}
+              id={id}
+              price={price}
+              discount={discount}
+              description={description}
+            />
+          ),
+        )}
       </div>
     </section>
   )

@@ -19,17 +19,6 @@ const ProductWrapper = styled.div`
   }
 `
 
-const ProductInfoContainer = styled.div`
-  display: flex;
-  align-items: start;
-  justify-content: start;
-  flex-direction: column;
-  gap: 5px;
-  max-width: 40ch;
-  @media (max-width: 700px) {
-    padding-inline: 10px;
-  }
-`
 const ProductImageContainer = styled.div`
   height: 420px;
   position: relative;
@@ -65,7 +54,7 @@ const ProductDescription = styled.p`
 `
 
 export default function ProductFeatured() {
-  const [product, setProduct] = useState()
+  const [product, setProduct] = useState([])
 
   async function getOneProduct() {
     const data = await requestOneById('66e4906be4f50256a4d1f2b5')
@@ -80,49 +69,52 @@ export default function ProductFeatured() {
     <>
       <section className="flex flex-col items-center justify-start gap-10">
         <h2 className="text-4xl">Destacado</h2>
-        {product && (
-          <>
-            <ProductWrapper>
-              <ProductInfoContainer>
-                <ProductTitle>{product.title}</ProductTitle>
-                <div>
-                  {product.discount && (
-                    <p className="text-gray-500 line-through">
-                      $ {calcDiscount(product.price, product.discount)}
-                    </p>
-                  )}
-                  <span className="flex items-center gap-2">
-                    <p className="text-3xl text-primary-600">
-                      {formatPrice(product.price)}
-                    </p>
-                  </span>
-                </div>
+        <ProductWrapper>
+          <div className="flex size-96 flex-col">
+            <ProductTitle>{product.title}</ProductTitle>
+            <div>
+              {product.discount && (
+                <p className="text-gray-500 line-through">
+                  $ {calcDiscount(product.price, product.discount)}
+                </p>
+              )}
+              <span className="flex items-center gap-2">
+                <p className="text-3xl text-primary-600">
+                  {product.price && formatPrice(product.price)}
+                </p>
+              </span>
+            </div>
 
-                <ProductDescription>{product.description}</ProductDescription>
+            <ProductDescription>{product.description}</ProductDescription>
 
-                <Link
-                  className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
-                  to={'/product/id/' + product._id}
-                >
-                  Saber Más
-                </Link>
-              </ProductInfoContainer>
-              <ProductImageContainer className="px-2">
+            <Link
+              className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
+              to={'/product/id/' + product._id}
+            >
+              Saber Más
+            </Link>
+          </div>
+          <ProductImageContainer className="px-2">
+            {product.coverImage ? (
+              <>
                 <FavCtn>
                   <FavButton id={product.id} />
                 </FavCtn>
                 <p className="absolute text-2xl font-bold text-primary-400">
                   {product.discount}% OFF
                 </p>
+
                 <img
                   className="size-80 object-contain md:size-96"
                   src={product.coverImage}
                   alt=""
                 />
-              </ProductImageContainer>
-            </ProductWrapper>
-          </>
-        )}
+              </>
+            ) : (
+              <div className="size-80 rounded-3xl bg-gray-100 md:size-96"></div>
+            )}
+          </ProductImageContainer>
+        </ProductWrapper>
       </section>
     </>
   )
