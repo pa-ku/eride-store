@@ -111,7 +111,7 @@ export default function ProductFeatured() {
                 />
               </>
             ) : (
-              <div className="size-80 rounded-3xl bg-gray-100 md:size-96"></div>
+              <div className="animate-skeleton size-80 rounded-3xl  md:size-96"></div>
             )}
           </ProductImageContainer>
         </ProductWrapper>

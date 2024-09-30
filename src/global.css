@@ -105,3 +105,19 @@
     opacity: 0;
   }
 }
+
+.animate-skeleton{
+  animation: skeleton 1s infinite;
+}
+
+@keyframes skeleton {
+  0% {
+    background-color: #cbcbcb;
+  }
+  50% {
+    background-color: #dbdbdb;
+  }
+  100% {
+    background-color: #cbcbcb;
+  }
+}

@@ -6,18 +6,20 @@ import { formatPrice } from '../utils/formatPrice'
 export default function ProductCard({ id, image, price, title, discount }) {
   return (
     <>
-      <figure className="hover:shadox-xl relative w-96 rounded-xl px-3 py-3 shadow-md duration-500 md:w-64">
+      <figure className="relative w-96 rounded-xl bg-red-200 shadow-md duration-300 hover:shadow-lg md:w-64">
         <Link
           to={`/product/id/${id}`}
           className="flex h-full w-full cursor-pointer md:block"
         >
           <div className="rounded-t-xl bg-white md:border-b-2">
-            <span
-              aria-label="Descuento"
-              className="absolute right-0 hidden rounded-bl-xl rounded-tr-xl bg-primary-500 px-3 text-lg font-bold text-white md:flex"
-            >
-              {discount}%
-            </span>
+            {discount && (
+              <span
+                aria-label="Descuento"
+                className="absolute right-0 hidden rounded-bl-xl rounded-tr-xl bg-primary-500 px-3 text-lg font-bold text-white md:flex"
+              >
+                {discount}%
+              </span>
+            )}
             <div className="absolute right-2 hidden md:left-2 md:flex">
               <FavButton id={id} />
             </div>
@@ -28,7 +30,7 @@ export default function ProductCard({ id, image, price, title, discount }) {
               src={image}
             />
           </div>
-          <figcaption className="rounded-b-xl bg-white text-slate-700">
+          <figcaption className="rounded-b-xl bg-white p-2 text-slate-700">
             <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
               {discount && (
                 <>

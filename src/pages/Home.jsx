@@ -6,6 +6,7 @@ import ProductCard from '../components/ProductCard'
 import ProductFeatured from '../components/home/ProductFeatured'
 import { Link } from 'react-router-dom'
 import { requestManyId } from '../api/scooters'
+import ProductSkeleton from '../components/ProductSkeleton'
 
 export default function Home() {
   const [data, setData] = useState([])
@@ -70,21 +71,30 @@ export default function Home() {
 
 export function ProductsRederedBySection({ title, data }) {
   return (
-    <section className="min-h-96 flex flex-col justify-start gap-5">
+    <section className="flex min-h-96 flex-col justify-start gap-5">
       <h2 className="text-center text-4xl">{title}</h2>
       <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-        {data.map(
-          ({ title, coverImage, _id: id, price, description, discount }) => (
-            <ProductCard
-              key={title}
-              image={coverImage}
-              title={title}
-              id={id}
-              price={price}
-              discount={discount}
-              description={description}
-            />
-          ),
+        {data.length > 1 ? (
+          data.map(
+            ({ title, coverImage, _id: id, price, description, discount }) => (
+              <ProductCard
+                key={title}
+                image={coverImage}
+                title={title}
+                id={id}
+                price={price}
+                discount={discount}
+                description={description}
+              />
+            ),
+          )
+        ) : (
+          <>
+            <ProductSkeleton></ProductSkeleton>
+            <ProductSkeleton></ProductSkeleton>
+            <ProductSkeleton></ProductSkeleton>
+            <ProductSkeleton></ProductSkeleton>
+          </>
         )}
       </div>
     </section>
