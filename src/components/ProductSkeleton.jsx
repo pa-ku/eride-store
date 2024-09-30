@@ -1,13 +1,12 @@
 export default function ProductSkeleton() {
   return (
     <>
-      <div className="relative w-96 rounded-xl p-2 shadow-md duration-300 hover:shadow-lg md:w-64">
-        <div className="animate-skeleton h-52  w-full rounded-xl bg-gray-300"></div>
-
-        <div className="flex flex-col gap-1 py-2">
-          <span className="animate-skeleton rounded-xl h-6 w-44"></span>
-          <span className="animate-skeleton rounded-xl h-6 w-20"></span>
-          <span className="animate-skeleton rounded-xl h-6 w-28"></span>
+      <div className="relative flex w-full rounded-xl p-2 shadow-md duration-300 hover:shadow-lg md:block md:w-64">
+        <div className="animate-skeleton size-28 rounded-xl bg-gray-300 md:h-52 md:w-full"></div>
+        <div className="flex flex-col gap-1 px-2 py-2 md:px-0">
+          <span className="animate-skeleton h-6 w-44 rounded-xl"></span>
+          <span className="animate-skeleton h-6 w-20 rounded-xl"></span>
+          <span className="animate-skeleton h-6 w-28 rounded-xl"></span>
         </div>
       </div>
     </>
