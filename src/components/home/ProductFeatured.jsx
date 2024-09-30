@@ -6,18 +6,7 @@ import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { requestOneById } from '../../api/scooters.js'
 import { useState } from 'react'
-
-const ProductWrapper = styled.div`
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  gap: 1em;
-  @media (max-width: 700px) {
-    flex-direction: column-reverse;
-  }
-`
+import FeaturedSkeleton from './FeaturedSkeleton.jsx'
 
 const ProductImageContainer = styled.div`
   height: 420px;
@@ -39,19 +28,6 @@ const FavCtn = styled.div`
     margin-right: 20px;
   }
 `
-const ProductTitle = styled.p`
-  color: #111;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  font-weight: 600;
-  z-index: 1;
-`
-
-const ProductDescription = styled.p`
-  text-align: start;
-  margin-bottom: 10px;
-`
 
 export default function ProductFeatured() {
   const [product, setProduct] = useState([])
@@ -69,52 +45,51 @@ export default function ProductFeatured() {
     <>
       <section className="flex flex-col items-center justify-start gap-10">
         <h2 className="text-4xl">Destacado</h2>
-        <ProductWrapper>
-          <div className="flex size-96 flex-col">
-            <ProductTitle>{product.title}</ProductTitle>
-            <div>
-              {product.discount && (
-                <p className="text-gray-500 line-through">
-                  $ {calcDiscount(product.price, product.discount)}
-                </p>
-              )}
-              <span className="flex items-center gap-2">
-                <p className="text-3xl text-primary-600">
-                  {product.price && formatPrice(product.price)}
-                </p>
-              </span>
+        {product.length !== 0 ? (
+          <div className="flex flex-col-reverse px-4 md:flex-row">
+            <div className="flex flex-col md:size-96">
+              <h2 className="text-3xl">{product.title}</h2>
+              <div>
+                {product.discount && (
+                  <p className="text-gray-500 line-through">
+                    $ {calcDiscount(product.price, product.discount)}
+                  </p>
+                )}
+                <span className="flex items-center gap-2">
+                  <p className="text-3xl text-primary-600">
+                    {product.price && formatPrice(product.price)}
+                  </p>
+                </span>
+              </div>
+
+              <p className="">{product.description}</p>
+
+              <Link
+                className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
+                to={'/product/id/' + product._id}
+              >
+                Saber Más
+              </Link>
             </div>
+            <ProductImageContainer className="px-2">
+              <FavCtn>
+                <FavButton id={product.id} />
+              </FavCtn>
+              <p className="absolute text-2xl font-bold text-primary-400">
+                {product.discount}% OFF
+              </p>
 
-            <ProductDescription>{product.description}</ProductDescription>
-
-            <Link
-              className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
-              to={'/product/id/' + product._id}
-            >
-              Saber Más
-            </Link>
+              <img
+                className="size-80 m-auto object-contain md:size-96"
+                fetchPriority="high"
+                src={product.coverImage}
+                alt="imagen de producto destacado"
+              />
+            </ProductImageContainer>
           </div>
-          <ProductImageContainer className="px-2">
-            {product.coverImage ? (
-              <>
-                <FavCtn>
-                  <FavButton id={product.id} />
-                </FavCtn>
-                <p className="absolute text-2xl font-bold text-primary-400">
-                  {product.discount}% OFF
-                </p>
-
-                <img
-                  className="size-80 object-contain md:size-96"
-                  src={product.coverImage}
-                  alt=""
-                />
-              </>
-            ) : (
-              <div className="animate-skeleton size-80 rounded-3xl  md:size-96"></div>
-            )}
-          </ProductImageContainer>
-        </ProductWrapper>
+        ) : (
+          <FeaturedSkeleton></FeaturedSkeleton>
+        )}
       </section>
     </>
   )

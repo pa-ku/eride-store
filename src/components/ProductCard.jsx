@@ -6,7 +6,7 @@ import { formatPrice } from '../utils/formatPrice'
 export default function ProductCard({ id, image, price, title, discount }) {
   return (
     <>
-      <figure className="relative w-96 rounded-xl bg-red-200 shadow-md duration-300 hover:shadow-lg md:w-64">
+      <figure className="relative w-full md:rounded-xl md:border-none border-b md:shadow-md duration-300 hover:shadow-lg md:w-64">
         <Link
           to={`/product/id/${id}`}
           className="flex h-full w-full cursor-pointer md:block"
@@ -26,7 +26,7 @@ export default function ProductCard({ id, image, price, title, discount }) {
             <img
               loading="lazy"
               alt="Product image"
-              className="m-auto flex h-32 w-44 rounded-t-xl object-contain p-3 md:h-56 md:w-64"
+              className="m-auto flex size-32 rounded-t-xl object-contain p-3 md:h-56 md:w-64"
               src={image}
             />
           </div>
