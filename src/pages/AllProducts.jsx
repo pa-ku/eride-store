@@ -7,15 +7,11 @@ export default function AllProducts() {
   const [itemsData, setItemsData] = useState([])
   const [productBrands, setProductBrands] = useState([])
   const [dataFiltered, setDataFiltered] = useState(itemsData)
-  const [itemsLength, setItemsLength] = useState(0)
 
   async function fetchAllScooters() {
     const data = await requestAllProducts()
-    setItemsLength(data.length)
     const getUniqueBrands = [...new Set(data.map((item) => item.brand))]
     setProductBrands(getUniqueBrands)
-    console.log(data)
-
     setItemsData(data)
     setDataFiltered(data)
   }
@@ -47,13 +43,13 @@ export default function AllProducts() {
   }
 
   function renderSkeletons(itemsLength) {
-    const skeletons = [] // Crear un array para almacenar los componentes
+    const skeletons = []
 
     for (let index = 0; index < itemsLength; index++) {
-      skeletons.push(<ProductSkeleton key={index} />) // Agregar cada componente al array
+      skeletons.push(<ProductSkeleton key={index} />)
     }
 
-    return skeletons // Retornar todos los componentes juntos
+    return skeletons
   }
 
   return (
