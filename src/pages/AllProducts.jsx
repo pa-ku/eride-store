@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import { requestAllProducts } from '../api/scooters'
+import ProductSkeleton from '../components/ProductSkeleton'
 
 export default function AllProducts() {
   const [itemsData, setItemsData] = useState([])
   const [productBrands, setProductBrands] = useState([])
   const [dataFiltered, setDataFiltered] = useState(itemsData)
+  const [itemsLength, setItemsLength] = useState(0)
 
   async function fetchAllScooters() {
     const data = await requestAllProducts()
+    setItemsLength(data.length)
     const getUniqueBrands = [...new Set(data.map((item) => item.brand))]
     setProductBrands(getUniqueBrands)
-    console.log(data);
-    
+    console.log(data)
+
     setItemsData(data)
     setDataFiltered(data)
   }
@@ -43,6 +46,16 @@ export default function AllProducts() {
     setDataFiltered(sortedData)
   }
 
+  function renderSkeletons(itemsLength) {
+    const skeletons = [] // Crear un array para almacenar los componentes
+
+    for (let index = 0; index < itemsLength; index++) {
+      skeletons.push(<ProductSkeleton key={index} />) // Agregar cada componente al array
+    }
+
+    return skeletons // Retornar todos los componentes juntos
+  }
+
   return (
     <>
       <div className="flex flex-col md:flex-row">
@@ -58,17 +71,26 @@ export default function AllProducts() {
               >
                 Todas
               </FilterButton>
-              {productBrands.map((brand) => (
-                <FilterButton
-                  key={brand}
-                  onChange={(e) => filterByBrand(e.target.value)}
-                  name={'brands'}
-                  value={brand}
-                  featured
-                >
-                  {brand}
-                </FilterButton>
-              ))}
+              {productBrands.length > 2 ? (
+                productBrands.map((brand) => (
+                  <FilterButton
+                    key={brand}
+                    onChange={(e) => filterByBrand(e.target.value)}
+                    name={'brands'}
+                    value={brand}
+                    featured
+                  >
+                    {brand}
+                  </FilterButton>
+                ))
+              ) : (
+                <>
+                  <div className="animate-skeleton h-5 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-5 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-5 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-5 w-20 rounded-lg"></div>
+                </>
+              )}
             </div>
           </div>
 
@@ -96,19 +118,20 @@ export default function AllProducts() {
           <h1 className="pb-10 text-center text-4xl">Monopatines</h1>
 
           <section className="flex w-full flex-wrap justify-center gap-4">
-            {itemsData &&
-              dataFiltered.map(
-                ({ title, price, discount, _id: id, coverImage }) => (
-                  <ProductCard
-                    key={id}
-                    title={title}
-                    price={price}
-                    discount={discount}
-                    id={id}
-                    image={coverImage}
-                  />
-                ),
-              )}
+            {itemsData.length > 2
+              ? dataFiltered.map(
+                  ({ title, price, discount, _id: id, coverImage }) => (
+                    <ProductCard
+                      key={id}
+                      title={title}
+                      price={price}
+                      discount={discount}
+                      id={id}
+                      image={coverImage}
+                    />
+                  ),
+                )
+              : renderSkeletons(19)}
           </section>
         </div>
       </div>
