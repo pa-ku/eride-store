@@ -81,10 +81,12 @@ export default function AllProducts() {
                 ))
               ) : (
                 <>
-                  <div className="animate-skeleton h-5 w-20 rounded-lg"></div>
-                  <div className="animate-skeleton h-5 w-20 rounded-lg"></div>
-                  <div className="animate-skeleton h-5 w-20 rounded-lg"></div>
-                  <div className="animate-skeleton h-5 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
                 </>
               )}
             </div>
