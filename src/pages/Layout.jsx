@@ -9,7 +9,10 @@ export default function Layout() {
     <>
       <Header />
       <HeaderMobile />
+      <div className='pt-14 md:p-0'>
+
       <Outlet />
+      </div>
       <Footer />
     </>
   )

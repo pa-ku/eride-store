@@ -1,58 +1,6 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
-  background-color: #fff;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  @media (max-width: 1200px) {
-    flex-direction: column-reverse;
-    width: 100%;
-  }
-`
-
-const SideBarCtn = styled.div`
-  display: flex;
-  align-items: center;
-  height: 400px;
-  justify-content: start;
-  flex-direction: column;
-  gap: 10px;
-  padding: 10px;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  @media (max-width: 1200px) {
-    flex-direction: row;
-    height: 100px;
-    width: 100%;
-  }
-`
-
-const SideBarBtn = styled.button`
-  width: 60px;
-  height: 60px;
-  border: 0;
-  margin: 0;
-  padding: 0;
-  padding: 4px;
-  border-radius: 8px;
-  background-color: #fff;
-  border: 2px solid #999;
-  cursor: pointer;
-  &:hover {
-    border-color: var(--main-color-500);
-  }
-`
-
-const SideBarImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-`
-
 const ImageContainer = styled.div`
   width: 600px;
   height: 400px;
@@ -65,22 +13,27 @@ const ImageContainer = styled.div`
   }
 `
 
-export default function Carousel({ render, images,coverImage }) {
+export default function Carousel({ render, images, coverImage }) {
   const [actualImg, setActualImg] = useState(0)
-
-
-
 
   return (
     <>
-      <Wrapper>
-        <SideBarCtn>
-          <SlideBar
-            render={render}
-            setActualImg={setActualImg}
-            images={images}
-          />
-        </SideBarCtn>
+      <section className="flex flex-col-reverse  md:flex-row">
+        <div className="flex flex-wrap items-center justify-center gap-2 md:flex-col">
+          {images.map((image, index) => (
+            <button
+              className="size-16 rounded-xl shadow-md duration-300 hover:shadow-xl"
+              key={index}
+              onMouseEnter={() => setActualImg(index)}
+            >
+              <img
+                className="size-16 rounded-xl object-contain"
+                src={image}
+                alt="Imagen pequeña del producto"
+              />
+            </button>
+          ))}
+        </div>
 
         <ImageContainer>
           <img
@@ -88,20 +41,7 @@ export default function Carousel({ render, images,coverImage }) {
             src={images[actualImg]}
           />
         </ImageContainer>
-      </Wrapper>
+      </section>
     </>
   )
-}
-export function SlideBar({ render, setActualImg, images }) {
-  const sideBarButtons = []
-
-  for (let index = 0; index < render; index++) {
-    sideBarButtons.push(
-      <SideBarBtn key={index} onMouseEnter={() => setActualImg(index)}>
-        <SideBarImg src={images[index]}></SideBarImg>
-      </SideBarBtn>,
-    )
-  }
-
-  return sideBarButtons
 }

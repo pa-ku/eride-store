@@ -8,44 +8,39 @@ export default function AboutPage() {
   return (
     <>
       <Wrapper>
-        <Title $noBackground text={'Conocé E-Ride'} />
+        <h1 className="text-4xl">Conocé E-Ride</h1>
+        <div className="flex max-w-[45em] flex-col space-y-2 items-center text-start md:flex-row">
+          <p>
+            En el corazón de la pintoresca provincia de San Juan, Argentina, se
+            encuentra E-ride, tu destino definitivo para explorar el emocionante
+            mundo de la movilidad electrica. Si sos un amante de la aventura,
+            E-ride tiene todo lo que necesitas para comenzar tu viaje.
+          </p>
+          <Image src={imageStore2} alt="" />
+        </div>
 
-        <SectionContainer>
-          <SubTitle>Descubri el Poder de la Aventura</SubTitle>
-          <TextImageCtn>
-            <Text>
-              En el corazón de la pintoresca provincia de San Juan, Argentina,
-              se encuentra E-ride, tu destino definitivo para explorar el
-              emocionante mundo de la movilidad electrica. Si sos un amante de
-              la aventura, E-ride tiene todo lo que necesitas para comenzar tu
-              viaje.
-            </Text>
-            <Image src={imageStore2} alt="" />
-          </TextImageCtn>
-        </SectionContainer>
-
-        <SectionContainer>
+        <div className="max-w-[45em] space-y-2 text-start">
           <SubTitle>Calidad Inigualable</SubTitle>
           <TextImageCtn>
-            <Text>
+            <p>
               Nos enorgullece ofrecer una amplia gama de scooters de la más alta
               calidad. Cada monopatin que vendemos está cuidadosamente
               seleccionada por su durabilidad, rendimiento, lo que garantiza que
               obtengas el máximo valor por tu inversión.
-            </Text>
+            </p>
           </TextImageCtn>
-        </SectionContainer>
+        </div>
 
-        <SectionContainer>
+        <div className="flex max-w-[45em] flex-col items-center space-y-2 text-start">
           <SubTitle>Comodidad en Línea</SubTitle>
-          <Text>
+          <p>
             Sabemos que tu tiempo es valioso. Es por eso que hemos creado una
             plataforma de compras en línea intuitiva y segura que te permite
             explorar nuestra selección, hacer pedidos y realizar pagos sin
             problemas desde la comodidad de tu hogar.
-          </Text>
+          </p>
           <Image src={imageStore3} alt="" />
-        </SectionContainer>
+        </div>
       </Wrapper>
     </>
   )

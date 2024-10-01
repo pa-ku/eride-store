@@ -9,6 +9,7 @@ import { formatPrice } from '../utils/formatPrice.js'
 import { calcDiscount } from '../utils/calcDiscount.js'
 import MainButton from '../components/ui/MainButton.jsx'
 import { requestOneById } from '../api/scooters.js'
+import ShowcaseSkeleton from '../components/ShowcaseSkeleton.jsx'
 
 export default function ProductShowcase() {
   const location = useLocation()
@@ -51,16 +52,14 @@ export default function ProductShowcase() {
             setShipping={setShipping}
           />
         )}
-        {data.title && (
+        {data.images ? (
           <section className="flex min-h-[30em] flex-col items-center justify-center px-4 lg:flex-row lg:items-start">
             <div className="flex">
-              {data.images && (
-                <Carousel
-                  coverImage={data.coverImage}
-                  render={data.images.length}
-                  images={data.images}
-                />
-              )}
+              <Carousel
+                coverImage={data.coverImage}
+                render={data.images.length}
+                images={data.images}
+              />
             </div>
 
             <div className="space-y-2">
@@ -104,6 +103,8 @@ export default function ProductShowcase() {
               <MainButton onClick={handleShipping}>COMPRAR</MainButton>
             </div>
           </section>
+        ) : (
+          <ShowcaseSkeleton></ShowcaseSkeleton>
         )}
 
         <section className="flex min-h-[30em] flex-col items-center">
