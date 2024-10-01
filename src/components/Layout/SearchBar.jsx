@@ -53,18 +53,18 @@ export default function SearchBar() {
   }, [setQuery])
 
   return (
-    <span className="relative " ref={searchBarRef}>
+    <span className="relative" ref={searchBarRef}>
       <div className="relative flex h-max w-max items-center justify-start">
         <input
           type="text"
-          className="text-red caret-primary w-64 focus-visible:border-primary peer rounded-lg border-[1px] border-transparent bg-gray-300 px-3 py-1 outline-none"
+          className="text-red caret-primary focus-visible:border-primary peer w-64 rounded-md border-[1px] border-transparent bg-gray-100 px-3 py-0.5 outline-none"
           placeholder=" "
           value={query}
           onClick={fetchScooters}
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        <p className="pointer-events-none  absolute -translate-x-20 px-3 font-bold text-slate-300 duration-300 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:font-normal peer-placeholder-shown:text-slate-800 peer-focus:-translate-x-20 peer-focus:font-bold peer-focus:text-slate-300">
+        <p className="pointer-events-none absolute -translate-x-20 px-3 text-slate-300 duration-300 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:text-slate-800 peer-focus:-translate-x-20 peer-focus:text-gray-100">
           Buscar
         </p>
         <button
@@ -75,10 +75,10 @@ export default function SearchBar() {
         </button>
       </div>
       {showResults && query !== '' && filterByQuery.length > 0 && (
-        <div className="absolute z-10 mt-2 flex w-full flex-col gap-2 bg-white shadow-lg">
+        <div className="absolute z-10 mt-2 flex w-full flex-col gap-2 rounded-md bg-white shadow-lg">
           {filterByQuery.slice(0, 6).map(({ title, _id: id }) => (
             <Link
-              className="item-center flex justify-start p-2 hover:bg-primary-500 hover:text-white"
+              className="item-center rounded-md flex justify-start p-2 hover:bg-primary-500 hover:text-white"
               key={title}
               to={`/product/id/${id}`}
               onClick={() => setQuery('')}

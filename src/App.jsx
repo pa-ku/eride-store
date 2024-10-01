@@ -27,15 +27,14 @@ function App() {
               <Route path="/product">
                 <Route path="scooters" element={<AllProducts />} />
                 <Route path="id/:id" element={<ProductShowcase />} />
-
-                <Route element={<ProtectedRoute />}>
-                  <Route path="favorites" element={<Favorites />} />
-                </Route>
               </Route>
 
               <Route path="/user">
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
+                <Route element={<ProtectedRoute />}>
+                  <Route path="favorites" element={<Favorites />} />
+                </Route>
               </Route>
 
               <Route path="/about" element={<AboutPage />} />

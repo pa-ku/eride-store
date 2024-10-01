@@ -4,16 +4,16 @@ export default function Carousel({ images }) {
 
   return (
     <>
-      <section className="flex flex-col-reverse md:flex-row">
-        <div className="flex flex-wrap items-center justify-center gap-2 md:flex-col">
+      <section className="pb-10 flex flex-col-reverse md:flex-row">
+        <div className="flex max-h-96 flex-wrap items-center justify-center gap-2 md:flex-col">
           {images.map((image, index) => (
             <button
-              className="size-16 rounded-xl shadow-md duration-300 hover:shadow-xl"
+              className="rounded-xl shadow-md duration-300 hover:shadow-xl"
               key={index}
               onMouseEnter={() => setActualImg(index)}
             >
               <img
-                className="size-16 rounded-xl object-contain"
+                className="size-16 rounded-xl bg-white object-contain"
                 src={image}
                 alt="Imagen pequeña del producto"
               />
@@ -21,7 +21,7 @@ export default function Carousel({ images }) {
           ))}
         </div>
 
-        <div className="">
+        <div className="flex items-center justify-center">
           <img
             className="size-80 object-contain md:size-96"
             src={images[actualImg]}
