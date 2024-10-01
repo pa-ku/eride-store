@@ -1,24 +1,10 @@
 import { useState } from 'react'
-import styled from 'styled-components'
-
-const ImageContainer = styled.div`
-  width: 600px;
-  height: 400px;
-  padding: 10px;
-
-  background-color: #fff;
-  @media (max-width: 700px) {
-    height: 250px;
-    width: 100%;
-  }
-`
-
-export default function Carousel({ render, images, coverImage }) {
+export default function Carousel({ images }) {
   const [actualImg, setActualImg] = useState(0)
 
   return (
     <>
-      <section className="flex flex-col-reverse  md:flex-row">
+      <section className="flex flex-col-reverse md:flex-row">
         <div className="flex flex-wrap items-center justify-center gap-2 md:flex-col">
           {images.map((image, index) => (
             <button
@@ -35,12 +21,12 @@ export default function Carousel({ render, images, coverImage }) {
           ))}
         </div>
 
-        <ImageContainer>
+        <div className="">
           <img
-            className="size-96 h-full w-full object-contain"
+            className="size-80 object-contain md:size-96"
             src={images[actualImg]}
           />
-        </ImageContainer>
+        </div>
       </section>
     </>
   )
