@@ -4,7 +4,7 @@ export default function Carousel({ images }) {
 
   return (
     <>
-      <section className="pb-10 flex flex-col-reverse md:flex-row">
+      <section className="pb- flex flex-col-reverse md:flex-row">
         <div className="flex max-h-96 flex-wrap items-center justify-center gap-2 md:flex-col">
           {images.map((image, index) => (
             <button
