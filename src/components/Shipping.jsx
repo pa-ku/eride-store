@@ -20,18 +20,6 @@ export default function Shipping({ title, price, setShipping, shipping }) {
     setShippingData({ ...shippingData, [event.target.name]: value })
   }
 
-  const handleStreet = (event) => {
-    setHasNumber((prevHasNumber) => !prevHasNumber)
-    setShippingData((prevShippingData) => {
-      // Crear una copia del objeto prevShippingData
-      const updatedShippingData = { ...prevShippingData }
-      // Establecer el valor en "Con Numeracion" o undefined según el valor de hasNumber
-      updatedShippingData[event.target.name] = hasNumber && undefined
-
-      return updatedShippingData
-    })
-  }
-
   const createPreference = async () => {
     try {
       const res = await fetch(
@@ -93,12 +81,18 @@ export default function Shipping({ title, price, setShipping, shipping }) {
             </FreeShippingTxt>
             <form>
               <InputCtn>
-                <Input
+                <FormInput
                   type={'text'}
                   name={'nombre'}
                   placeholder={'Nombre y Apellido'}
                   onChange={HandleInput}
                   value={shippingData.nombre}
+                />
+                <FormInput
+                  onChange={HandleInput}
+                  type={'email'}
+                  name={'email'}
+                  placeholder={'Email'}
                 />
                 <FormInput
                   onChange={HandleInput}
@@ -125,29 +119,26 @@ export default function Shipping({ title, price, setShipping, shipping }) {
                   name={'calle'}
                   placeholder={'Calle'}
                 />
-                <FormInputContainer>
-                  <InputCheckBox
-                    type={'checkbox'}
-                    $isText
-                    name={'NCalle'}
-                    onClick={handleStreet}
-                    text={'Sin Numeracion'}
-                  />
-                  {hasNumber === false && (
+                <div className="flex h-10 w-full items-center justify-center gap-5">
+                  {hasNumber === false ? (
                     <FormInput
                       onChange={HandleInput}
                       type={'text'}
                       name={'NCalle'}
                       placeholder={'Numero de Calle'}
                     />
+                  ) : (
+                    <div className="w-full"></div>
                   )}
-                </FormInputContainer>
-                <FormInput
-                  onChange={HandleInput}
-                  type={'email'}
-                  name={'email'}
-                  placeholder={'Email'}
-                />
+                  <button
+                  type='button'
+                    className={`${hasNumber && 'border-primary-700 text-primary-700'} w-full rounded-xl border-2 border-black`}
+                    onClick={() => setHasNumber(!hasNumber)}
+                    name="NCalle"
+                  >
+                    {hasNumber ? 'Con numeración' : 'Sin Numeración'}
+                  </button>
+                </div>
               </InputCtn>
               <p className="text-red-500">{fillMsj}</p>
               <button
@@ -200,7 +191,6 @@ const FreeShippingTxt = styled.p`
   text-transform: uppercase;
   font-size: 14px;
   text-align: start;
-  width: 40ch;
 `
 
 const BuyInfoCtn = styled.div`

@@ -26,7 +26,7 @@ export default function ProductCard({ id, image, price, title, discount }) {
             <img
               loading="lazy"
               alt="Product image"
-              className="m-auto flex size-32 p-3 rounded-t-xl object-contain md:h-56 md:w-64"
+              className="m-auto flex size-32 rounded-t-xl object-contain p-3 md:h-56 md:w-64"
               src={image}
             />
           </div>
@@ -34,7 +34,7 @@ export default function ProductCard({ id, image, price, title, discount }) {
             <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
               {discount && (
                 <>
-                  <div className="flex gap-2 text-2xl md:gap-0">
+                  <div className="flex gap-2 text-xl md:gap-0">
                     ${discount && calcDiscount(price, discount)}
                     <div className="right-2 z-10 md:left-2 md:hidden">
                       <FavButton id={id} />
@@ -46,7 +46,7 @@ export default function ProductCard({ id, image, price, title, discount }) {
                   </p>
                 </>
               )}
-              {!discount && <p className="text-2xl">${formatPrice(price)}</p>}
+              {price && !discount && <p className="text-xl">${formatPrice(price)}</p>}
             </div>
             <p className="text-start text-green-600">Envío gratis</p>
             <h2 className="text-start font-bold">{title}</h2>

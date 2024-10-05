@@ -28,6 +28,7 @@ export default function Login() {
             required
             className="input-form"
             placeholder="email"
+            autoComplete="email"
           />
 
           <label className="flex flex-col">
@@ -38,6 +39,7 @@ export default function Login() {
                 className="input-form"
                 placeholder="password"
                 required
+                autoComplete="current-password"
               />
             </div>
           </label>

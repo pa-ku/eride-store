@@ -12,7 +12,7 @@ const WrapperBanner = styled.div`
   background-image: url(${ImgBanner});
   background-size: cover;
   background-position: center;
-  @media (max-width: 800px) {
+  @media (max-width: 1150px) {
     background-size: cover;
     background-position: 50%;
     width: 100%;

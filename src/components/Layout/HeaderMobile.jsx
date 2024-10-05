@@ -24,7 +24,7 @@ export default function HeaderMobile() {
         </Link>
         <div className="flex items-center gap-4">
           <button
-          title='Buscar'
+            title="Buscar"
             onClick={() => setOpenSearchBar(!openSearchBar)}
             className="justify-centert-ce flex size-8 items-center rounded-lg p-1 text-white hover:bg-gray-700"
           >
@@ -44,7 +44,7 @@ export default function HeaderMobile() {
           <Link
             className="justify-centert-ce flex size-8 items-center rounded-lg text-white hover:bg-gray-700"
             to={'/product/scooters'}
-            title='Monopatines'
+            title="Monopatines"
           >
             <svg
               viewBox="0 0 24 24"
@@ -65,22 +65,20 @@ export default function HeaderMobile() {
             <FavIcon></FavIcon>
           </Link> */}
           <Link
-          to={'/user/login'}
+            to={'/user/login'}
             onClick={() => setOpenMenu(!openMenu)}
             className="justify-centert-ce flex size-8 items-center rounded-lg text-white hover:bg-gray-700"
-            title='Ingresar'
+            title="Ingresar"
           >
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="icon icon-tabler icon-tabler-user"
               width="44"
               height="44"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="#ffffff"
               fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Title from '../components/ui/Title.jsx'
 import { useLocation } from 'react-router'
 import FavButton from '../components/ui/FavButton.jsx'
 import Shipping from '../components/Shipping.jsx'
@@ -8,23 +7,33 @@ import Carousel from '../components/Carousel.jsx'
 import { formatPrice } from '../utils/formatPrice.js'
 import { calcDiscount } from '../utils/calcDiscount.js'
 import MainButton from '../components/ui/MainButton.jsx'
-import { requestOneById } from '../api/scooters.js'
 import ShowcaseSkeleton from '../components/ShowcaseSkeleton.jsx'
+import { API_ROUTE } from '../api/API_ROUTE.js'
 
 export default function ProductShowcase() {
   const location = useLocation()
   const productId = location.pathname.split('/')[3]
   const [data, setData] = useState({})
   const [shipping, setShipping] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchOneItem()
+    window.scrollTo(0, 0)
+    requestOneById()
   }, [productId])
 
-  async function fetchOneItem() {
-    const data = await requestOneById(productId)
-    data.images.unshift(data.coverImage)
-    setData(data)
+  async function requestOneById() {
+    try {
+      setLoading(true)
+      const res = await fetch(`${API_ROUTE}/scooters/${productId}`)
+      const data = await res.json()
+      data.images.unshift(data.coverImage)
+      setLoading(false)
+      setData(data)
+      return
+    } catch (err) {
+      console.error('¡Hubo un problema con la solicitud!', err)
+    }
   }
 
   function handleShipping() {
@@ -40,10 +49,10 @@ export default function ProductShowcase() {
     }) +
     ' ' +
     seisDiasDespues.toLocaleDateString()
-
+    
   return (
     <>
-      <Wrapper>
+      <Wrapper className="">
         {shipping === true && (
           <Shipping
             title={data.title}
@@ -52,77 +61,79 @@ export default function ProductShowcase() {
             setShipping={setShipping}
           />
         )}
-        {data.images ? (
-          <section className="flex min-h-[30em] flex-col items-center justify-center px-4 lg:flex-row lg:items-start">
-            <div className="flex">
-              <Carousel
-                coverImage={data.coverImage}
-                render={data.images.length}
-                images={data.images}
-              />
-            </div>
 
-            <div className="space-y-2">
-              <div className="flex gap-1">
-                <h1 className="text-4xl">{data.title} </h1>
-                <FavButton id={data._id} />
-              </div>
-              <DescriptionTxt>{data.description}</DescriptionTxt>
-
-              <FreeShippingCtn>
-                <ReturnTitle>Llega gratis </ReturnTitle>
-                <p>el {diaDeLaSemana}</p>
-              </FreeShippingCtn>
-
-              <ReturnContainer>
-                <ReturnTitle>Devolución gratis</ReturnTitle>
-                <ReturnSubtitle>
-                  Tenés 30 días desde que lo recibís.
-                </ReturnSubtitle>
-              </ReturnContainer>
-              <div className="flex flex-col items-start">
-                {data.discount && (
-                  <>
-                    <p className="text-gray-500 line-through">
-                      ${formatPrice(data.price)}
-                    </p>
-                    <span className="flex items-center gap-2">
-                      <p className="text-3xl">
-                        ${calcDiscount(data.price, data.discount)}
-                      </p>
-                      <p className="text-xl text-primary-600">
-                        {data.discount}% OFF
-                      </p>
-                    </span>
-                  </>
-                )}
-                {data.price && !data.discount && (
-                  <p className="text-3xl">${formatPrice(data.price)}</p>
-                )}
-              </div>
-              <MainButton onClick={handleShipping}>COMPRAR</MainButton>
-            </div>
-          </section>
-        ) : (
+        {loading ? (
           <ShowcaseSkeleton></ShowcaseSkeleton>
-        )}
+        ) : (
+          <>
+            <section className="flex min-h-[30em] flex-col items-center justify-center px-4 lg:flex-row lg:items-start">
+              <div className="flex">
+                <Carousel
+                  coverImage={data.coverImage}
+                  render={data.images.length}
+                  images={data.images}
+                />
+              </div>
 
-        <section className="flex min-h-[30em] flex-col items-center">
-          <Title $noBackground={true} text={'ESPECIFICACIÓNES'} />
-          {data.title && (
-            <SpecsContainer>
-              {data.specs.map(({ category, name, info }) => (
-                <div key={name}>
-                  <SpecRow>
-                    {category && <SpecsTitle>{category}</SpecsTitle>}
-                    <SpecsName>{name}</SpecsName>
-                    <SpecsInfo>{info}</SpecsInfo>
-                  </SpecRow>
+              <div className="space-y-2">
+                <div className="flex gap-1">
+                  <h1 className="text-4xl">{data.title} </h1>
+                  <FavButton id={data._id} />
                 </div>
-              ))}
-            </SpecsContainer>
-          )}
-        </section>
+                <DescriptionTxt>{data.description}</DescriptionTxt>
+
+                <FreeShippingCtn>
+                  <ReturnTitle>Llega gratis </ReturnTitle>
+                  <p>el {diaDeLaSemana}</p>
+                </FreeShippingCtn>
+
+                <ReturnContainer>
+                  <ReturnTitle>Devolución gratis</ReturnTitle>
+                  <ReturnSubtitle>
+                    Tenés 30 días desde que lo recibís.
+                  </ReturnSubtitle>
+                </ReturnContainer>
+                <div className="flex flex-col items-start">
+                  {data.discount && (
+                    <>
+                      <p className="text-gray-500 line-through">
+                        ${formatPrice(data.price)}
+                      </p>
+                      <span className="flex items-center gap-2">
+                        <p className="text-3xl">
+                          ${calcDiscount(data.price, data.discount)}
+                        </p>
+                        <p className="text-xl text-primary-600">
+                          {data.discount}% OFF
+                        </p>
+                      </span>
+                    </>
+                  )}
+                  {data.price && !data.discount && (
+                    <p className="text-3xl">${formatPrice(data.price)}</p>
+                  )}
+                </div>
+                <MainButton onClick={handleShipping}>COMPRAR</MainButton>
+              </div>
+            </section>
+
+            <section className="flex min-h-[30em] flex-col items-center bg-gray-100 py-10">
+              <h2 className="text-3xl">ESPECIFICACIONES</h2>
+
+              <SpecsContainer className="">
+                {data.specs.map(({ category, name, info }) => (
+                  <div key={name}>
+                    <SpecRow>
+                      {category && <SpecsTitle>{category}</SpecsTitle>}
+                      <SpecsName>{name}</SpecsName>
+                      <SpecsInfo>{info}</SpecsInfo>
+                    </SpecRow>
+                  </div>
+                ))}
+              </SpecsContainer>
+            </section>
+          </>
+        )}
       </Wrapper>
     </>
   )

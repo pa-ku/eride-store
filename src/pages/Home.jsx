@@ -7,19 +7,20 @@ import ProductFeatured from '../components/home/ProductFeatured'
 import { Link } from 'react-router-dom'
 import { requestManyId } from '../api/scooters'
 import ProductSkeleton from '../components/ProductSkeleton'
+import FeaturedSkeleton from '../components/home/FeaturedSkeleton'
+import { API_ROUTE } from '../api/API_ROUTE'
 
 export default function Home() {
   const [data, setData] = useState([])
-  const [bestSelled, setBestSelled] = useState([])
+  const [featuredProduct, setFeaturedProduct] = useState({})
+  const [loadingFeatured, setLoadingFeatured] = useState(true)
+  const featuredProductId = '66e4906be4f50256a4d1f2b5'
 
   const idArray = [
     '66e4906be4f50256a4d1f2c6',
     '66e4906be4f50256a4d1f2ba',
     '66e4906be4f50256a4d1f2c3',
     '66e4906be4f50256a4d1f2b6',
-  ]
-
-  const selledArr = [
     '66e4906be4f50256a4d1f2bb',
     '66e4906be4f50256a4d1f2b9',
     '66e4906be4f50256a4d1f2be',
@@ -27,13 +28,29 @@ export default function Home() {
   ]
 
   async function requestMany() {
-    const data = await requestManyId(idArray)
-    setData(data)
-    const bestSelled = await requestManyId(selledArr)
-    setBestSelled(bestSelled)
+    try {
+      const data = await requestManyId(idArray)
+      setData(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function requestOneById() {
+    try {
+      setLoadingFeatured(true)
+      const res = await fetch(`${API_ROUTE}/scooters/${featuredProductId}`)
+      const data = await res.json()
+      setLoadingFeatured(false)
+      setFeaturedProduct(data)
+      return
+    } catch (err) {
+      console.error('¡Hubo un problema con la solicitud!', err)
+    }
   }
 
   useEffect(() => {
+    requestOneById()
     requestMany()
   }, [])
 
@@ -45,16 +62,20 @@ export default function Home() {
       />
       <OurBrands />
       <main className="flex flex-col items-center justify-center gap-20 py-20">
-        <ProductFeatured />
+        {loadingFeatured ? (
+          <FeaturedSkeleton></FeaturedSkeleton>
+        ) : (
+          <ProductFeatured data={featuredProduct} />
+        )}
 
         <ProductsRederedBySection
           title="Las mejores ofertas"
-          data={data}
+          data={data && data.slice(0, 4)}
         ></ProductsRederedBySection>
 
         <ProductsRederedBySection
           title="Más vendidos"
-          data={bestSelled}
+          data={data && data.slice(4, 8)}
         ></ProductsRederedBySection>
         <Link
           to={'/product/scooters'}
@@ -74,11 +95,14 @@ export function ProductsRederedBySection({ title, data }) {
     <section className="flex min-h-96 flex-col justify-start gap-5">
       <h2 className="text-center text-4xl">{title}</h2>
       <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-        {data.length > 1 ? (
+        {data ? (
           data.map(
-            ({ title, coverImage, _id: id, price, description, discount }) => (
+            (
+              { title, coverImage, _id: id, price, description, discount },
+              index,
+            ) => (
               <ProductCard
-                key={title}
+                key={index}
                 image={coverImage}
                 title={title}
                 id={id}

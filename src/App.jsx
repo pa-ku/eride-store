@@ -11,6 +11,7 @@ import AllProducts from './pages/AllProducts'
 import ProductShowcase from './pages/ProductShowcase'
 import ProtectedRoute from './ProtectedRoute'
 import { AuthContextProvider } from './context/AuthContext'
+import Profile from './pages/Profile'
 
 {
   /* <Route path='create' element={<CreateProduct />} /> */
@@ -18,8 +19,8 @@ import { AuthContextProvider } from './context/AuthContext'
 function App() {
   return (
     <>
-      <AuthContextProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <AuthContextProvider>
           <Routes>
             <Route element={<Layout />}>
               <Route index path="/" element={<Home />} />
@@ -34,14 +35,15 @@ function App() {
                 <Route path="register" element={<Register />} />
                 <Route element={<ProtectedRoute />}>
                   <Route path="favorites" element={<Favorites />} />
+                  <Route path="profile" element={<Profile />} />
                 </Route>
               </Route>
 
               <Route path="/about" element={<AboutPage />} />
             </Route>
           </Routes>
-        </BrowserRouter>
-      </AuthContextProvider>
+        </AuthContextProvider>
+      </BrowserRouter>
     </>
   )
 }

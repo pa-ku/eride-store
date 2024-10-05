@@ -1,12 +1,11 @@
-import styled from 'styled-components'
-import Title from '../components/ui/Title'
-import ProductCard from '../components/ProductCard.jsx'
-
 export default function Favorites() {
   return (
     <>
-      <div>
-        <h1 className="text-center text-4xl"></h1>
+      <div className="min-h-[30em] py-20">
+        <h1 className="text-center text-4xl">Favoritos</h1>
+        <p className="text-center text-gray-400">
+          Agrega tus productos favoritos y podras verlos aqui!
+        </p>
       </div>
     </>
   )
