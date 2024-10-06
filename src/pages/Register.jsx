@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
 export default function Register() {

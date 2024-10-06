@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 export const AuthContext = createContext()
-import { loginRequest, tokenRequest } from '../api/auth'
+import { tokenRequest } from '../api/auth'
 import { useNavigate } from 'react-router-dom'
 import cookies from 'js-cookie'
 import { API_ROUTE } from '../api/API_ROUTE'
@@ -23,18 +23,26 @@ export function AuthContextProvider({ children }) {
 
   async function userLogin(user) {
     try {
-      const res = await loginRequest(user)
-      console.log('login response', res)
+      const res = await fetch(`${API_ROUTE}/user/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+        credentials: 'include',
+      })
+      const data = await res.json()
 
-      if (res.error) {
+      if (data.error) {
         console.log(res)
         setUser(null)
         return setMessage(res.error)
+      } else {
+        setUser(res)
+        setIsAuth(true)
+        navigate('/')
+        console.log('login successful')
       }
-      setUser(res)
-      setIsAuth(true)
-      navigate('/')
-      console.log('login successful')
     } catch (error) {
       console.log('login error', error)
     }
@@ -48,10 +56,11 @@ export function AuthContextProvider({ children }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
+        credentials: 'include',
       })
       const data = await res.json()
-      console.log(data);
-      
+      console.log(data)
+
       if (data.error) {
         setUser(null)
         setMessage(data.error[0])
@@ -60,7 +69,6 @@ export function AuthContextProvider({ children }) {
         setUser(data)
         setIsAuth(true)
         navigate('/')
-        console.log(data)
       }
     } catch (error) {
       console.log('Login error', error)
@@ -73,7 +81,6 @@ export function AuthContextProvider({ children }) {
       if (!cookie.token) return console.log('No hay un token')
       else {
         const res = await tokenRequest(cookie.token)
-        console.log('response', res)
         if (res.error) {
           setLoading(false)
           setIsAuth(false)
@@ -83,7 +90,8 @@ export function AuthContextProvider({ children }) {
         } else {
           setLoading(false)
           setIsAuth(true)
-          setUser(res.data)
+          console.log(res)
+          setUser(res)
           console.log('usuario cargado correctamente')
           return
         }

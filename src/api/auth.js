@@ -13,14 +13,6 @@ export async function tokenRequest(token) {
 
 export async function loginRequest(user) {
   try {
-    const res = await fetch(`${API_ROUTE}/user/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-      credentials: 'include',
-    })
     const data = await res.json()
     if (res.ok) {
       console.log('Login successful')
@@ -28,15 +20,5 @@ export async function loginRequest(user) {
     return data
   } catch (error) {
     console.error(error)
-  }
-}
-
-export async function logOutRequest() {
-  try {
-    const res = await fetch(`${API_ROUTE}/user/logout`)
-    const data = await res.json()
-    console.log(data)
-  } catch (err) {
-    console.log(err)
   }
 }

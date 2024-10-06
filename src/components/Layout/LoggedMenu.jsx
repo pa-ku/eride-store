@@ -1,15 +1,44 @@
+import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import React from 'react'
 
 export default function LoggedMenu() {
-  const { userLogout } = useAuth()
+  const { userLogout, user } = useAuth()
 
   return (
     <>
-      <div className="absolute right-0 flex w-max flex-col gap-2 rounded-lg bg-white px-5 py-3 shadow-xl">
-        <button className="hover:text-primary-500">Mi Perfil</button>
-        <button onClick={userLogout} className="hover:text-primary-500">
-          LogOut
-        </button>
+      <div className="absolute right-0 flex w-max flex-col gap-2 rounded-lg bg-white px-7 py-6 shadow-xl">
+        <div className="relative flex flex-col items-center gap-3">
+          <p className="text-xs">{user.email}</p>
+          <h2 className="text-xl font-bold">¡Hola, {user.name}!</h2>
+          <Link
+            to={'user/profile'}
+            className="w-full rounded-lg border border-primary-500 px-4 py-1 text-center text-primary-500 hover:bg-primary-500 hover:text-white"
+          >
+            Administrar mi cuenta
+          </Link>
+
+          <button
+            onClick={userLogout}
+            className="just-center flex items-center gap-1 hover:text-primary-500"
+          >
+            <svg
+              className="size-5"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#111"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+              <path d="M9 12h12l-3 -3" />
+              <path d="M18 15l3 -3" />
+            </svg>{' '}
+            LogOut
+          </button>
+        </div>
       </div>
     </>
   )

@@ -7,6 +7,7 @@ import { useState } from 'react'
 
 export default function Header() {
   const { isAuth } = useAuth()
+
   const [openUserMenu, setOpenUserMenu] = useState(false)
   return (
     <>
