@@ -1,28 +1,27 @@
-import { Link, useNavigate } from 'react-router-dom'
-import { registerRequest } from '../api/auth'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
 
 export default function Register() {
-  const [message, setMessage] = useState()
-  const navigate = useNavigate()
+  const { userRegister, message } = useAuth()
+
   async function handleSubmit(e) {
     e.preventDefault()
-
-    // Aquí accedemos a los valores usando e.target
     const lastname = e.target.password.value
     const name = e.target.password.value
     const email = e.target.email.value
     const password = e.target.password.value
-
-    const user = { lastname, name, password, email }
-
-    const res = await registerRequest(user)
-
-    if (!res.error) {
-      navigate('/user/login')
-    } else {
-      setMessage(res.error)
-    }
+    userRegister({ lastname, name, password, email })
+    /*     if (name === '') return setMessage('Rellena el campo de Nombre')
+    if (lastname === '') return setMessage('Rellena el campo de Apellido')
+    if (email === '') return setMessage('Rellena el campo de Email')
+    if (password === '') return setMessage('Rellena el campo de Contraseña')
+    if (password.length < 6)
+      return setMessage('La contraseña debe tener al menos 6 caracteres')
+    else {
+      setMessage('registered')
+      userRegister({ lastname, name, password, email })
+    } */
   }
 
   return (
@@ -38,14 +37,14 @@ export default function Register() {
             <input
               name="name"
               type="text"
-              required
+              autoComplete="name"
               className="input-form"
               placeholder="Nombre"
             />
             <input
               name="lastname"
               type="text"
-              required
+              autoComplete="lastname"
               className="input-form"
               placeholder="Apellido"
             />
@@ -54,7 +53,7 @@ export default function Register() {
           <input
             name="email"
             type="email"
-            required
+            autoComplete="email"
             className="input-form"
             placeholder="email"
           />
@@ -64,9 +63,9 @@ export default function Register() {
               <input
                 name="password"
                 type="password"
+                autoComplete="current-password"
                 className="input-form"
                 placeholder="password"
-                required
               />
             </div>
           </label>

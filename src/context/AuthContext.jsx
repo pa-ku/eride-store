@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 export const AuthContext = createContext()
-import { loginRequest, registerRequest, tokenRequest } from '../api/auth'
+import { loginRequest, tokenRequest } from '../api/auth'
 import { useNavigate } from 'react-router-dom'
 import cookies from 'js-cookie'
+import { API_ROUTE } from '../api/API_ROUTE'
 
 export function useAuth() {
   const context = useContext(AuthContext)
@@ -39,7 +40,32 @@ export function AuthContextProvider({ children }) {
     }
   }
 
-  async function userRegister(user) {}
+  async function userRegister(user) {
+    try {
+      const res = await fetch(`${API_ROUTE}/user/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+      const data = await res.json()
+      console.log(data);
+      
+      if (data.error) {
+        setUser(null)
+        setMessage(data.error[0])
+        return
+      } else {
+        setUser(data)
+        setIsAuth(true)
+        navigate('/')
+        console.log(data)
+      }
+    } catch (error) {
+      console.log('Login error', error)
+    }
+  }
 
   async function validateToken() {
     try {
@@ -48,7 +74,6 @@ export function AuthContextProvider({ children }) {
       else {
         const res = await tokenRequest(cookie.token)
         console.log('response', res)
-
         if (res.error) {
           setLoading(false)
           setIsAuth(false)

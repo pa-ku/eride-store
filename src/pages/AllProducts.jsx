@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
-import { requestAllProducts } from '../api/scooters'
 import ProductSkeleton from '../components/ProductSkeleton'
+import { API_ROUTE } from '../api/API_ROUTE'
 
 export default function AllProducts() {
   const [itemsData, setItemsData] = useState([])
   const [productBrands, setProductBrands] = useState([])
   const [dataFiltered, setDataFiltered] = useState(itemsData)
+  const [loading, setLoading] = useState(true)
 
-  async function fetchAllScooters() {
-    const data = await requestAllProducts()
+  async function requestAllProducts() {
+    try {
+      setLoading(true)
+      const res = await fetch(`${API_ROUTE}/scooters`)
+      const data = await res.json()
+      setLoading(false)
+      setItemsData(data)
+      setDataFiltered(data)
+      getUniqueBrands(data)
+    } catch (err) {
+      console.error('¡Hubo un problema con la solicitud!', err)
+    }
+  }
+
+  function getUniqueBrands(data) {
     const getUniqueBrands = [...new Set(data.map((item) => item.brand))]
     setProductBrands(getUniqueBrands)
-    setItemsData(data)
-    setDataFiltered(data)
   }
 
   useEffect(() => {
-    fetchAllScooters()
+    requestAllProducts()
   }, [])
 
   function filterByBrand(brandSelected) {
@@ -67,7 +79,16 @@ export default function AllProducts() {
               >
                 Todas
               </FilterButton>
-              {productBrands.length > 2 ? (
+              {productBrands < 1 ? (
+                <>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
+                </>
+              ) : (
                 productBrands.map((brand) => (
                   <FilterButton
                     key={brand}
@@ -79,15 +100,6 @@ export default function AllProducts() {
                     {brand}
                   </FilterButton>
                 ))
-              ) : (
-                <>
-                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
-                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
-                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
-                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
-                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
-                  <div className="animate-skeleton h-6 w-20 rounded-lg"></div>
-                </>
               )}
             </div>
           </div>
@@ -116,8 +128,9 @@ export default function AllProducts() {
           <h1 className="pb-10 text-center text-4xl">Monopatines</h1>
 
           <section className="flex w-full flex-wrap justify-center gap-4">
-            {itemsData.length > 2
-              ? dataFiltered.map(
+            {loading
+              ? renderSkeletons(19)
+              : dataFiltered.map(
                   ({ title, price, discount, _id: id, coverImage }) => (
                     <ProductCard
                       key={id}
@@ -128,8 +141,7 @@ export default function AllProducts() {
                       image={coverImage}
                     />
                   ),
-                )
-              : renderSkeletons(19)}
+                )}
           </section>
         </div>
       </div>

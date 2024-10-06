@@ -1,20 +1,44 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { API_ROUTE } from '../../api/API_ROUTE'
+import { useAuth } from '../../context/AuthContext'
 
 export default function FavButton({ id }) {
   const [favorites, setFavorites] = useState('favorites', [])
   const isFavorite = favorites.includes(id)
   const [isAdmin, setIsAdmin] = useState(false)
   const [toolkit, setToolkit] = useState(false)
+  const { isAuth } = useAuth()
 
   const handleFavorite = () => {
-    if (!isAdmin) {
+    if (!isAuth) {
       setToolkit(true)
       const timer = setTimeout(() => {
         return setToolkit(false)
       }, 2000)
       return () => clearTimeout(timer)
+    } else {
+      sendNewFavorite()
+    }
+  }
+
+  async function sendNewFavorite() {
+    alert('guardando en favoritos')
+
+    try {
+      const res = await fetch(`${API_ROUTE}user/favorites`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id,
+        }),
+      })
+      const data = await res.json()
+    } catch (err) {
+      console.error('¡Hubo un problema con la solicitud!', err)
     }
   }
 
@@ -37,12 +61,11 @@ export default function FavButton({ id }) {
         )}
         <FavoriteBtn
           title={isFavorite ? 'Eliminar favorito' : 'Añadir favorito'}
-          className="Favorite"
+          className="Favorite absolute appearance-none"
           onChange={handleFavorite}
           type="checkbox"
           checked={isFavorite}
         />
-        {isFavorite === true && <p>asd</p>}
         <label
           htmlFor="favorite"
           className="relative m-0 flex size-7 cursor-pointer items-center justify-center stroke-red-400 p-0"
@@ -68,12 +91,7 @@ export default function FavButton({ id }) {
 }
 
 const FavoriteBtn = styled.input`
-  position: absolute;
   right: 0px;
-
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   width: 100%;
   height: 100%;
   cursor: pointer;
