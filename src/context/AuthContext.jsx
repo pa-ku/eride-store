@@ -36,7 +36,7 @@ export function AuthContextProvider({ children }) {
       if (data.error) {
         console.log(res)
         setUser(null)
-        return setMessage(res.error)
+        return setMessage(data.error[0])
       } else {
         setUser(res)
         setIsAuth(true)

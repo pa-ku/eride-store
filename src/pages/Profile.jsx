@@ -65,27 +65,13 @@ export default function Profile() {
               name={'calle'}
               placeholder={'Calle'}
             />
-            <div className="flex h-10 w-full items-center justify-center gap-5">
-              {hasNumber === false ? (
-                <input
-                  onChange={HandleInput}
-                  type={'text'}
-                  name={'NCalle'}
-                  className="input-form"
-                  placeholder={'Numero de Calle'}
-                />
-              ) : (
-                <div className="w-full"></div>
-              )}
-              <button
-                type="button"
-                className={`${hasNumber && 'border-primary-700 text-primary-700'} w-full rounded-xl border-2 border-black`}
-                onClick={() => setHasNumber(!hasNumber)}
-                name="NCalle"
-              >
-                {hasNumber ? 'Con numeración' : 'Sin Numeración'}
-              </button>
-            </div>
+            <input
+              onChange={HandleInput}
+              type={'text'}
+              name={'NCalle'}
+              className="input-form"
+              placeholder={'Numero de Calle'}
+            />
           </div>
         </form>
         <button
