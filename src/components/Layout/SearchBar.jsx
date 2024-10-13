@@ -39,10 +39,10 @@ export default function SearchBar() {
 
   return (
     <span className="relative" ref={searchBarRef}>
-      <div className="relative flex h-max w-max items-center justify-start">
+      <div className="relative flex h-max w-64 items-center justify-start">
         <input
           type="text"
-          className="text-red caret-primary focus-visible:border-primary peer w-64 rounded-md border-[1px] border-transparent bg-gray-100 px-3 py-0.5 outline-none"
+          className="text-red caret-primary focus-visible:border-primary peer w-64 rounded-md border-transparent bg-gray-100 px-3 py-0.5 outline-none"
           placeholder=" "
           value={query}
           onClick={handleInputMenu}
