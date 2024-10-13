@@ -10,12 +10,10 @@ import Login from './pages/Login'
 import AllProducts from './pages/AllProducts'
 import ProductShowcase from './pages/ProductShowcase'
 import ProtectedRoute from './ProtectedRoute'
+import AlreadyAuthRoutes from './AlreadyAuthRoutes'
 import { AuthContextProvider } from './context/AuthContext'
 import Profile from './pages/Profile'
 
-{
-  /* <Route path='create' element={<CreateProduct />} /> */
-}
 function App() {
   return (
     <>
@@ -31,8 +29,10 @@ function App() {
               </Route>
 
               <Route path="/user">
-                <Route path="login" element={<Login />} />
-                <Route path="register" element={<Register />} />
+                <Route element={<AlreadyAuthRoutes />}>
+                  <Route path="login" element={<Login />} />
+                  <Route path="register" element={<Register />} />
+                </Route>
                 <Route element={<ProtectedRoute />}>
                   <Route path="favorites" element={<Favorites />} />
                   <Route path="profile" element={<Profile />} />

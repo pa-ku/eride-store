@@ -49,7 +49,7 @@ export default function ProductShowcase() {
     }) +
     ' ' +
     seisDiasDespues.toLocaleDateString()
-    
+
   return (
     <>
       <Wrapper className="">
@@ -78,7 +78,7 @@ export default function ProductShowcase() {
               <div className="space-y-2">
                 <div className="flex gap-1">
                   <h1 className="text-4xl">{data.title} </h1>
-                  <FavButton id={data._id} />
+                  <FavButton productId={data._id} />
                 </div>
                 <DescriptionTxt>{data.description}</DescriptionTxt>
 

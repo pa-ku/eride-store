@@ -130,18 +130,9 @@ export default function AllProducts() {
           <section className="flex w-full flex-wrap justify-center gap-4">
             {loading
               ? renderSkeletons(19)
-              : dataFiltered.map(
-                  ({ title, price, discount, _id: id, coverImage }) => (
-                    <ProductCard
-                      key={id}
-                      title={title}
-                      price={price}
-                      discount={discount}
-                      id={id}
-                      image={coverImage}
-                    />
-                  ),
-                )}
+              : dataFiltered.map((product) => (
+                  <ProductCard key={product.id} productData={product} />
+                ))}
           </section>
         </div>
       </div>

@@ -3,10 +3,15 @@ import FavButton from './ui/FavButton'
 import { calcDiscount } from '../utils/calcDiscount'
 import { formatPrice } from '../utils/formatPrice'
 
-export default function ProductCard({ id, image, price, title, discount }) {
+export default function ProductCard({ productData }) {
+  const { _id: id, coverImage, price, title, discount } = productData
+
   return (
     <>
       <figure className="relative w-full border-b duration-300 hover:shadow-lg md:w-60 md:rounded-xl md:border-none md:shadow-md">
+        <div className="absolute right-2 z-50 hidden md:left-2 md:flex">
+          <FavButton productId={id} />
+        </div>
         <Link
           to={`/product/id/${id}`}
           className="flex h-full w-full cursor-pointer md:block"
@@ -20,14 +25,12 @@ export default function ProductCard({ id, image, price, title, discount }) {
                 {discount}%
               </span>
             )}
-            <div className="absolute right-2 hidden md:left-2 md:flex">
-              <FavButton id={id} />
-            </div>
+
             <img
               loading="lazy"
               alt="Product image"
               className="m-auto flex size-32 rounded-t-xl object-contain p-3 md:h-56 md:w-64"
-              src={image}
+              src={coverImage}
             />
           </div>
           <figcaption className="rounded-b-xl bg-white p-2 text-slate-700">
@@ -46,7 +49,9 @@ export default function ProductCard({ id, image, price, title, discount }) {
                   </p>
                 </>
               )}
-              {price && !discount && <p className="text-xl">${formatPrice(price)}</p>}
+              {price && !discount && (
+                <p className="text-xl">${formatPrice(price)}</p>
+              )}
             </div>
             <p className="text-start text-green-600">Envío gratis</p>
             <h2 className="text-start font-bold">{title}</h2>

@@ -11,14 +11,3 @@ export async function tokenRequest(token) {
   }
 }
 
-export async function loginRequest(user) {
-  try {
-    const data = await res.json()
-    if (res.ok) {
-      console.log('Login successful')
-    }
-    return data
-  } catch (error) {
-    console.error(error)
-  }
-}

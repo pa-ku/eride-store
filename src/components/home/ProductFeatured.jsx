@@ -16,60 +16,49 @@ const ProductImageContainer = styled.div`
   }
 `
 
-const FavCtn = styled.div`
-  position: absolute;
-  right: 0px;
-  scale: 1.2;
-  @media (max-width: 700px) {
-    margin-right: 20px;
-  }
-`
-
 export default function ProductFeatured({ data }) {
   return (
     <>
-      <section className="flex flex-col items-center justify-start gap-10">
-        <h2 className="text-4xl">Destacado</h2>
-        <div className="flex flex-col-reverse px-4 md:flex-row">
-          <div className="flex flex-col md:size-96">
-            <h2 className="text-3xl">{data.title}</h2>
-            <div>
-              {data.discount && (
-                <p className="text-gray-500 line-through">
-                  $ {calcDiscount(data.price, data.discount)}
-                </p>
-              )}
-              <span className="flex items-center gap-2">
-                <p className="text-3xl text-primary-600">
-                  {data.price && formatPrice(data.price)}
-                </p>
-              </span>
-            </div>
-
-            <p className="">{data.description}</p>
-
-            <Link
-              className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
-              to={'/product/id/' + data._id}
-            >
-              Saber Más
-            </Link>
+      <div className="flex flex-col-reverse px-4 md:flex-row">
+        <div className="flex flex-col md:size-96">
+          <h2 className="text-3xl">{data.title}</h2>
+          <div>
+            {data.discount && (
+              <p className="text-gray-500 line-through">
+                $ {calcDiscount(data.price, data.discount)}
+              </p>
+            )}
+            <span className="flex items-center gap-2">
+              <p className="text-3xl text-primary-600">
+                {data.price && formatPrice(data.price)}
+              </p>
+            </span>
           </div>
-          <ProductImageContainer className="px-2">
-            <FavCtn>
-              <FavButton id={data.id} />
-            </FavCtn>
-            <p className="absolute text-2xl font-bold text-primary-400">
-              {data.discount}% OFF
-            </p>
-            <img
-              className="m-auto size-80 object-contain md:size-96"
-              src={data.coverImage}
-              alt="imagen de producto destacado"
-            />
-          </ProductImageContainer>
+
+          <p className="">{data.description}</p>
+
+          <Link
+            className="w-full bg-primary-500 py-3 text-center font-bold text-white hover:bg-primary-400 md:w-40"
+            to={'/product/id/' + data._id}
+          >
+            Saber Más
+          </Link>
         </div>
-      </section>
+        <ProductImageContainer className="px-2">
+          <div className="absolute right-0">
+            <FavButton productId={data.id} />
+          </div>
+
+          <p className="absolute text-2xl font-bold text-primary-400">
+            {data.discount}% OFF
+          </p>
+          <img
+            className="m-auto size-80 object-contain md:size-96"
+            src={data.coverImage}
+            alt="imagen de producto destacado"
+          />
+        </ProductImageContainer>
+      </div>
     </>
   )
 }

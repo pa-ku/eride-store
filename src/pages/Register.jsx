@@ -1,26 +1,29 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useState } from 'react'
 
 export default function Register() {
   const { userRegister, message } = useAuth()
+  const [regMessage, setRegMessage] = useState()
+
+  console.log(regMessage)
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const lastname = e.target.password.value
-    const name = e.target.password.value
+    setRegMessage(message)
+    const name = e.target.name.value
+    const lastname = e.target.lastname.value
     const email = e.target.email.value
     const password = e.target.password.value
-    userRegister({ lastname, name, password, email })
-    /*     if (name === '') return setMessage('Rellena el campo de Nombre')
-    if (lastname === '') return setMessage('Rellena el campo de Apellido')
-    if (email === '') return setMessage('Rellena el campo de Email')
-    if (password === '') return setMessage('Rellena el campo de Contraseña')
+    if (name === '') return setRegMessage('Rellena el campo de Nombre')
+    if (lastname === '') return setRegMessage('Rellena el campo de Apellido')
+    if (email === '') return setRegMessage('Rellena el campo de Email')
+    if (password === '') return setRegMessage('Rellena el campo de Contraseña')
     if (password.length < 6)
-      return setMessage('La contraseña debe tener al menos 6 caracteres')
+      return setRegMessage('La contraseña debe tener al menos 6 caracteres')
     else {
-      setMessage('registered')
       userRegister({ lastname, name, password, email })
-    } */
+    }
   }
 
   return (
@@ -81,7 +84,7 @@ export default function Register() {
           >
             Ya tienes una cuenta? Ingresa aqui
           </Link>
-          <p className="h-10">{message}</p>
+          <div className="flex h-10 flex-col">{regMessage}</div>
         </form>
       </div>
     </>

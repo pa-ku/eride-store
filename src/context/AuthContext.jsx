@@ -18,8 +18,15 @@ export function AuthContextProvider({ children }) {
   const [isAuth, setIsAuth] = useState(false)
   const [message, setMessage] = useState('')
   const [loading, setLoading] = useState(true)
-
   const navigate = useNavigate()
+
+  useEffect(() => {
+    validateToken()
+  }, [])
+
+  useEffect(() => {
+    setMessage('')
+  }, [navigate])
 
   async function userLogin(user) {
     try {
@@ -36,9 +43,9 @@ export function AuthContextProvider({ children }) {
       if (data.error) {
         console.log(res)
         setUser(null)
-        return setMessage(data.error[0])
+        return setMessage(data.error)
       } else {
-        setUser(res)
+        setUser(data)
         setIsAuth(true)
         navigate('/')
         console.log('login successful')
@@ -63,7 +70,7 @@ export function AuthContextProvider({ children }) {
 
       if (data.error) {
         setUser(null)
-        setMessage(data.error[0])
+        setMessage(data.error)
         return
       } else {
         setUser(data)
@@ -78,21 +85,27 @@ export function AuthContextProvider({ children }) {
   async function validateToken() {
     try {
       const cookie = cookies.get()
-      if (!cookie.token) return console.log('No hay un token')
+      if (!cookie.token) return 
       else {
         const res = await tokenRequest(cookie.token)
+        if (!res) {
+          console.log('Respuesta no válida o indefinida')
+          setLoading(false)
+          setIsAuth(false)
+          setUser(null)
+          return
+        }
         if (res.error) {
           setLoading(false)
           setIsAuth(false)
           setUser(null)
-          console.log('no tiene acceso')
+      
           return
         } else {
           setLoading(false)
           setIsAuth(true)
-          console.log(res)
           setUser(res)
-          console.log('usuario cargado correctamente')
+
           return
         }
       }
@@ -112,16 +125,13 @@ export function AuthContextProvider({ children }) {
     }
   }
 
-  useEffect(() => {
-    validateToken()
-  }, [])
-
   return (
     <AuthContext.Provider
       value={{
         userLogin,
         userRegister,
         userLogout,
+        setUser,
         user,
         isAuth,
         message,

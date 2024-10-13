@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
 import { useAuth } from '../../context/AuthContext'
 import LoggedMenu from './LoggedMenu'
-import { useState } from 'react'
+import { useRef } from 'react'
+import { useOutsideClick } from '../../hooks/useOutsideClick'
 
 export default function Header() {
   const { isAuth } = useAuth()
+  const menuRef = useRef()
+  const { isOpen, setIsOpen } = useOutsideClick(menuRef)
 
-  const [openUserMenu, setOpenUserMenu] = useState(false)
   return (
     <>
       <header className="hidden h-14 w-full items-center justify-between bg-slate-800 md:flex md:px-10">
@@ -42,7 +44,7 @@ export default function Header() {
               </Link>
               <span className="relative">
                 <button
-                  onClick={() => setOpenUserMenu(!openUserMenu)}
+                  onClick={() => setIsOpen(!isOpen)}
                   to={'/user/profile'}
                   className="size-8 rounded-full bg-gray-200"
                 >
@@ -60,7 +62,12 @@ export default function Header() {
                     <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                   </svg>
                 </button>
-                {openUserMenu && <LoggedMenu></LoggedMenu>}
+                {isOpen && (
+                  <LoggedMenu
+                    menuRef={menuRef}
+                    setIsOpen={setIsOpen}
+                  ></LoggedMenu>
+                )}
               </span>
             </>
           )}
