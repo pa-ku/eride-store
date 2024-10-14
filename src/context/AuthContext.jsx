@@ -46,6 +46,7 @@ export function AuthContextProvider({ children }) {
         return setMessage(data.error)
       } else {
         setUser(data)
+        console.log(data)
         setIsAuth(true)
         navigate('/')
         console.log('login successful')
@@ -85,7 +86,7 @@ export function AuthContextProvider({ children }) {
   async function validateToken() {
     try {
       const cookie = cookies.get()
-      if (!cookie.token) return 
+      if (!cookie.token) return
       else {
         const res = await tokenRequest(cookie.token)
         if (!res) {
@@ -99,7 +100,7 @@ export function AuthContextProvider({ children }) {
           setLoading(false)
           setIsAuth(false)
           setUser(null)
-      
+
           return
         } else {
           setLoading(false)

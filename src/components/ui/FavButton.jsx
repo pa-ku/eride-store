@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { API_ROUTE } from '../../api/API_ROUTE'
 import { useAuth } from '../../context/AuthContext'
 
-export default function FavButton({ productId }) {
+export default function FavButton({ productId, isFav }) {
   const [toolkit, setToolkit] = useState(false)
   const { isAuth } = useAuth()
 
@@ -49,13 +49,12 @@ export default function FavButton({ productId }) {
 
       <button
         onClick={handleFavorite}
-        className="z-50 rounded-full stroke-red-500 p-2 text-2xl hover:shadow-lg"
+        className={`${isFav ? 'fill-red-400' : 'fill-white'} z-50 rounded-full stroke-red-500 p-2 text-2xl hover:shadow-lg`}
       >
         <svg
           className="size-7"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
