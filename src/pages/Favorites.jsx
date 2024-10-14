@@ -4,9 +4,11 @@ import useReqMany from '../hooks/useReqMany'
 
 export default function Favorites() {
   const { user } = useAuth()
-
   const { data, loading } = useReqMany(user.favorites)
 
+
+
+  
   return (
     <>
       <div className="flex min-h-[30em] flex-col items-center justify-center gap-10 py-20">

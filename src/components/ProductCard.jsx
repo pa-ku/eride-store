@@ -2,24 +2,15 @@ import { Link } from 'react-router-dom'
 import FavButton from './ui/FavButton'
 import { calcDiscount } from '../utils/calcDiscount'
 import { formatPrice } from '../utils/formatPrice'
-import { useAuth } from '../context/AuthContext'
-import { useEffect, useState } from 'react'
 
 export default function ProductCard({ productData }) {
   const { _id: id, coverImage, price, title, discount } = productData
-  const { user } = useAuth()
-  const [isFav, setIsFav] = useState(false)
-
-  useEffect(() => {
-    const result = user.favorites.includes(id)
-    setIsFav(result)
-  }, [user])
 
   return (
     <>
       <figure className="relative w-full border-b duration-300 hover:shadow-lg md:w-60 md:rounded-xl md:border-none md:shadow-md">
         <div className="absolute right-2 z-50 hidden md:left-2 md:flex">
-          <FavButton isFav={isFav} productId={id} />
+          <FavButton productId={id} />
         </div>
         <Link
           to={`/product/id/${id}`}

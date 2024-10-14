@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Title from '../ui/Title'
-import LinkButton from '../ui/LinkButton'
 import lockIcon from '../../assets/icons/lock.webp'
 import shippingIcon from '../../assets/icons/shipping.webp'
 import premiumIcon from '../../assets/icons/premium.webp'

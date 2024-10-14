@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { API_ROUTE } from '../../api/API_ROUTE'
 import { useAuth } from '../../context/AuthContext'
 
-export default function FavButton({ productId, isFav }) {
+export default function FavButton({ productId }) {
   const [toolkit, setToolkit] = useState(false)
-  const { isAuth } = useAuth()
+  const { isAuth, user } = useAuth()
+
+  const [isFav, setIsFav] = useState(false)
+
+  useEffect(() => {
+    if (user) {
+      const result = user.favorites.includes(productId)
+      setIsFav(result)
+    }
+  }, [user])
 
   const handleFavorite = () => {
     if (!isAuth) {
@@ -42,14 +51,14 @@ export default function FavButton({ productId, isFav }) {
   return (
     <>
       <div
-        className={`${toolkit && 'opacity-100 duration-500'}pointer-events-none fixed left-0 right-0 top-0 z-50 m-auto w-80 rounded-b-xl bg-primary-500 p-3 text-center text-white opacity-0 duration-500`}
+        className={`${toolkit && 'opacity-100 duration-500'} pointer-events-none fixed left-0 right-0 top-0 z-50 m-auto w-80 rounded-b-xl bg-primary-500 p-3 text-center text-white opacity-0 duration-500`}
       >
         Para guardar favoritos debes Logearte
       </div>
 
       <button
         onClick={handleFavorite}
-        className={`${isFav ? 'fill-red-400' : 'fill-white'} z-50 rounded-full stroke-red-500 p-2 text-2xl hover:shadow-lg`}
+        className={`${isFav ? 'fill-red-400' : 'fill-white'} z-20 rounded-full stroke-red-500 p-2 text-2xl hover:shadow-lg`}
       >
         <svg
           className="size-7"

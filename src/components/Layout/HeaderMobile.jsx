@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import imgLogo from '/favicon.webp'
 import { device } from '../../responsive'
 import { Link } from 'react-router-dom'
-import SearchBar from './SearchBar'
 import { useState } from 'react'
 
 const Logo = styled.img`
