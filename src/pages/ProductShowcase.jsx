@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router'
-import FavButton from '../components/ui/FavButton.jsx'
+import FavButton from '../components/FavButton.jsx'
 import Shipping from '../components/Shipping.jsx'
 import Carousel from '../components/Carousel.jsx'
 import { formatPrice } from '../utils/formatPrice.js'

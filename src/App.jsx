@@ -13,6 +13,7 @@ import ProtectedRoute from './ProtectedRoute'
 import AlreadyAuthRoutes from './AlreadyAuthRoutes'
 import { AuthContextProvider } from './context/AuthContext'
 import Profile from './pages/Profile'
+import Account from './pages/Account'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
                 <Route element={<AlreadyAuthRoutes />}>
                   <Route path="login" element={<Login />} />
                   <Route path="register" element={<Register />} />
+                  <Route path="account" element={<Account />} />
                 </Route>
                 <Route element={<ProtectedRoute />}>
                   <Route path="favorites" element={<Favorites />} />

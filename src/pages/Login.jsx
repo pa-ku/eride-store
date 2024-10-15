@@ -13,7 +13,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex h-[calc(100vh-3.5em)] w-full items-center justify-center">
         <form
           name="login"
           onSubmit={handleSubmit}
@@ -43,10 +43,7 @@ export default function Login() {
             </div>
           </label>
 
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-primary-500 py-3 text-lg text-white hover:bg-primary-400"
-          >
+          <button type="submit" className="button-main">
             Enviar
           </button>
           <Link

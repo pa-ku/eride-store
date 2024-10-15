@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import FavButton from './ui/FavButton'
+import FavButton from './FavButton'
 import { calcDiscount } from '../utils/calcDiscount'
 import { formatPrice } from '../utils/formatPrice'
 

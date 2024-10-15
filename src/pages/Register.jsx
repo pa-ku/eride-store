@@ -28,7 +28,7 @@ export default function Register() {
 
   return (
     <>
-      <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex h-[calc(100vh-3.5em)] w-full items-center justify-center">
         <form
           name="register"
           onSubmit={handleSubmit}

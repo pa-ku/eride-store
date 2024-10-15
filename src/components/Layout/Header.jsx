@@ -17,7 +17,7 @@ export default function Header() {
         <Link className="w-max" title="Home" to={'/'}>
           <img className="size-36 object-contain" src={imgLogo} alt="" />
         </Link>
-        <nav className="z-50 flex items-center justify-end gap-2">
+        <nav className="z-50 flex items-center justify-end gap-5">
           <SearchBar></SearchBar>
           <Link
             className="rounded-lg px-3 py-1 text-white hover:bg-gray-700"

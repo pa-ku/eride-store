@@ -39,22 +39,22 @@ export default function SearchBar() {
 
   return (
     <span className="relative" ref={searchBarRef}>
-      <div className="relative flex h-max w-64 items-center justify-start">
+      <div className="relative flex h-max w-52 items-center justify-start">
         <input
           type="text"
-          className="text-red caret-primary focus-visible:border-primary peer w-64 rounded-md border-transparent bg-gray-100 px-3 py-0.5 outline-none"
+          className="text-red caret-primary focus-visible:border-primary peer w-64 rounded-md border-transparent bg-gray-600 px-3 py-0.5 text-white outline-none"
           placeholder=" "
           value={query}
           onClick={handleInputMenu}
           onChange={(e) => setQuery(e.target.value)}
         />
 
-        <p className="pointer-events-none absolute -translate-x-20 px-3 text-slate-300 duration-300 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:text-slate-800 peer-focus:-translate-x-20 peer-focus:text-gray-100">
+        <p className="pointer-events-none absolute -translate-x-20 px-3 text-slate-300 duration-300 peer-placeholder-shown:translate-x-0 peer-placeholder-shown:text-slate-300 peer-focus:-translate-x-20 peer-focus:text-gray-100">
           Buscar
         </p>
         <button
           onClick={() => setQuery('')}
-          className="absolute right-2 text-xl text-primary-700 peer-placeholder-shown:hidden"
+          className="absolute right-2 text-white peer-placeholder-shown:hidden"
         >
           ✕
         </button>

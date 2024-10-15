@@ -31,6 +31,7 @@
   --main-color-700: #00375c;
   --mobile: 1000px;
 
+  --primary-50: #dff2ff;
   --primary-100: #c8e5f9;
   --primary-200: #a4d4f4;
   --primary-300: #7fc3f0;
@@ -83,10 +84,6 @@
   }
 }
 
-.input-form {
-  @apply w-full rounded-l-lg bg-gray-100 p-3 placeholder:text-gray-700;
-}
-
 @keyframes favIn {
   0% {
     scale: 0;
@@ -106,7 +103,7 @@
   }
 }
 
-.animate-skeleton{
+.animate-skeleton {
   animation: skeleton 1s infinite;
 }
 
@@ -120,4 +117,16 @@
   100% {
     background-color: #cbcbcb;
   }
+}
+
+.button-main {
+  @apply w-full rounded-lg bg-primary-500 py-3 text-lg text-white hover:bg-primary-400;
+}
+
+.button-alt {
+  @apply hover:bg-primary-50 w-full rounded-lg py-3 text-lg text-primary-500;
+}
+
+.input-form {
+  @apply w-full rounded-l-lg bg-gray-100 p-3 placeholder:text-gray-700;
 }

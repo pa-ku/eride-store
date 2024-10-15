@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import FavButton from '../ui/FavButton.jsx'
+import FavButton from '../FavButton.jsx'
 import { calcDiscount } from '../../utils/calcDiscount.js'
 import { formatPrice } from '../../utils/formatPrice.js'
 import { Link } from 'react-router-dom'
