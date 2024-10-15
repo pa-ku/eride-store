@@ -2,3 +2,4 @@
 node_modules
 .txt
 desktop.ini
+.env.local
