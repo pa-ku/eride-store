@@ -14,7 +14,7 @@ Eride es una tienda de monopatines eléctricos que permite a los usuarios explor
 - **CRUD:** Desde la sección de administración, se pueden **crear**, **eliminar** o **modificar** productos del catálogo.
 - **Filtro de productos:** Los usuarios pueden buscar y filtrar los monopatines según características como precio y marca.
 - **Pagos Online:** Integración con **MercadoPago** para procesar pagos de forma segura y eficiente.
-- **Autenticación y Seguridad:** Uso de `useContext` para proteger rutas, asegurando que ciertas secciones (como el admin, o favorites) solo sean accesibles con un **token de autenticación** válido.
+- **Autenticación y Seguridad:** Uso de `useContext` para proteger rutas, asegurando que ciertas secciones (como el admin, o favorites) solo sean accesibles con un **token de autenticación** válido, generado con JWT
 - **Manejo de errores:** El backend valida los datos utilizando **Zod**, lo que asegura que los datos sean correctos antes de ser procesados o almacenados en la base de datos.
 
 ## Rutas
