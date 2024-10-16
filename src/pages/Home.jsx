@@ -67,7 +67,25 @@ export default function Home() {
             )}
           </div>
         </section>
-
+        <section className="relative flex h-[calc(100vh-10em)] w-full snap-mandatory flex-col items-center justify-center gap-2 text-white">
+          <div className="flex max-w-[45em] flex-col">
+            <h2 className="text-6xl font-bold">
+              Nunca pares de viajar con la mejor autonomia
+            </h2>
+            <p className="text-2xl">
+              Hagas lo que hagas, vas a necesitar equipo resistente, cómodo y
+              duradero.
+            </p>
+          </div>
+          <Link to={'/product/scooters'} className="mt-5 rounded-full bg-white px-5 py-4 font-bold text-black hover:bg-primary-600 hover:text-white">
+            Explorar la colección
+          </Link>
+          <img
+            className="absolute -z-10 h-full w-full object-cover object-center blur-[1px] brightness-90"
+            src="https://img.freepik.com/foto-gratis/dos-e-scooter-estacionado-al-margen-carretera-parque_1153-7327.jpg?t=st=1729103180~exp=1729106780~hmac=2d471b4beaa2f94212ffefa56e99a1bbbf4429dc84967affd9c59bebf2529e4e&w=996"
+            alt=""
+          />
+        </section>
         <section className="flex min-h-96 flex-col justify-start gap-5">
           <h2 className="text-center text-4xl">Más vendidos</h2>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
@@ -85,13 +103,6 @@ export default function Home() {
             )}
           </div>
         </section>
-
-        <Link
-          to={'/product/scooters'}
-          className="rounded-lg bg-primary-400 px-4 py-2 text-lg text-white"
-        >
-          Ver todos los productos
-        </Link>
       </main>
       |
       <AboutMe />
