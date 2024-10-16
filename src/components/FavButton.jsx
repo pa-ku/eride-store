@@ -4,9 +4,8 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router'
 
 export default function FavButton({ productId }) {
-  const { isAuth, user } = useAuth()
+  const { isAuth, user, setUser } = useAuth()
   const [isFav, setIsFav] = useState(false)
-
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -15,16 +14,6 @@ export default function FavButton({ productId }) {
       setIsFav(result)
     }
   }, [user])
-
-  const handleFavorite = () => {
-    if (!isAuth) {
-      navigate('/user/account')
-    } else {
-      console.log(productId)
-
-      sendNewFavorite()
-    }
-  }
 
   async function sendNewFavorite() {
     try {
@@ -40,8 +29,21 @@ export default function FavButton({ productId }) {
       })
       const data = await res.json()
       console.log('data', data)
+      setUser((prevUser) => ({
+        ...prevUser,
+        favorites: data.favorites,
+      }))
     } catch (err) {
       console.error('¡Hubo un problema con la solicitud!', err)
+    }
+  }
+
+  const handleFavorite = () => {
+    if (!isAuth) {
+      navigate('/user/account')
+    } else {
+      setIsFav(!isFav)
+      sendNewFavorite()
     }
   }
 

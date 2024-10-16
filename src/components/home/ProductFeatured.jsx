@@ -45,10 +45,6 @@ export default function ProductFeatured({ data }) {
           </Link>
         </div>
         <ProductImageContainer className="px-2">
-          <div className="absolute right-0">
-            <FavButton productId={data.id} />
-          </div>
-
           <p className="absolute text-2xl font-bold text-primary-400">
             {data.discount}% OFF
           </p>
