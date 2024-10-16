@@ -68,7 +68,6 @@ export function AuthContextProvider({ children }) {
       })
       const data = await res.json()
       console.log(data)
-
       if (data.error) {
         setUser(null)
         setMessage(data.error)
@@ -84,34 +83,37 @@ export function AuthContextProvider({ children }) {
   }
 
   async function validateToken() {
+    const cookie = cookies.get()
+    if (!cookie.token) {
+      setIsAuth(false)
+      setLoading(false)
+      return setUser(null)
+    }
     try {
-      const cookie = cookies.get()
-      if (!cookie.token) return
-      else {
-        const res = await tokenRequest(cookie.token)
-        if (!res) {
-          console.log('Respuesta no válida o indefinida')
-          setLoading(false)
-          setIsAuth(false)
-          setUser(null)
-          return
-        }
-        if (res.error) {
-          setLoading(false)
-          setIsAuth(false)
-          setUser(null)
-
-          return
-        } else {
-          setLoading(false)
-          setIsAuth(true)
-          setUser(res)
-
-          return
-        }
+      const res = await tokenRequest(cookie.token)
+      if (!res) {
+        console.log('Respuesta no válida o indefinida')
+        setLoading(false)
+        setIsAuth(false)
+        setUser(null)
+        return
+      }
+      if (res.error) {
+        setLoading(false)
+        setIsAuth(false)
+        setUser(null)
+        return
+      } else {
+        setLoading(false)
+        setIsAuth(true)
+        setUser(res)
+        return
       }
     } catch (error) {
       console.log('error al validar', error)
+      setLoading(false)
+      setIsAuth(false)
+      setUser(null)
     }
   }
 
