@@ -10,6 +10,8 @@ import ProductCard from '../components/ProductCard'
 import useReqOne from '../hooks/useReqOne'
 import useReqMany from '../hooks/useReqMany'
 
+import homeBanner from '../assets/img/home_second_banner.webp'
+
 export default function Home() {
   const featuredId = '66e4906be4f50256a4d1f2b5'
   const bestOffersIds = [
@@ -77,13 +79,18 @@ export default function Home() {
               duradero.
             </p>
           </div>
-          <Link to={'/product/scooters'} className="mt-5 rounded-full bg-white px-5 py-4 font-bold text-black hover:bg-primary-600 hover:text-white">
+          <Link
+            to={'/product/scooters'}
+            className="mt-5 rounded-full bg-white px-5 py-4 font-bold text-black hover:bg-primary-600 hover:text-white"
+          >
             Explorar la colección
           </Link>
+
           <img
             className="absolute -z-10 h-full w-full object-cover object-center blur-[1px] brightness-90"
-            src="https://img.freepik.com/foto-gratis/dos-e-scooter-estacionado-al-margen-carretera-parque_1153-7327.jpg?t=st=1729103180~exp=1729106780~hmac=2d471b4beaa2f94212ffefa56e99a1bbbf4429dc84967affd9c59bebf2529e4e&w=996"
-            alt=""
+            loading="lazy"
+            src={homeBanner}
+            alt="Imagen del banner"
           />
         </section>
         <section className="flex min-h-96 flex-col justify-start gap-5">
