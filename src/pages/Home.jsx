@@ -72,7 +72,7 @@ export default function Home() {
         <section className="relative flex h-[calc(100vh-10em)] w-full snap-mandatory flex-col items-center justify-center gap-2 text-white">
           <div className="flex max-w-[45em] flex-col">
             <h2 className="text-6xl font-bold">
-              Nunca pares de viajar con la mejor autonomia
+              Nunca pares de viajar elegi la mejor autonomia
             </h2>
             <p className="text-2xl">
               Hagas lo que hagas, vas a necesitar equipo resistente, cómodo y

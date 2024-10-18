@@ -1,1 +1,1 @@
-export const API_ROUTE = import.meta.env.VITE_API_ROUTE
+export const API_ROUTE = 'https://eride-api.vercel.app/api'
