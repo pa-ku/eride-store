@@ -10,4 +10,3 @@ export async function tokenRequest(token) {
     console.error('Hubo un problema con la solicitud del token', err)
   }
 }
-
