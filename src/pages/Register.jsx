@@ -31,9 +31,10 @@ export default function Register() {
       <div className="flex h-[calc(100vh-3.5em)] w-full items-center justify-center">
         <form
           name="register"
-          onSubmit={handleSubmit}
+          /*    onSubmit={handleSubmit} */
           className="mb-20 flex w-96 flex-col gap-3"
         >
+          <p className='bg-red-200 w-full text-center text-red-700'>El Registro y Login estaran desabilitados en producción</p>
           <h1 className="text-3xl">Registrarse</h1>
           <div className="grid grid-cols-2 gap-2">
             <input

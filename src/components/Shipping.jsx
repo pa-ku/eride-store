@@ -64,7 +64,9 @@ export default function Shipping({ title, price, setShipping, shipping }) {
         {shipping === true && pay === false && (
           <>
             <div className="flex w-full justify-between">
+
               <h1 className="text-3xl">Datos de Envío</h1>
+
               <button
                 className="flex size-9 items-center justify-center rounded-full p-2 text-3xl text-primary-600 hover:bg-gray-100"
                 onClick={() => {
@@ -75,7 +77,9 @@ export default function Shipping({ title, price, setShipping, shipping }) {
               >
                 🞪
               </button>
+
             </div>
+            <p className='bg-red-200 text-wrap w-full text-center text-red-700'>Los pagos online estaran desabilitados en producción <br /> para evitar compras no intencionadas</p>
             <FreeShippingTxt>
               Todos nuestros productos cuentan con <b>ENVIO GRATIS</b>
             </FreeShippingTxt>
@@ -131,7 +135,7 @@ export default function Shipping({ title, price, setShipping, shipping }) {
                     <div className="w-full"></div>
                   )}
                   <button
-                  type='button'
+                    type='button'
                     className={`${hasNumber && 'border-primary-700 text-primary-700'} w-full rounded-xl border-2 border-black`}
                     onClick={() => setHasNumber(!hasNumber)}
                     name="NCalle"
@@ -143,7 +147,7 @@ export default function Shipping({ title, price, setShipping, shipping }) {
               <p className="text-red-500">{fillMsj}</p>
               <button
                 className="w-full rounded-lg bg-primary-500 py-3 text-xl text-white"
-                onClick={(e) => handleBuy(e)}
+              /*   onClick={(e) => handleBuy(e)} */
               >
                 Confirmar
               </button>

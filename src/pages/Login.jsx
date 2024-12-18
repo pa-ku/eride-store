@@ -14,11 +14,13 @@ export default function Login() {
   return (
     <>
       <div className="flex h-[calc(100vh-3.5em)] w-full items-center justify-center">
+
         <form
           name="login"
-          onSubmit={handleSubmit}
+          /*    onSubmit={handleSubmit} */
           className="mb-20 flex w-80 flex-col gap-3"
         >
+          <p className='bg-red-200 w-full text-center text-red-700'>El Registro y Login estaran desabilitados en producción</p>
           <h1 className="text-3xl">Login</h1>
 
           <input

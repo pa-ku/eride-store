@@ -39,7 +39,6 @@ export function AuthContextProvider({ children }) {
         credentials: 'include',
       })
       const data = await res.json()
-
       if (data.error) {
         console.log(res)
         setUser(null)
