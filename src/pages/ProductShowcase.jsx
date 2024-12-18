@@ -52,7 +52,7 @@ export default function ProductShowcase() {
 
   return (
     <>
-      <Wrapper className="">
+      <Wrapper className="min-h-screen">
         {shipping === true && (
           <Shipping
             title={data.title}
@@ -66,7 +66,7 @@ export default function ProductShowcase() {
           <ShowcaseSkeleton></ShowcaseSkeleton>
         ) : (
           <>
-            <section className="flex min-h-[30em] flex-col items-center justify-center px-4 lg:flex-row lg:items-start">
+            <section className="flex  min-h-[30em] flex-col items-center justify-center px-4 lg:flex-row lg:items-start">
               <div className="flex">
                 <Carousel
                   coverImage={data.coverImage}
@@ -120,7 +120,7 @@ export default function ProductShowcase() {
             <section className="flex min-h-[30em] flex-col items-center bg-gray-100 py-10">
               <h2 className="text-3xl">ESPECIFICACIONES</h2>
 
-              <SpecsContainer className="">
+              <SpecsContainer>
                 {data.specs.map(({ category, name, info }) => (
                   <div key={name}>
                     <SpecRow>
