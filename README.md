@@ -10,10 +10,12 @@ E-ride es un e-commerce de monopatines eléctricos con compras online a través 
 </kbd>
 
 ## 🛠️Stack Tecnológico
-- **Frontend:** React + Tailwind CSS
-- **Backend:** Nodejs/Expressjs + MongoDB/Mongoose
+- React
+- Tailwind
+- Express
+- MongoDb
+- Zod
 - **Pagos Online:** Integración con la API de MercadoPago
-- **Validaciones:** Zod para manejo de errores en el backend
 
 ## 🌟 Características Principales
 - **Catálogo de productos:** Los usuarios pueden ver una lista de monopatines eléctricos disponibles, con detalles de cada producto.
