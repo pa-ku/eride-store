@@ -23,9 +23,10 @@
 
 ## Clonar el proyecto
 
-```
-github clone https://github.com/pa-ku/eride-store.git
-```
+
+````
+git clone https://github.com/pa-ku/eride-store.git
+````
 
 ```
 npm install
