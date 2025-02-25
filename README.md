@@ -18,3 +18,14 @@
 - **Pagos Online:** Integración con **MercadoPago** para procesar pagos de forma segura y eficiente.
 - **Autenticación y Seguridad:** Uso de `useContext` para proteger rutas, asegurando que ciertas secciones (como el admin, o favorites) solo sean accesibles con un **token de autenticación** válido, generado con JWT
 - **Manejo de errores:** El backend valida los datos utilizando **Zod**, lo que asegura que los datos sean correctos antes de ser procesados o almacenados en la base de datos.
+
+## Clonar el proyecto
+
+
+````
+github clone https://github.com/pa-ku/eride-store.git
+````
+
+````
+npm install
+````
