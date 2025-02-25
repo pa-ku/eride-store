@@ -23,7 +23,7 @@
 
 
 ````
-github clone https://github.com/pa-ku/eride-store.git
+git clone https://github.com/pa-ku/eride-store.git
 ````
 
 ````
