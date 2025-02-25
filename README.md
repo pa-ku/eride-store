@@ -5,16 +5,11 @@
   <p>
   E-ride es un e-commerce de monopatines eléctricos con compras online a través de Mercado Pago, validación de usuarios, gestión de favoritos y una interfaz administrativa con funcionalidad CRUD para productos. Incluye una UI intuitiva y un sistema de pagos sencillo.
 </p>
- <a src="https://eride.paku.com.ar/">eride.paku.com.ar </a>
+ <a src="https://eride.paku.com.ar/" target="_BLANK" > eride.paku.com.ar </a>
 </div>
 
-### 🛠️Stack Tecnológico
-- React
-- Tailwind
-- Express
-- MongoDb
-- Zod
-- **Pagos Online:** Integración con la API de MercadoPago
+### 🛠️ Tecologias 
+``React`` ``Express`` ``Zod`` ``MongoDb`` ``Bcrypt``  ``Tailwind`` ``JWT`` ``Mercadopago API`` ``Vite``
 
 ### 🌟 Características Principales
 - **Catálogo de productos:** Los usuarios pueden ver una lista de monopatines eléctricos disponibles, con detalles de cada producto.
