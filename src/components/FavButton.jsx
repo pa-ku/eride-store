@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { API_ROUTE } from '../api/API_ROUTE'
-import { useAuth } from '../context/AuthContext'
+import { API_ROUTE } from '../services/api/API_ROUTE'
+import { useAuth } from '#context/AuthContext'
 import { useNavigate } from 'react-router'
 
 export default function FavButton({ productId }) {
@@ -10,12 +10,12 @@ export default function FavButton({ productId }) {
 
   useEffect(() => {
     if (user) {
-      const result = user.favorites.includes(productId)
-      setIsFav(result)
+      const isProductFavorited = user.favorites.includes(productId)
+      setIsFav(isProductFavorited)
     }
-  }, [user])
+  }, [user, productId])
 
-  async function sendNewFavorite() {
+  async function addFavorite(productId) {
     try {
       const res = await fetch(`${API_ROUTE}/user/favorites`, {
         method: 'POST',
@@ -27,14 +27,14 @@ export default function FavButton({ productId }) {
         }),
         credentials: 'include',
       })
+      if (!res.ok) throw new Error('No se pudo crear el favorito')
       const data = await res.json()
-      console.log('data', data)
       setUser((prevUser) => ({
         ...prevUser,
         favorites: data.favorites,
       }))
     } catch (err) {
-      console.error('¡Hubo un problema con la solicitud!', err)
+      console.error('¡No se pudo crear el favorito!', err)
     }
   }
 
@@ -43,7 +43,7 @@ export default function FavButton({ productId }) {
       navigate('/user/account')
     } else {
       setIsFav(!isFav)
-      sendNewFavorite()
+      addFavorite(productId)
     }
   }
 

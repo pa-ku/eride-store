@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import FavButton from './FavButton'
-import { calcDiscount } from '../utils/calcDiscount'
-import { formatPrice } from '../utils/formatPrice'
+import { calcDiscount } from '#utils/calcDiscount'
+import { formatPrice } from '#utils/formatPrice'
 
 export default function ProductCard({ productData }) {
   const { _id: id, coverImage, price, title, discount } = productData

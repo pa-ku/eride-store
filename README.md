@@ -8,10 +8,12 @@
 <a href="https://eride.paku.com.ar/">eride.paku.com.ar</a>
 </div>
 
-### 💻 Tecologias 
-``React`` ``Express`` ``Zod`` ``MongoDb`` ``Bcrypt``  ``Tailwind`` ``JWT`` ``Mercadopago API`` ``Vite``
+### 💻 Tecologias
+
+`React` `Express` `Zod` `MongoDb` `Bcrypt` `Tailwind` `JWT` `Mercadopago API` `Vite`
 
 ### 🌟 Características Principales
+
 - **Catálogo de productos:** Los usuarios pueden ver una lista de monopatines eléctricos disponibles, con detalles de cada producto.
 - **CRUD:** Desde la sección de administración, se pueden **crear**, **eliminar** o **modificar** productos del catálogo.
 - **Filtro de productos:** Los usuarios pueden buscar y filtrar los monopatines según características como precio y marca.
@@ -21,11 +23,10 @@
 
 ## Clonar el proyecto
 
-
-````
+```
 github clone https://github.com/pa-ku/eride-store.git
-````
+```
 
-````
+```
 npm install
-````
+```

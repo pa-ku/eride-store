@@ -1,5 +1,4 @@
-import React from "react";
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Button = styled.input`
   border: 0px;
@@ -11,7 +10,7 @@ const Button = styled.input`
   &:hover {
     background-color: var(--main-color-400);
   }
-`;
+`
 
 export default function FormButton({
   value,
@@ -31,5 +30,5 @@ export default function FormButton({
       type="submit"
       value={value}
     />
-  );
+  )
 }

@@ -1,14 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const CheckboxContainer = styled.div`
-  width: ${(props) => (props.$isText ? "100%" : "35px")};
+  width: ${(props) => (props.$isText ? '100%' : '35px')};
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1;
-`;
+`
 const Checkbox = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -23,23 +22,13 @@ const Checkbox = styled.input`
   border: 0px;
   scale: 1.1;
   cursor: pointer;
-
-  border: ${(props) => (props.$colorChoice ? "3px solid" : "")};
+  border: ${(props) => (props.$colorChoice ? '3px solid' : '')};
   border-color: ${(props) => props.$color};
-
   &:checked {
     background-color: var(--main-color-450);
-  
   }
-`;
+`
 
-const CheckboxText = styled.p`
-  position: absolute;
-  scale: 1.1;
-  
-  pointer-events: none;
-  color: #fff;
-`;
 export default function CheckBox({
   text,
   onClick,
@@ -61,8 +50,10 @@ export default function CheckBox({
           onClick={onClick}
           type={type}
         ></Checkbox>
-        <CheckboxText>{text}</CheckboxText>
+        <p className="pointer-events-none absolute scale-110 text-white">
+          {text}
+        </p>
       </CheckboxContainer>
     </>
-  );
+  )
 }

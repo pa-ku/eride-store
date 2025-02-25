@@ -1,19 +1,19 @@
 import Home from './pages/Home'
 import './global.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import AboutPage from './pages/AboutPage'
-import Favorites from './pages/Favorites'
-/* import CreateProduct from './pages/CreateProduct' */
-import Layout from './pages/Layout'
-import Register from './pages/Register'
-import Login from './pages/Login'
-import AllProducts from './pages/AllProducts'
-import ProductShowcase from './pages/ProductShowcase'
-import ProtectedRoute from './ProtectedRoute'
-import AlreadyAuthRoutes from './AlreadyAuthRoutes'
 import { AuthContextProvider } from './context/AuthContext'
+
+import Favorites from './pages/Favorites'
+import Layout from './layout/Layout'
+import Register from './pages/SignUp'
+import Login from './pages/SignIn'
+import AllProducts from './pages/ProductList'
+import ProductShowcase from './pages/Product'
 import Profile from './pages/Profile'
-import Account from './pages/Account'
+import Account from './components/NoAuthMessage'
+import About from './pages/About'
+import ProtectedRoutes from './layout/IsAuthRedirect'
+import IsAuthRedirect from './layout/IsAuthRedirect'
 
 function App() {
   return (
@@ -30,18 +30,18 @@ function App() {
               </Route>
 
               <Route path="/user">
-                <Route element={<AlreadyAuthRoutes />}>
+                <Route element={<IsAuthRedirect />}>
                   <Route path="login" element={<Login />} />
                   <Route path="register" element={<Register />} />
                   <Route path="account" element={<Account />} />
                 </Route>
-                <Route element={<ProtectedRoute />}>
+                <Route element={<ProtectedRoutes />}>
                   <Route path="favorites" element={<Favorites />} />
                   <Route path="profile" element={<Profile />} />
                 </Route>
               </Route>
 
-              <Route path="/about" element={<AboutPage />} />
+              <Route path="/about" element={<About />} />
             </Route>
           </Routes>
         </AuthContextProvider>

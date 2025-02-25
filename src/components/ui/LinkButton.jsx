@@ -1,6 +1,5 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const BtnNav = styled(Link)`
   color: white;
@@ -18,7 +17,7 @@ const BtnNav = styled(Link)`
   &:hover {
     border-bottom: 1px solid var(--color-gold);
   }
-`;
+`
 
 export default function LinkButton({
   to,
@@ -29,8 +28,7 @@ export default function LinkButton({
   logo,
   title,
   onClick,
-  className
-
+  className,
 }) {
   return (
     <BtnNav
@@ -45,5 +43,5 @@ export default function LinkButton({
       {logo}
       {text}
     </BtnNav>
-  );
+  )
 }

@@ -1,5 +1,4 @@
-import React from "react";
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const Input = styled.input`
   padding: 8px 15px 4px 4px;
@@ -13,7 +12,7 @@ const Input = styled.input`
     outline: 0px;
     border-bottom: 2px solid var(--main-color-500);
   }
-`;
+`
 
 export default function FormInput({
   value,
@@ -22,7 +21,7 @@ export default function FormInput({
   type,
   placeholder,
   onChange,
-  required,
+
   onSubmit,
 }) {
   return (
@@ -36,5 +35,5 @@ export default function FormInput({
       type={type}
       placeholder={placeholder}
     />
-  );
+  )
 }

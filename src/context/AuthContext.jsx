@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 export const AuthContext = createContext()
-import { tokenRequest } from '../api/auth'
+import { tokenRequest } from '../services/api/auth'
 import { useNavigate } from 'react-router-dom'
 import cookies from 'js-cookie'
-import { API_ROUTE } from '../api/API_ROUTE'
+import { API_ROUTE } from '../services/api/API_ROUTE'
 
 export function useAuth() {
   const context = useContext(AuthContext)
