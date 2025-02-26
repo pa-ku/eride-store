@@ -58,15 +58,13 @@ export default function Home() {
         <section className="flex min-h-96 flex-col justify-start gap-5">
           <h2 className="text-center text-4xl">Las mejores ofertas</h2>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-            {loadingBestOffers ? (
-              Array(bestOffersIds.length).fill().map((_, index) => (
-                <ProductSkeleton key={index} />
-              ))
-            ) : (
-              bestOffers.map((productData, index) => (
-                <ProductCard key={index} productData={productData} />
-              ))
-            )}
+            {loadingBestOffers
+              ? Array(bestOffersIds.length)
+                  .fill()
+                  .map((_, index) => <ProductSkeleton key={index} />)
+              : bestOffers.map((productData, index) => (
+                  <ProductCard key={index} productData={productData} />
+                ))}
           </div>
         </section>
         <section className="relative flex h-[calc(100vh-10em)] w-full snap-mandatory flex-col items-center justify-center gap-2 text-white">
@@ -96,15 +94,13 @@ export default function Home() {
         <section className="flex min-h-96 flex-col justify-start gap-5">
           <h2 className="text-center text-4xl">Más vendidos</h2>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-            {loadingBestSellers ? (
-              Array(bestSellersIds.length).fill().map((_, index) => (
-                <ProductSkeleton key={index} />
-              ))
-            ) : (
-              bestSellers.map((productData, index) => (
-                <ProductCard key={index} productData={productData} />
-              ))
-            )}
+            {loadingBestSellers
+              ? Array(bestSellersIds.length)
+                  .fill()
+                  .map((_, index) => <ProductSkeleton key={index} />)
+              : bestSellers.map((productData, index) => (
+                  <ProductCard key={index} productData={productData} />
+                ))}
           </div>
         </section>
       </main>

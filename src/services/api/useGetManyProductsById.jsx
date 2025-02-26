@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { API_ROUTE } from './API_ROUTE'
 
-export default function useGetManyProductsById(idArray) {
+export default function useGetManyProductsById({ IdArrayOfProducts }) {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  async function requestMany() {
+  const requestMany = useCallback(async () => {
     try {
       setLoading(true)
       const res = await fetch(`${API_ROUTE}/scooters/multiple`, {
@@ -14,7 +14,7 @@ export default function useGetManyProductsById(idArray) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ids: idArray }),
+        body: JSON.stringify({ ids: IdArrayOfProducts }),
       })
       const data = await res.json()
       setData(data)
@@ -24,11 +24,12 @@ export default function useGetManyProductsById(idArray) {
     } finally {
       setLoading(false)
     }
-  }
+  }, [IdArrayOfProducts, setLoading, setData, setError])
+
 
   useEffect(() => {
     requestMany()
-  }, [])
+  }, [requestMany])
 
   return { data, loading, error }
 }

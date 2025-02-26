@@ -6,11 +6,11 @@ export default function Profile() {
   const { userData, loading: loadingUser } = useProfile()
   const [isEditing, setIsEditing] = useState(false)
 
-  const [userShipping, setUserShipping] = useState({})
+  const [userShippingData, setUserShippingData] = useState({})
   const [loading, setLoading] = useState(true)
 
-  function HandleInput() {
-    console.log('input info')
+  function handleInput(value) {
+    setUserShippingData(value)
   }
 
   async function saveEditedProfile() {
@@ -21,12 +21,11 @@ export default function Profile() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userShipping }),
+        body: JSON.stringify({ userShippingData }),
       })
       const data = await res.json()
       console.log(data)
     } catch (err) {
-      setError(err)
       console.error('¡Hubo un problema con la solicitud!', err)
     } finally {
       setLoading(false)
@@ -77,9 +76,10 @@ export default function Profile() {
                   name={name}
                   placeholder={label}
                   value={value && value}
-                  onChange={HandleInput}
+                  onChange={(e) => handleInput(e.target.value)}
                 />
               ))}
+            {loading && <p>Cargando...</p>}
           </div>
         </div>
         <div className="just-center flex items-center gap-5">
