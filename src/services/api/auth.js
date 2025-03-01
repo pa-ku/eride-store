@@ -1,6 +1,6 @@
 import { API_ROUTE } from './API_ROUTE'
 import axios from 'axios'
-export async function tokenRequest() {
+export async function tokenRequest () {
   try {
     const { data } = await axios.get(`${API_ROUTE}/user/token`, {
       credentials: 'include'

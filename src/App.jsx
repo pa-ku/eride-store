@@ -17,35 +17,35 @@ import UserAlreadyAuth from './layout/UserAlreadyAuth'
 
 const LazyAbout = React.lazy(() => import('#pages/About'))
 
-function App() {
+function App () {
   return (
     <>
       <BrowserRouter>
         <AuthContextProvider>
           <Routes>
             <Route element={<Layout />}>
-              <Route index path="/" element={<Home />} />
+              <Route index path='/' element={<Home />} />
 
-              <Route path="/product">
-                <Route path="scooters" element={<AllProducts />} />
-                <Route path="id/:id" element={<ProductShowcase />} />
+              <Route path='/product'>
+                <Route path='scooters' element={<AllProducts />} />
+                <Route path='id/:id' element={<ProductShowcase />} />
               </Route>
 
-              <Route path="/user">
+              <Route path='/user'>
                 <Route element={<UserAlreadyAuth />}>
-                  <Route path="login" element={<Login />} />
-                  <Route path="register" element={<Register />} />
-                  <Route path="account" element={<Account />} />
+                  <Route path='login' element={<Login />} />
+                  <Route path='register' element={<Register />} />
+                  <Route path='account' element={<Account />} />
                 </Route>
                 <Route element={<ProtectedRoutes />}>
-                  <Route path="favorites" element={<Favorites />} />
-                  <Route path="profile" element={<Profile />} />
+                  <Route path='favorites' element={<Favorites />} />
+                  <Route path='profile' element={<Profile />} />
                 </Route>
               </Route>
               <Route
-                path="about"
+                path='about'
                 element={
-                  <React.Suspense fallback="Loading...">
+                  <React.Suspense fallback='Loading...'>
                     <LazyAbout />
                   </React.Suspense>
                 }

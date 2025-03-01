@@ -5,7 +5,7 @@ import cookies from 'js-cookie'
 import { API_ROUTE } from '../services/api/API_ROUTE'
 export const AuthContext = createContext()
 
-export function useAuth() {
+export function useAuth () {
   const context = useContext(AuthContext)
   if (!context) {
     throw new Error('useContext debe estar dentro de un provider')
@@ -13,7 +13,7 @@ export function useAuth() {
   return context
 }
 
-export function AuthContextProvider({ children }) {
+export function AuthContextProvider ({ children }) {
   const [user, setUser] = useState(null)
   const [isAuth, setIsAuth] = useState(false)
   const [message, setMessage] = useState('')
@@ -28,15 +28,15 @@ export function AuthContextProvider({ children }) {
     setMessage('')
   }, [navigate])
 
-  async function userLogin(user) {
+  async function userLogin (user) {
     try {
       const res = await fetch(`${API_ROUTE}/user/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(user),
-        credentials: 'include',
+        credentials: 'include'
       })
       const data = await res.json()
       if (data.error) {
@@ -55,15 +55,15 @@ export function AuthContextProvider({ children }) {
     }
   }
 
-  async function userRegister(user) {
+  async function userRegister (user) {
     try {
       const res = await fetch(`${API_ROUTE}/user/register`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(user),
-        credentials: 'include',
+        credentials: 'include'
       })
       const data = await res.json()
       console.log(data)
@@ -80,7 +80,7 @@ export function AuthContextProvider({ children }) {
     }
   }
 
-  async function validateToken() {
+  async function validateToken () {
     const cookie = cookies.get()
     if (!cookie.token) {
       setIsAuth(false)
@@ -113,7 +113,7 @@ export function AuthContextProvider({ children }) {
     }
   }
 
-  function userLogout() {
+  function userLogout () {
     try {
       cookies.remove('token')
       setIsAuth(false)
@@ -134,7 +134,7 @@ export function AuthContextProvider({ children }) {
         user,
         isAuth,
         message,
-        loading,
+        loading
       }}
     >
       {children}
