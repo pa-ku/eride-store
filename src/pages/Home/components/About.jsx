@@ -1,41 +1,16 @@
-import styled from 'styled-components'
 import Title from '#components/ui/Title'
 import lockIcon from '#assets/icons/lock.webp'
 import shippingIcon from '#assets/icons/shipping.webp'
 import premiumIcon from '#assets/icons/premium.webp'
 import MainButton from '#components/ui/MainButton'
 
-const Wrapper = styled.div`
-  background-color: #f5f5f5;
-  padding: 3em;
-  display: flex;
-  justify-content: center;
-`
-const Container = styled.div`
-  max-width: 100ch;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 2em;
-`
-
-const SectionContainer = styled.div`
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  gap: 2em;
-  @media (max-width: 700px) {
-    flex-wrap: wrap;
-  }
-`
-
 export default function About() {
   return (
-    <Wrapper>
-      <Container>
+    <div className="flex justify-center bg-[#f5f5f5] p-3">
+      <div className="flex w-[40em] items-center justify-center gap-2">
         <Title $noBackground text={'Sobre Eride'} />
 
-        <SectionContainer>
+        <div className="jut-center flex items-start gap-2">
           <Section
             src={premiumIcon}
             alt={'imagen de una estrella '}
@@ -55,13 +30,13 @@ export default function About() {
             src={lockIcon}
             alt={'imagen de un candado'}
           />
-        </SectionContainer>
+        </div>
 
         <MainButton typeLink $altButton to={'/about'}>
           Conocer más...
         </MainButton>
-      </Container>
-    </Wrapper>
+      </div>
+    </div>
   )
 }
 

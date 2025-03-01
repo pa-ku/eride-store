@@ -21,7 +21,6 @@ export default function FormInput({
   type,
   placeholder,
   onChange,
-
   onSubmit,
 }) {
   return (

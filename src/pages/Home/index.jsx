@@ -8,35 +8,17 @@ import ProductCard from '#components/ProductCard'
 import ProductSkeleton from '#components/ProductSkeleton'
 
 import homeBanner from './images/scotter-banner.webp'
-
-import useGetProductById from '#src/services/api/useGetProductById.jsx'
-import useGetManyProductsById from '#src/services/api/useGetManyProductsById.jsx'
+import useGetProducts from '#src/services/api/useGetProducts.jsx'
 
 export default function Home() {
-  const featuredId = '66e4906be4f50256a4d1f2b5'
-  const bestOffersIds = [
-    '66e4906be4f50256a4d1f2c6',
-    '66e4906be4f50256a4d1f2ba',
-    '66e4906be4f50256a4d1f2c3',
-    '66e4906be4f50256a4d1f2b6',
-  ]
-  const bestSellersIds = [
-    '66e4906be4f50256a4d1f2bb',
-    '66e4906be4f50256a4d1f2b9',
-    '66e4906be4f50256a4d1f2be',
-    '66e4906be4f50256a4d1f2c1',
-    '66e4906be4f50256a4d1f2c1',
-    '66e4906be4f50256a4d1f2c1',
-  ]
-
   const { data: featuredData, loading: loadingFeatured } =
-    useGetProductById(featuredId)
+    useGetProducts('filter/featured')
 
   const { data: bestOffers, loading: loadingBestOffers } =
-    useGetManyProductsById(bestOffersIds)
+    useGetProducts('filter/bestOffers')
 
   const { data: bestSellers, loading: loadingBestSellers } =
-    useGetManyProductsById(bestSellersIds)
+    useGetProducts('filter/bestSellers')
 
   return (
     <>
@@ -59,10 +41,11 @@ export default function Home() {
           <h2 className="text-center text-4xl">Las mejores ofertas</h2>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
             {loadingBestOffers
-              ? Array(bestOffersIds.length)
+              ? Array(5)
                   .fill()
                   .map((_, index) => <ProductSkeleton key={index} />)
-              : bestOffers.map((productData, index) => (
+              : Array.isArray(bestOffers) &&
+                bestOffers.map((productData, index) => (
                   <ProductCard key={index} productData={productData} />
                 ))}
           </div>
@@ -95,16 +78,16 @@ export default function Home() {
           <h2 className="text-center text-4xl">Más vendidos</h2>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
             {loadingBestSellers
-              ? Array(bestSellersIds.length)
+              ? Array(5)
                   .fill()
                   .map((_, index) => <ProductSkeleton key={index} />)
-              : bestSellers.map((productData, index) => (
+              : Array.isArray(bestSellers) &&
+                bestSellers.map((productData, index) => (
                   <ProductCard key={index} productData={productData} />
                 ))}
           </div>
         </section>
       </main>
-      |
       <AboutMe />
     </>
   )

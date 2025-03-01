@@ -25,6 +25,7 @@ export default function Carousel({ images }) {
           <img
             className="size-80 object-contain md:size-96"
             src={images[actualImg]}
+            alt="Imagen de carousel de productos"
           />
         </div>
       </section>

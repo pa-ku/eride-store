@@ -124,17 +124,16 @@ export default function AllProducts() {
             </div>
           </div>
         </aside>
-        <div className="w-full py-10 md:py-20">
+        <main className="w-full px-5 py-10 md:py-20">
           <h1 className="pb-10 text-center text-4xl">Monopatines</h1>
-
-          <section className="flex w-full flex-wrap justify-center gap-4">
+          <section className="flex w-full flex-wrap justify-center gap-5">
             {loading
               ? renderSkeletons(19)
               : dataFiltered.map((product) => (
                   <ProductCard key={product.id} productData={product} />
                 ))}
           </section>
-        </div>
+        </main>
       </div>
     </>
   )

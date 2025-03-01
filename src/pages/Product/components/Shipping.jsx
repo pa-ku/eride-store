@@ -4,7 +4,7 @@ import FormInput from '../../../components/ui/FormInput'
 import Title from '../../../components/ui/Title'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
-export default function Shipping({ title, price, setShipping, shipping }) {
+export default function Shipping({ title, price, setShipping }) {
   const [preferenceId, setPreferenceIdId] = useState(null)
   const [pay, setPay] = useState(false)
   initMercadoPago('APP_USR-400ac6bd-a71b-4e78-9dfe-7f390acd7f68', {
@@ -19,7 +19,8 @@ export default function Shipping({ title, price, setShipping, shipping }) {
     setShippingData({ ...shippingData, [event.target.name]: value })
   }
 
-  const createPreference = async () => {
+  const errorList = [{ name: true }]
+  const createMpPreference = async () => {
     try {
       const res = await fetch(
         'https://eride-api.vercel.app/api/payment/create_preference',
@@ -42,13 +43,11 @@ export default function Shipping({ title, price, setShipping, shipping }) {
     }
   }
 
-  const errorList = [{ name: true }]
-
   const handleBuy = async (e) => {
     e.preventDefault()
     if (errorList.every((item) => item !== undefined && item !== '')) {
       setPay(true)
-      const id = await createPreference()
+      const id = await createMpPreference()
       if (id) {
         setPreferenceIdId(id)
       }
@@ -70,9 +69,9 @@ export default function Shipping({ title, price, setShipping, shipping }) {
   ]
 
   return (
-    <Wrapper>
+    <section className="absolute left-1/2 top-1/2 z-50 m-auto w-[35em] -translate-x-1/2 -translate-y-1/2">
       <div className="rounded-lg bg-white p-7 shadow-xl">
-        {shipping === true && pay === false && (
+        {pay === false && (
           <>
             <div className="flex w-full justify-between">
               <h1 className="text-3xl">Datos de Envío</h1>
@@ -87,13 +86,9 @@ export default function Shipping({ title, price, setShipping, shipping }) {
                 🞪
               </button>
             </div>
-            <p className="w-full text-wrap bg-red-200 text-center text-red-700">
-              Los pagos online estaran desabilitados en producción <br /> para
-              evitar compras no intencionadas
+            <p className="text-sm text-primary-500">
+              Todos nuestros productos cuentan con <b>envio gratis</b>
             </p>
-            <FreeShippingTxt>
-              Todos nuestros productos cuentan con <b>ENVIO GRATIS</b>
-            </FreeShippingTxt>
             <form>
               <InputCtn>
                 {formImputs.map(({ type, name, label, value }, index) => (
@@ -160,16 +155,9 @@ export default function Shipping({ title, price, setShipping, shipping }) {
           </>
         )}
       </div>
-    </Wrapper>
+    </section>
   )
 }
-
-const FreeShippingTxt = styled.p`
-  color: var(--main-color-550);
-  text-transform: uppercase;
-  font-size: 14px;
-  text-align: start;
-`
 
 const BuyInfoCtn = styled.div`
   text-align: start;
@@ -178,21 +166,6 @@ const BuyInfoCtn = styled.div`
   flex-direction: column;
   gap: 0.5em;
   padding-top: 1em;
-`
-
-const Wrapper = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: start;
-  height: max-content;
-  justify-content: center;
-  padding-block: 8em;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  z-index: 100;
-  text-align: center;
 `
 
 const InputCtn = styled.div`

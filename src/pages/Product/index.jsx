@@ -8,37 +8,14 @@ import { formatPrice } from '../../utils/formatPrice.js'
 import { calcDiscount } from '../../utils/calcDiscount.js'
 import MainButton from '../../components/ui/MainButton.jsx'
 import ShowcaseSkeleton from './components/Skeleton.jsx'
-import { API_ROUTE } from '../../services/api/API_ROUTE.js'
+import useGetProductById from '#src/services/api/useGetProductById.jsx'
 
 export default function ProductShowcase() {
   const location = useLocation()
   const productId = location.pathname.split('/')[3]
-  const [data, setData] = useState({})
   const [shipping, setShipping] = useState(false)
-  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    requestOneById()
-  }, [productId])
-
-  async function requestOneById() {
-    try {
-      setLoading(true)
-      const res = await fetch(`${API_ROUTE}/scooters/${productId}`)
-      const data = await res.json()
-      data.images.unshift(data.coverImage)
-      setLoading(false)
-      setData(data)
-      return
-    } catch (err) {
-      console.error('¡Hubo un problema con la solicitud!', err)
-    }
-  }
-
-  function handleShipping() {
-    setShipping(true)
-  }
+  const { data, error, loading } = useGetProductById(productId)
 
   var hoy = new Date()
   var seisDiasDespues = new Date()
@@ -82,17 +59,16 @@ export default function ProductShowcase() {
                 </div>
                 <DescriptionTxt>{data.description}</DescriptionTxt>
 
-                <FreeShippingCtn>
-                  <ReturnTitle>Llega gratis </ReturnTitle>
-                  <p>el {diaDeLaSemana}</p>
-                </FreeShippingCtn>
+                <p className="text-green-600">
+                  Llega gratis el {diaDeLaSemana}
+                </p>
 
-                <ReturnContainer>
-                  <ReturnTitle>Devolución gratis</ReturnTitle>
-                  <ReturnSubtitle>
-                    Tenés 30 días desde que lo recibís.
-                  </ReturnSubtitle>
-                </ReturnContainer>
+                <div className="flex flex-col text-start">
+                  <p className="font-bold text-[var(--main-color-450)]">
+                    Devolución gratis
+                  </p>
+                  <p>Tenés 30 días desde que lo recibís.</p>
+                </div>
                 <div className="flex flex-col items-start">
                   {data.discount && (
                     <>
@@ -113,7 +89,9 @@ export default function ProductShowcase() {
                     <p className="text-3xl">${formatPrice(data.price)}</p>
                   )}
                 </div>
-                <MainButton onClick={handleShipping}>COMPRAR</MainButton>
+                <MainButton onClick={() => setShipping(true)}>
+                  COMPRAR
+                </MainButton>
               </div>
             </section>
 
@@ -143,18 +121,6 @@ const FreeShippingCtn = styled.div`
   display: flex;
   gap: 0.5em;
 `
-const ReturnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: start;
-`
-
-const ReturnTitle = styled.p`
-  color: var(--main-color-450);
-  font-weight: 800;
-`
-
-const ReturnSubtitle = styled.p``
 
 const Wrapper = styled.div`
   padding-top: 4em;
@@ -162,7 +128,6 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 5em;
   justify-content: start;
-
   opacity: 0;
   animation: 400ms show forwards;
 `

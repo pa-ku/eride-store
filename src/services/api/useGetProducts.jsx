@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
 import { API_ROUTE } from './API_ROUTE'
 
-export default function useGetProductById(productId) {
+export default function useGetProducts(endpoint) {
   const [data, setData] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  async function getProductByID() {
+  async function getProducts() {
     try {
       setLoading(true)
-      const res = await fetch(`${API_ROUTE}/scooters/${productId}`)
+      const res = await fetch(`${API_ROUTE}/scooters/${endpoint}`)
       const data = await res.json()
       setData(data)
     } catch (err) {
@@ -21,8 +21,8 @@ export default function useGetProductById(productId) {
   }
 
   useEffect(() => {
-    getProductByID()
-  }, [productId])
+    getProducts()
+  }, [])
 
   return { data, loading, error }
 }

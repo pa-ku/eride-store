@@ -8,7 +8,7 @@ export default function ProductCard({ productData }) {
 
   return (
     <>
-      <figure className="relative w-full border-b duration-300 hover:shadow-lg md:w-60 md:rounded-xl md:border-none md:shadow-md">
+      <figure className="relative w-full border-b duration-300 hover:shadow-lg md:w-60 md:rounded-xl md:border-none md:shadow-md md:shadow-gray-200">
         <div className="absolute right-2 z-50 hidden md:left-2 md:flex">
           <FavButton productId={id} />
         </div>

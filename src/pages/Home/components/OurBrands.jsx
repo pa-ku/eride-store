@@ -36,6 +36,7 @@ export default function OurBrands() {
             className="h-20 w-36 object-contain duration-300"
             key={index}
             src={image}
+            loading="lazy"
             alt="Imagen Marca"
           />
         ))}
