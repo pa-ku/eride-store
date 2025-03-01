@@ -1,4 +1,4 @@
-export async function fetchScooters() {
+export async function fetchScooters () {
   try {
     const res = await fetch('http://localhost:5000/api/scooters')
     const data = await res.json()

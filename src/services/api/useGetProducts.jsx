@@ -7,8 +7,8 @@ const fetchProducts = async (endpoint) => {
   return data
 }
 
-export default function useGetProducts(endpoint) {
+export default function useGetProducts (endpoint) {
   return useQuery(['products', endpoint], () => fetchProducts(endpoint), {
-    enabled: Boolean(endpoint)  // Se ejecuta solo si 'endpoint' existe
+    enabled: Boolean(endpoint) // Se ejecuta solo si 'endpoint' existe
   })
 }

@@ -5,14 +5,14 @@ export const createMpPreference = async ({ title, price }) => {
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           description: title,
-          price: price,
-          quantity: 1,
-        }),
-      },
+          price,
+          quantity: 1
+        })
+      }
     )
     const data = await res.json()
     return data.id

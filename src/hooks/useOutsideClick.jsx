@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 
-export function useOutsideClick(ref) {
+export function useOutsideClick (ref) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClickOutside = useCallback(
@@ -9,7 +9,7 @@ export function useOutsideClick(ref) {
         setIsOpen(false)
       }
     },
-    [ref, setIsOpen],
+    [ref, setIsOpen]
   )
 
   useEffect(() => {

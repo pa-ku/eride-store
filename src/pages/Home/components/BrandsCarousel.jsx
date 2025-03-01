@@ -26,20 +26,20 @@ const ImgContainer = styled.div`
   }
 `
 
-export default function BrandsCarousel() {
+export default function BrandsCarousel () {
   const brads = [dualtron, inmotion, maxyou, segway, vsett, zero]
   return (
-    <div className="objec-fit flex flex-col items-center justify-center gap-1 bg-[#f5f5f5] text-center">
+    <div className='objec-fit flex flex-col items-center justify-center gap-1 bg-[#f5f5f5] text-center'>
       <ImgContainer>
         {brads.map((image, index) => (
           <img
-            className=" object-contain duration-300"
+            className=' object-contain duration-300'
             height={55}
             width={150}
             key={index}
             src={image}
-            loading="lazy"
-            alt="Imagen Marca"
+            loading='lazy'
+            alt='Imagen Marca'
           />
         ))}
       </ImgContainer>

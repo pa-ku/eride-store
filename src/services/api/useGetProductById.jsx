@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { API_ROUTE } from './API_ROUTE'
 
-export default function useGetProductById(productId) {
+export default function useGetProductById (productId) {
   const [data, setData] = useState({})
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  async function getProductByID() {
+  async function getProductByID () {
     try {
       setLoading(true)
       const res = await fetch(`${API_ROUTE}/scooters/${productId}`)

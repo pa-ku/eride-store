@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { API_ROUTE } from './API_ROUTE'
 
-export default function useGetProductNames() {
+export default function useGetProductNames () {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
-  async function requestNames() {
+  async function requestNames () {
     if (!loading) {
-      return
+
     } else {
       try {
         const res = await fetch(`${API_ROUTE}/scooters/names`)

@@ -1,9 +1,9 @@
 import { API_ROUTE } from './API_ROUTE'
 
-export async function tokenRequest() {
+export async function tokenRequest () {
   try {
     const res = await fetch(`${API_ROUTE}/user/token`, {
-      credentials: 'include',
+      credentials: 'include'
     })
     const data = await res.json()
     return data

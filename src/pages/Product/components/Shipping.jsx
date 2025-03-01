@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import FormInput from '../../../components/ui/FormInput'
-import Title from '../../../components/ui/Title'
+
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
 export default function Shipping({ title, price, setShipping }) {
   const [preferenceId, setPreferenceIdId] = useState(null)
   const [pay, setPay] = useState(false)
   initMercadoPago('APP_USR-400ac6bd-a71b-4e78-9dfe-7f390acd7f68', {
-    locale: 'es-AR',
+    locale: 'es-AR'
   })
   const [hasNumber, setHasNumber] = useState(false)
   const [fillMsj, setFillMsj] = useState('')
@@ -27,14 +26,14 @@ export default function Shipping({ title, price, setShipping }) {
         {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             description: title,
-            price: price,
-            quantity: 1,
-          }),
-        },
+            price,
+            quantity: 1
+          })
+        }
       )
       const data = await res.json()
       return data.id
@@ -61,70 +60,50 @@ export default function Shipping({ title, price, setShipping }) {
     { label: 'Apellido', name: 'lastName', type: 'text' },
     { label: 'Telefono', name: 'phone', type: 'number' },
     { label: 'Email', name: 'email', type: 'email' },
-    { label: 'Direccion', name: 'address', type: 'text' },
-    { label: 'Ciudad', name: 'city', type: 'text' },
     { label: 'Provincia', name: 'province', type: 'text' },
-    { label: 'Pais', name: 'country', type: 'text' },
-    { label: 'Codigo Postal', name: 'postalCode', type: 'number' },
+    { label: 'Ciudad', name: 'city', type: 'text' },
+    { label: 'Direccion', name: 'address', type: 'text' },
+    { label: 'Codigo Postal', name: 'postalCode', type: 'number' }
   ]
 
   return (
-    <section className="absolute left-1/2 top-1/2 z-50 m-auto w-[35em] -translate-x-1/2 -translate-y-1/2">
-      <div className="rounded-lg bg-white p-7 shadow-xl">
+    <section className='absolute left-1/2 top-1/2 z-50 m-auto w-[35em] -translate-x-1/2 -translate-y-1/2'>
+      <div className='rounded-lg bg-white p-7 shadow-xl'>
         {pay === false && (
           <>
-            <div className="flex w-full justify-between">
-              <h1 className="text-3xl">Datos de Envío</h1>
+            <div className='flex w-full justify-between'>
+              <h1 className='text-3xl'>Datos de Envío</h1>
               <button
-                className="flex size-9 items-center justify-center rounded-full p-2 text-3xl text-primary-600 hover:bg-gray-100"
+                className='flex size-9 items-center justify-center rounded-full p-2 text-3xl text-primary-600 hover:bg-gray-100'
                 onClick={() => {
                   setShipping(false)
                   setShippingData({})
                 }}
-                title="Cerrar modal"
+                title='Cerrar modal'
               >
                 🞪
               </button>
             </div>
-            <p className="text-sm text-primary-500">
+            <p className='text-sm text-primary-500'>
               Todos nuestros productos cuentan con <b>envio gratis</b>
             </p>
             <form>
               <InputCtn>
                 {formImputs.map(({ type, name, label, value }, index) => (
-                  <FormInput
+                  <input
                     key={index}
                     type={type}
+                    className='input-form'
                     name={name}
                     placeholder={label}
                     onChange={HandleInput}
                     value={value}
                   />
                 ))}
-                <div className="flex h-10 w-full items-center justify-center gap-5">
-                  {hasNumber === false ? (
-                    <FormInput
-                      onChange={HandleInput}
-                      type={'text'}
-                      name={'NCalle'}
-                      placeholder={'Numero de Calle'}
-                    />
-                  ) : (
-                    <div className="w-full"></div>
-                  )}
-                  <button
-                    type="button"
-                    className={`${hasNumber && 'border-primary-700 text-primary-700'} w-full rounded-xl border-2 border-black`}
-                    onClick={() => setHasNumber(!hasNumber)}
-                    name="NCalle"
-                  >
-                    {hasNumber ? 'Con numeración' : 'Sin Numeración'}
-                  </button>
-                </div>
               </InputCtn>
-              <p className="text-red-500">{fillMsj}</p>
+              <p className='text-red-500'>{fillMsj}</p>
               <button
-                className="w-full rounded-lg bg-primary-500 py-3 text-xl text-white"
+                className='w-full rounded-lg bg-primary-500 py-3 text-xl text-white'
                 onClick={(e) => handleBuy(e)}
               >
                 Confirmar
@@ -135,7 +114,7 @@ export default function Shipping({ title, price, setShipping }) {
         {pay === true && (
           <>
             <PayCtn>
-              <Title text={'PAGO'} />
+              <h2 className='subtitle'>Pago</h2>
               <BuyInfoCtn>
                 <p>
                   <b>♦ Producto:</b> {title}

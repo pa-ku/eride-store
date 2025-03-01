@@ -21,10 +21,10 @@ const WrapperBanner = styled.div`
   }
 `
 
-export default function Banner() {
+export default function Banner () {
   return (
     <>
-      <WrapperBanner></WrapperBanner>
+      <WrapperBanner />
     </>
   )
 }

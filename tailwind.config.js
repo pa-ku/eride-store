@@ -15,10 +15,10 @@ export default {
           700: 'var(--primary-700)',
           800: 'var(--primary-800)',
           900: 'var(--primary-900)',
-          1000: 'var(--primary-1000)',
-        },
-      },
-    },
+          1000: 'var(--primary-1000)'
+        }
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }

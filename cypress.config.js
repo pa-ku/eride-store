@@ -2,8 +2,8 @@ import { defineConfig } from 'cypress'
 
 export default defineConfig({
   e2e: {
-    setupNodeEvents() {
+    setupNodeEvents () {
       // implement node event listeners here
-    },
-  },
+    }
+  }
 })
