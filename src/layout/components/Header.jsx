@@ -7,22 +7,22 @@ import { useRef } from 'react'
 import { useOutsideClick } from '#hooks/useOutsideClick'
 import { Heart, User } from 'lucide-react'
 
-export default function Header () {
+export default function Header() {
   const { isAuth } = useAuth()
   const menuRef = useRef()
   const { isOpen: menuIsOpen, setIsOpen } = useOutsideClick(menuRef)
 
   return (
     <>
-      <header className='hidden h-14 w-full items-center justify-between bg-slate-800 md:flex md:px-10'>
-        <Link className='w-max' title='Home' to='/'>
-          <img className='size-36 object-contain' src={imgLogo} alt='' />
+      <header className="h-14 w-full items-center justify-between bg-slate-800 md:flex md:px-10">
+        <Link className="w-max" title="Home" to="/">
+          <img className="size-36 object-contain" src={imgLogo} alt="" />
         </Link>
-        <nav className='z-50 flex items-center justify-end gap-5'>
+        <nav className="z-50 flex items-center justify-end gap-5">
           <SearchBar />
           <Link
-            className='rounded-lg px-3 py-1 text-white hover:bg-gray-700'
-            to='/product/scooters'
+            className="rounded-lg px-3 py-1 text-white hover:bg-gray-700"
+            to="/product/scooters"
           >
             Monopatines
           </Link>
@@ -30,26 +30,23 @@ export default function Header () {
           {isAuth && (
             <>
               <Link
-                to='user/favorites'
-                className='flex items-center justify-center gap-1 rounded-lg p-2 text-white hover:bg-gray-700'
+                to="user/favorites"
+                className="flex items-center justify-center gap-1 rounded-lg p-2 text-white hover:bg-gray-700"
               >
-                <Heart fill='white' size={15} />
+                <Heart fill="white" size={15} />
                 Favoritos
               </Link>
-              <span className='relative'>
+              <span className="relative">
                 <button
                   onClick={() => setIsOpen(true)}
-                  role='button open profile'
-                  data-test-id='btn-open-profile'
-                  className='p-1 rounded-full flex items-center justify-center bg-gray-200'
+                  role="button open profile"
+                  data-test-id="btn-open-profile"
+                  className="flex items-center justify-center rounded-full bg-gray-200 p-1"
                 >
                   <User />
                 </button>
                 {menuIsOpen && (
-                  <LoggedMenu
-                    menuRef={menuRef}
-                    setIsOpen={setIsOpen}
-                  />
+                  <LoggedMenu menuRef={menuRef} setIsOpen={setIsOpen} />
                 )}
               </span>
             </>
@@ -58,15 +55,15 @@ export default function Header () {
           {!isAuth && (
             <>
               <Link
-                className='rounded-lg border px-3 py-1 text-white hover:bg-gray-700'
-                to='/user/login'
-                data-test-id='btn-login'
+                className="rounded-lg border px-3 py-1 text-white hover:bg-gray-700"
+                to="/user/login"
+                data-test-id="btn-login"
               >
                 Ingresar
               </Link>
               <Link
-                className='rounded-lg bg-primary-600 px-3 py-1 text-white hover:bg-primary-500'
-                to='/user/register'
+                className="rounded-lg bg-primary-600 px-3 py-1 text-white hover:bg-primary-500"
+                to="/user/register"
               >
                 Registrarse
               </Link>
