@@ -1,13 +1,12 @@
 import { API_ROUTE } from './API_ROUTE'
-
-export async function tokenRequest () {
+import axios from 'axios'
+export async function tokenRequest() {
   try {
-    const res = await fetch(`${API_ROUTE}/user/token`, {
+    const { data } = await axios.get(`${API_ROUTE}/user/token`, {
       credentials: 'include'
     })
-    const data = await res.json()
     return data
   } catch (err) {
-    console.error('Hubo un problema con la solicitud del token', err)
+    console.log('Error al validar token', err)
   }
 }

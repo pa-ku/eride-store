@@ -15,7 +15,7 @@ import Account from './components/NoAuthMessage'
 import ProtectedRoutes from './layout/ProtectedRoute'
 import UserAlreadyAuth from './layout/UserAlreadyAuth'
 
-const LazyAbout = React.lazy(() => import('#pages/about'))
+const LazyAbout = React.lazy(() => import('#pages/About'))
 
 function App() {
   return (
