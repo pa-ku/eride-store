@@ -2,7 +2,7 @@ import { calcDiscount } from '#utils/calcDiscount.js'
 import { formatPrice } from '#utils/formatPrice.js'
 import { Link } from 'react-router-dom'
 
-export default function ProductFeatured ({ data }) {
+export default function FeaturedProduct ({ data }) {
   return (
     <>
       <div className='flex flex-col-reverse px-4 md:flex-row'>
