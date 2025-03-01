@@ -1,21 +1,25 @@
-import Home from './pages/Home'
-import './css/global.css'
-import './css/animations.css'
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AuthContextProvider } from './context/AuthContext'
-import Favorites from './pages/Favorites'
+import './css/global.css'
+import './css/animations.css'
+
 import Layout from './layout/Layout'
-import Register from './pages/SignUp'
+import Home from './pages/Home'
+
 import Login from './pages/SignIn'
-import AllProducts from './pages/ProductList'
-import ProductShowcase from './pages/Product'
+import Register from './pages/SignUp'
 import Profile from './pages/Profile'
+import Favorites from './pages/Favorites'
 import Account from './components/NoAuthMessage'
+
+import ProductShowcase from './pages/Product'
+import AllProducts from './pages/ProductList'
+
 import ProtectedRoutes from './layout/ProtectedRoute'
 import UserAlreadyAuth from './layout/UserAlreadyAuth'
 
-const LazyAbout = React.lazy(() => import('./pages/About/index.jsx'))
+const LazyAbout = React.lazy(() => import('./pages/About'))
 
 function App() {
   return (
