@@ -65,13 +65,18 @@
 }
 
 .title {
-  @apply font-bold;
+  @apply text-5xl text-primary-600;
+}
+.subtitle {
+  @apply text-4xl font-bold text-slate-500;
 }
 
-.button-main {
-  @apply w-full rounded-lg bg-primary-500 py-3 text-lg text-white hover:bg-primary-400;
+.button {
+  @apply rounded-lg bg-primary-500 px-8 py-3 text-center text-lg text-white hover:bg-primary-400;
 }
-
+.hyperlink {
+  @apply text-primary-600 hover:text-primary-400;
+}
 .button-alt {
   @apply w-full rounded-lg py-3 text-lg text-primary-500 hover:bg-primary-50;
 }

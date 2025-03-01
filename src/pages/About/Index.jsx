@@ -6,7 +6,7 @@ export default function About() {
   return (
     <>
       <Wrapper>
-        <h1 className="text-4xl">Conocé E-Ride</h1>
+        <h1 className="title">Conocé E-Ride</h1>
         <div className="flex max-w-[45em] flex-col items-center space-y-2 text-start md:flex-row">
           <p>
             En el corazón de la pintoresca provincia de San Juan, Argentina, se
@@ -23,7 +23,7 @@ export default function About() {
         </div>
 
         <div className="max-w-[45em] space-y-2 text-start">
-          <SubTitle>Calidad Inigualable</SubTitle>
+          <h2 className='subtitle'>Calidad Inigualable</h2>
           <TextImageCtn>
             <p>
               Nos enorgullece ofrecer una amplia gama de scooters de la más alta
@@ -34,8 +34,8 @@ export default function About() {
           </TextImageCtn>
         </div>
 
-        <div className="flex max-w-[45em] flex-col items-center space-y-2 text-start">
-          <SubTitle>Comodidad en Línea</SubTitle>
+        <div className="flex max-w-[45em] flex-col items-start space-y-2 text-start">
+          <h2 className='subtitle'>Comodidad en Línea</h2>
           <p>
             Sabemos que tu tiempo es valioso. Es por eso que hemos creado una
             plataforma de compras en línea intuitiva y segura que te permite

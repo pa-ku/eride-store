@@ -43,11 +43,11 @@ export default function Login() {
             </div>
           </label>
 
-          <button type="submit" className="button-main">
+          <button type="submit" className="button w-full">
             Enviar
           </button>
           <Link
-            className="text-primary-600 hover:text-primary-400"
+            className="hyperlink"
             to={'/user/register'}
           >
             No tienes cuenta? registrate aqui

@@ -1,5 +1,5 @@
-import AboutMe from '#pages/home/components/About'
-import OurBrands from '#pages/home/components/OurBrands'
+import AboutUsBanner from '#pages/home/components/AboutUsBanner'
+import BrandsCarousel from '#pages/home/components/BrandsCarousel'
 import Featured from '#pages/home/components/ProductFeatured'
 import FeaturedSkeleton from '#pages/home/components/FeaturedSkeleton'
 import Banner from '#pages/home/components/Banner'
@@ -9,16 +9,17 @@ import ProductSkeleton from '#components/ProductSkeleton'
 
 import homeBanner from './images/scotter-banner.webp'
 import useGetProducts from '#src/services/api/useGetProducts.jsx'
+import { Zap } from 'lucide-react'
 
 export default function Home() {
-  const { data: featuredData, loading: loadingFeatured } =
-    useGetProducts('filter/featured')
+  const { data: featuredData, isLoading: loadingFeatured } =
+    useGetProducts('scooters/filter/featured')
 
-  const { data: bestOffers, loading: loadingBestOffers } =
-    useGetProducts('filter/bestOffers')
+  const { data: bestOffers, isLoading: loadingBestOffers } =
+    useGetProducts('scooters/filter/bestOffers')
 
-  const { data: bestSellers, loading: loadingBestSellers } =
-    useGetProducts('filter/bestSellers')
+  const { data: bestSellers, isLoading: loadingBestSellers } =
+    useGetProducts('scooters/filter/bestSellers')
 
   return (
     <>
@@ -26,69 +27,70 @@ export default function Home() {
         title="SOLO LO MEJOR"
         subtitle="No te conformes con menos cuando se trata de tu pasión"
       />
-      <OurBrands />
+      <BrandsCarousel />
       <main className="flex flex-col items-center justify-center gap-20 py-20">
         <section className="flex flex-col items-center justify-start gap-10">
-          <h2 className="text-4xl">Destacado</h2>
+          <h2 className="title flex gap-2 items-center justify-center"><Zap size={36}></Zap> Destacado</h2>
           {loadingFeatured ? (
             <FeaturedSkeleton />
           ) : (
             <Featured data={featuredData} />
           )}
         </section>
-
-        <section className="flex min-h-96 flex-col justify-start gap-5">
-          <h2 className="text-center text-4xl">Las mejores ofertas</h2>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-            {loadingBestOffers
-              ? Array(5)
-                  .fill()
-                  .map((_, index) => <ProductSkeleton key={index} />)
-              : Array.isArray(bestOffers) &&
-                bestOffers.map((productData, index) => (
-                  <ProductCard key={index} productData={productData} />
-                ))}
-          </div>
-        </section>
-        <section className="relative flex h-[calc(100vh-10em)] w-full snap-mandatory flex-col items-center justify-center gap-2 text-white">
-          <div className="flex max-w-[45em] flex-col">
-            <h2 className="text-6xl font-bold">
-              Nunca pares de viajar elegi la mejor autonomia
-            </h2>
-            <p className="text-2xl">
-              Hagas lo que hagas, vas a necesitar equipo resistente, cómodo y
-              duradero.
-            </p>
-          </div>
-          <Link
-            to={'/product/scooters'}
-            className="mt-5 rounded-full bg-white px-5 py-4 font-bold text-black hover:bg-primary-600 hover:text-white"
-          >
-            Explorar la colección
-          </Link>
-
-          <img
-            className="absolute -z-10 h-full w-full object-cover object-center blur-[1px] brightness-90"
-            loading="lazy"
-            src={homeBanner}
-            alt="Imagen del banner"
-          />
-        </section>
-        <section className="flex min-h-96 flex-col justify-start gap-5">
-          <h2 className="text-center text-4xl">Más vendidos</h2>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
-            {loadingBestSellers
-              ? Array(5)
-                  .fill()
-                  .map((_, index) => <ProductSkeleton key={index} />)
-              : Array.isArray(bestSellers) &&
-                bestSellers.map((productData, index) => (
-                  <ProductCard key={index} productData={productData} />
-                ))}
-          </div>
-        </section>
+        <ProductRow
+          title="Las mejores ofertas"
+          products={bestOffers}
+          loading={loadingBestOffers}
+        />
+        <BannerDontStopTraveling />
+        <ProductRow
+          title="Más vendidos"
+          products={bestSellers}
+          loading={loadingBestSellers}
+        />
       </main>
-      <AboutMe />
+      <AboutUsBanner />
     </>
+  )
+}
+
+
+function ProductRow({ title, loading, products }) {
+  return (<section className="flex min-h-96 flex-col justify-start gap-5">
+    <h2 className="subtitle text-center">{title}</h2>
+    <div className="flex flex-wrap items-center justify-center gap-4 pt-5">
+      {loading
+        ? Array(5)
+          .fill()
+          .map((_, index) => <ProductSkeleton key={index} />)
+        : Array.isArray(products) &&
+        products.map((productData, index) => (
+          <ProductCard key={index} productData={productData} />
+        ))}
+    </div>
+  </section>)
+}
+
+
+function BannerDontStopTraveling() {
+  return (
+    <section className="relative flex h-[calc(100vh-10em)] w-full snap-mandatory flex-col items-center justify-center gap-5 text-white">
+      <div className="flex max-w-[45em] flex-col">
+        <h2 className="text-6xl font-bold">Nunca pares de viajar</h2>
+        <p className="text-2xl">
+          Hagas lo que hagas, vas a necesitar equipo resistente, cómodo y
+          duradero.
+        </p>
+      </div>
+      <Link to={'/product/scooters'} className="button">
+        Explorar la colección
+      </Link>
+      <img
+        className="absolute -z-10 h-full w-full object-cover object-center blur-[1px] brightness-90"
+        loading="lazy"
+        src={homeBanner}
+        alt="Imagen del banner"
+      />
+    </section>
   )
 }

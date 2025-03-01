@@ -40,7 +40,7 @@ export default function Header() {
                 <button
                   onClick={() => setIsOpen(true)}
                   role='button open profile'
-                  test-data-id="btn-open-profile"
+                  data-test-id="btn-open-profile"
                   className="p-1 rounded-full flex items-center justify-center bg-gray-200"
                 >
                   <User />

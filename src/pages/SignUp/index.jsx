@@ -74,12 +74,12 @@ export default function Register() {
 
           <button
             type="submit"
-            className="w-full rounded-lg bg-primary-500 py-3 text-lg text-white hover:bg-primary-400"
+            className="button w-full"
           >
             Enviar
           </button>
           <Link
-            className="text-primary-600 hover:text-primary-400"
+            className="hyperlink"
             to={'/user/login'}
           >
             Ya tienes una cuenta? Ingresa aqui

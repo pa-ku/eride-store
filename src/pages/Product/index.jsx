@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router'
 import FavButton from '../../components/FavButton.jsx'
@@ -15,7 +15,7 @@ export default function ProductShowcase() {
   const productId = location.pathname.split('/')[3]
   const [shipping, setShipping] = useState(false)
 
-  const { data, error, loading } = useGetProductById(productId)
+  const { data, loading } = useGetProductById(productId)
 
   var hoy = new Date()
   var seisDiasDespues = new Date()
@@ -117,10 +117,7 @@ export default function ProductShowcase() {
   )
 }
 
-const FreeShippingCtn = styled.div`
-  display: flex;
-  gap: 0.5em;
-`
+
 
 const Wrapper = styled.div`
   padding-top: 4em;
