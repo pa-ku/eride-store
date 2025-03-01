@@ -2,7 +2,7 @@ import AboutUsBanner from './components/AboutUsBanner'
 import BrandsCarousel from './components/BrandsCarousel'
 import FeaturedProduct from './components/FeaturedProduct'
 import FeaturedSkeleton from './components/FeaturedSkeleton'
-import Banner from './components/banner'
+import HomeBanner from './components/HomeBanner'
 import { Link } from 'react-router-dom'
 import ProductCard from '#components/ProductCard'
 import ProductSkeleton from '#components/ProductSkeleton'
@@ -26,7 +26,7 @@ export default function Home () {
 
   return (
     <>
-      <Banner
+      <HomeBanner
         title='SOLO LO MEJOR'
         subtitle='No te conformes con menos cuando se trata de tu pasión'
       />

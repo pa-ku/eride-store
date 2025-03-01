@@ -21,7 +21,7 @@ const WrapperBanner = styled.div`
   }
 `
 
-export default function Banner () {
+export default function HomeBanner() {
   return (
     <>
       <WrapperBanner />
