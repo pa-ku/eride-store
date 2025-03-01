@@ -18,7 +18,7 @@ import AllProducts from './pages/ProductList'
 
 import ProtectedRoutes from './layout/ProtectedRoute'
 import UserAlreadyAuth from './layout/UserAlreadyAuth'
-import AboutUs from './pages/AboutUs'
+/* import AboutUs from './pages/AboutUs' */
 /* const LazyAbout = React.lazy(() => import('./pages/About')) */
 
 function App() {
@@ -29,7 +29,8 @@ function App() {
           <Routes>
             <Route element={<Layout />}>
               <Route index path="/" element={<Home />} />
-              <Route path="about" element={<AboutUs />} />
+           {/*    <Route path="about" element={<AboutUs />} /> */}
+
               <Route path="/product">
                 <Route path="scooters" element={<AllProducts />} />
                 <Route path="id/:id" element={<ProductShowcase />} />
