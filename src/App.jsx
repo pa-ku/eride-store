@@ -18,8 +18,8 @@ import AllProducts from './pages/ProductList'
 
 import ProtectedRoutes from './layout/ProtectedRoute'
 import UserAlreadyAuth from './layout/UserAlreadyAuth'
-
-const LazyAbout = React.lazy(() => import('./pages/About'))
+import About from './pages/About'
+/* const LazyAbout = React.lazy(() => import('./pages/About')) */
 
 function App() {
   return (
@@ -46,7 +46,10 @@ function App() {
                   <Route path="profile" element={<Profile />} />
                 </Route>
               </Route>
-              <Route
+
+              <Route path="about" element={<About />} />
+
+              {/*     <Route
                 path="about"
                 element={
                   <React.Suspense fallback="Loading...">
@@ -54,6 +57,7 @@ function App() {
                   </React.Suspense>
                 }
               />
+            */}
             </Route>
           </Routes>
         </AuthContextProvider>

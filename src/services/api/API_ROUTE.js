@@ -1,4 +1,4 @@
-const production = false
+const production = true
 
 export const API_ROUTE = production
   ? 'https://eride-api.vercel.app/api'
