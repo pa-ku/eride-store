@@ -10,7 +10,7 @@ import { calcDiscount } from '../../utils/calcDiscount.js'
 import ShowcaseSkeleton from './components/Skeleton.jsx'
 import useGetProductById from '#src/services/api/useGetProductById.jsx'
 
-export default function ProductShowcase() {
+export default function ProductShowcase () {
   const location = useLocation()
   const productId = location.pathname.split('/')[3]
   const [shipping, setShipping] = useState(false)
@@ -42,7 +42,7 @@ export default function ProductShowcase() {
         {loading
           ? (
             <ShowcaseSkeleton />
-          )
+            )
           : (
             <>
               <section className='flex min-h-[30em] flex-col items-center justify-center px-4 lg:flex-row lg:items-start'>
@@ -113,7 +113,7 @@ export default function ProductShowcase() {
                 </SpecsContainer>
               </section>
             </>
-          )}
+            )}
       </Wrapper>
     </>
   )

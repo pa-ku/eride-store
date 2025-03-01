@@ -3,13 +3,12 @@ import styled from 'styled-components'
 
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
-export default function Shipping({ title, price, setShipping }) {
+export default function Shipping ({ title, price, setShipping }) {
   const [preferenceId, setPreferenceIdId] = useState(null)
   const [pay, setPay] = useState(false)
   initMercadoPago('APP_USR-400ac6bd-a71b-4e78-9dfe-7f390acd7f68', {
     locale: 'es-AR'
   })
-  const [hasNumber, setHasNumber] = useState(false)
   const [fillMsj, setFillMsj] = useState('')
   const [shippingData, setShippingData] = useState({})
 

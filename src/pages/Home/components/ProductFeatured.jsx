@@ -1,5 +1,3 @@
-import styled from 'styled-components'
-
 import { calcDiscount } from '#utils/calcDiscount.js'
 import { formatPrice } from '#utils/formatPrice.js'
 import { Link } from 'react-router-dom'

@@ -7,19 +7,16 @@ export default function useGetProductNames () {
   const [error, setError] = useState(null)
 
   async function requestNames () {
-    if (!loading) {
-
-    } else {
-      try {
-        const res = await fetch(`${API_ROUTE}/scooters/names`)
-        const data = await res.json()
-        setData(data)
-      } catch (err) {
-        setError(error)
-        console.error('Hubo un problema con la solicitud!', err)
-      } finally {
-        setLoading(false)
-      }
+    try {
+      setLoading(true)
+      const res = await fetch(`${API_ROUTE}/scooters/names`)
+      const data = await res.json()
+      setData(data)
+    } catch (err) {
+      setError(error)
+      console.error('Hubo un problema con la solicitud!', err)
+    } finally {
+      setLoading(false)
     }
   }
 

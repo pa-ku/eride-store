@@ -75,11 +75,3 @@ const Wrapper = styled.div`
   flex-direction: column;
   background-color: #f5f5f5;
 `
-
-const SubTitle = styled.h2`
-  font-weight: 800;
-  text-align: center;
-  font-size: 1.2rem;
-  color: #666;
-  width: 100%;
-`

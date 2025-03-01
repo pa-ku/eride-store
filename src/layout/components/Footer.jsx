@@ -81,7 +81,7 @@ const TitleText = styled.h2`
   }
 `
 
-export default function Footer() {
+export default function Footer () {
   const d = new Date()
   const year = d.getFullYear()
   return (

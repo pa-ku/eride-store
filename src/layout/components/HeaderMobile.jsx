@@ -1,8 +1,8 @@
-import imgLogo from '/favicon.webp'
+import imgLogo from '../../../../favicon.webp'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
-export default function HeaderMobile() {
+export default function HeaderMobile () {
   const [openSearchBar, setOpenSearchBar] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
   return (
