@@ -5,7 +5,7 @@ import cookies from 'js-cookie'
 import { API_ROUTE } from '../services/api/API_ROUTE'
 export const AuthContext = createContext()
 
-export function useAuth () {
+export function useAuth() {
   const context = useContext(AuthContext)
   if (!context) {
     throw new Error('useContext debe estar dentro de un provider')
@@ -13,7 +13,7 @@ export function useAuth () {
   return context
 }
 
-export function AuthContextProvider ({ children }) {
+export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null)
   const [isAuth, setIsAuth] = useState(false)
   const [message, setMessage] = useState('')
@@ -21,22 +21,22 @@ export function AuthContextProvider ({ children }) {
   const navigate = useNavigate()
 
   useEffect(() => {
-    validateToken()
+    handleTokenValidation()
   }, [])
 
   useEffect(() => {
     setMessage('')
   }, [navigate])
 
-  async function userLogin (user) {
+  async function userLogin(user) {
     try {
       const res = await fetch(`${API_ROUTE}/user/login`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
-        credentials: 'include'
+        credentials: 'include',
       })
       const data = await res.json()
       if (data.error) {
@@ -55,15 +55,15 @@ export function AuthContextProvider ({ children }) {
     }
   }
 
-  async function userRegister (user) {
+  async function userRegister(user) {
     try {
       const res = await fetch(`${API_ROUTE}/user/register`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
-        credentials: 'include'
+        credentials: 'include',
       })
       const data = await res.json()
       console.log(data)
@@ -80,40 +80,29 @@ export function AuthContextProvider ({ children }) {
     }
   }
 
-  async function validateToken () {
-    const cookie = cookies.get()
-    if (!cookie.token) {
-      setIsAuth(false)
-      setLoading(false)
-      return setUser(null)
-    }
+  const handleTokenValidation = async () => {
+    setLoading(true)
+
     try {
-      const res = await tokenRequest(cookie.token)
-      if (!res) {
-        console.log('Respuesta no válida o indefinida')
-        setLoading(false)
-        setIsAuth(false)
-        setUser(null)
-        return
+      const token = cookies.get().token
+      if (!token) throw new AuthError('MISSING_TOKEN')
+
+      const response = await tokenRequest(token)
+
+      if (!response?.success) {
+        throw new AuthError('INVALID_TOKEN', response?.error)
       }
-      if (res.error) {
-        setLoading(false)
-        setIsAuth(false)
-        setUser(null)
-      } else {
-        setLoading(false)
-        setIsAuth(true)
-        setUser(res)
-      }
+
+      setIsAuth(true)
+      setUser(response.data)
     } catch (error) {
-      console.log('error al validar', error)
+      handleAuthError(error)
+    } finally {
       setLoading(false)
-      setIsAuth(false)
-      setUser(null)
     }
   }
 
-  function userLogout () {
+  function userLogout() {
     try {
       cookies.remove('token')
       setIsAuth(false)
@@ -134,7 +123,7 @@ export function AuthContextProvider ({ children }) {
         user,
         isAuth,
         message,
-        loading
+        loading,
       }}
     >
       {children}
